@@ -1,0 +1,14 @@
+<header>
+  <div id = "header_inner">
+	  <nav class="round signin">
+		<ul>
+		  <li><%= link_to "Sign in", '#' %></li>
+		</ul>
+	  </nav>
+	  <div id = "logo_search">
+		  <%= link_to logo, root_path %>
+		  <%= render 'layouts/search' %>
+	  </div>
+      <%= render 'layouts/mainmenu' %>
+  </div>
+</header>

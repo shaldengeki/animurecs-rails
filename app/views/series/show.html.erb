@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<img src='/images/series/<%= @series.name %>.png' />
+<br />
 <p>
   <b>Name:</b>
   <%= @series.name %>
@@ -12,14 +14,23 @@
 
 <p>
   <b>Link:</b>
-  <%= @series.link %>
+  <%= link_to @series.link , @series.link %>
 </p>
 
 <p>
-  <b>Genre:</b>
-  <%= @series.genre_id %>
+  <b>Tags:</b>
+  <%= #@taggings.each do |tag|
+#	tag.name + " | "
+#end
+ %>
 </p>
 
+<h2>Comments:</h2>
+<% unless @comments.empty? %>
+<table class="comments" summary="Series comments">
+  <%= render @comments %>
+</table>
+<% end %>
 
 <%= link_to 'Edit', edit_series_path(@series) %> |
 <%= link_to 'Back', series_index_path %>

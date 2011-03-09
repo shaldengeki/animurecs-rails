@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110304014729) do
+ActiveRecord::Schema.define(:version => 20110309064607) do
 
   create_table "comments", :force => true do |t|
     t.string   "text"
@@ -30,9 +30,23 @@ ActiveRecord::Schema.define(:version => 20110304014729) do
 
   create_table "series", :force => true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description", :limit => 2147483647
     t.string   "link"
     t.integer  "genre_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "series_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

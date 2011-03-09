@@ -1,23 +1,24 @@
-<h1>Listing genres</h1>
+<h1>Genres</h1>
 
-<table>
+<table id='genre_listing'>
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
+<% i = 0 %>
 <% @genres.each do |genre| %>
-  <tr>
-    <td><%= genre.name %></td>
-    <td><%= genre.description %></td>
-    <td><%= link_to 'Show', genre %></td>
-    <td><%= link_to 'Edit', edit_genre_path(genre) %></td>
-    <td><%= link_to 'Destroy', genre, :confirm => 'Are you sure?', :method => :delete %></td>
+<% 
+  if i > 4 %>
+</tr><tr>
+<%
+    i = 0
+  end 
+%>
+    <td>
+		<%= link_to image_tag("genres/" + genre.name + ".png", :alt => genre.name), genre, :title => genre.description %><br />
+		<%= link_to genre.name, genre, :title => genre.description %>
+	</td>
+<% i += 1
+end %>
   </tr>
-<% end %>
 </table>
 
 <br />
