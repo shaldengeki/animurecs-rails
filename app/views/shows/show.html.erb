@@ -19,7 +19,7 @@
 
 <p>
   <b>Link:</b>
-  <%= @show.link %>
+  <%= link_to @show.link, @show.link %>
 </p>
 
 <p>
@@ -30,6 +30,11 @@
 <p>
   <b>Downvotes:</b>
   <%= @show.downvotes %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%= tag_cloud %>
 </p>
 
 <h2>Comments:</h2>

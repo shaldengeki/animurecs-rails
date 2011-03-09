@@ -1,6 +1,4 @@
 Animurecs::Application.routes.draw do
-  resources :shows
-
   root :to => 'pages#home'
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
@@ -10,7 +8,11 @@ Animurecs::Application.routes.draw do
   resources :tags
   resources :users
   resources :comments
-  resources :series
+  resources :shows do 
+	member do
+		get :taggings, :taggeds
+	end
+  end
 #  resources :genres
 
   # The priority is based upon order of creation:

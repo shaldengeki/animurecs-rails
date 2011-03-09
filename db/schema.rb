@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110309171625) do
+ActiveRecord::Schema.define(:version => 20110309182346) do
 
   create_table "comments", :force => true do |t|
     t.string   "text"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20110309171625) do
 
   create_table "shows", :force => true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description", :limit => 2147483647
     t.string   "length"
     t.string   "link"
     t.integer  "upvotes"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(:version => 20110309171625) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "shows", ["name"], :name => "index_shows_on_name", :unique => true
 
   create_table "taggings", :force => true do |t|
     t.integer  "show_id"
@@ -61,6 +63,8 @@ ActiveRecord::Schema.define(:version => 20110309171625) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "username"

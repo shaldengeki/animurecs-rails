@@ -2,7 +2,7 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.xml
   def index
-    @shows = Show.all
+    @shows = Show.find(:all).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
 	@title = "Shows"
     respond_to do |format|
       format.html # index.html.erb

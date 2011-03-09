@@ -1,4 +1,10 @@
 class Tagging < ActiveRecord::Base
 	belongs_to	:tag
-	belongs_to	:taggable, :polymorphic => true
+	
+	validates :series_id,	:presence => true,
+							:numericality => true
+
+	validates :tag_id,	:presence => true,
+						:numericality => true
+
 end
