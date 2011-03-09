@@ -1,4 +1,6 @@
 Animurecs::Application.routes.draw do
+  resources :shows
+
   root :to => 'pages#home'
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'

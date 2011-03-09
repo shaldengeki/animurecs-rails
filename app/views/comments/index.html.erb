@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Text</th>
-    <th>Series</th>
+    <th>Show</th>
     <th>User</th>
     <th>Time</th>
     <th></th>
@@ -14,7 +14,7 @@
 <% @comments.each do |comment| %>
   <tr>
     <td><%= comment.text %></td>
-    <td><%= comment.series_id %></td>
+    <td><%= comment.show_id %></td>
     <td><%= comment.user_id %></td>
     <td><%= comment.time %></td>
     <td><%= link_to 'Show', comment %></td>

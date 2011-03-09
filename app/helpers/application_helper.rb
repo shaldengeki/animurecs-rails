@@ -13,12 +13,12 @@ module ApplicationHelper
 		image_tag("logo.png", :alt => "LL Animu Recommendations", :class => "logo")
 	end
 
-	# Returns the image associated with this series.
-	def series_image
-		if @series.name.nil?
-			image_tag("series/blank.png", alt => "")
+	# Returns the image associated with this show.
+	def show_image
+		if @show.name.nil?
+			image_tag("shows/blank.png", :alt => "")
 		else
-			image_tag("series/#{@series.name}.png", alt => "#{@series.name}");
+			image_tag("shows/#{@show.name}.png", :alt => "#{@show.name}");
 		end
 	end
 end

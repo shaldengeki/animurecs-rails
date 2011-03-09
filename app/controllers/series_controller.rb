@@ -77,7 +77,7 @@ class SeriesController < ApplicationController
     @series.destroy
 
     respond_to do |format|
-      format.html { redirect_to(series_index_url) }
+      format.html { redirect_to(serial_index_url) }
       format.xml  { head :ok }
     end
   end
