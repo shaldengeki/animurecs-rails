@@ -44,5 +44,7 @@
 </table>
 <% end %>
 
+<%= link_to 'Comment', new_comment_path(:show_id => @show.id)%><br /><br />
+
 <%= link_to 'Edit', edit_show_path(@show) %> |
 <%= link_to 'Back', shows_path %>

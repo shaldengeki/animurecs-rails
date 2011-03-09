@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.xml
   def index
-    @comments = Comment.all
+    @comments = Comment.find(:all, :order => 'time DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +26,11 @@ class CommentsController < ApplicationController
   # GET /comments/new.xml
   def new
     @comment = Comment.new
+	unless params[:show_id].nil?
+		@show = Show.find(params[:show_id])
+	else
+		@show = Show.first
+	end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,19 +41,22 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+	@show = Show.find(@comment.show_id)
   end
 
   # POST /comments
   # POST /comments.xml
   def create
     @comment = Comment.new(params[:comment])
+	@comment.time = 
+	@show = Show.find(@comment.show_id)
 
     respond_to do |format|
       if @comment.save
         format.html { redirect_to(@comment, :notice => 'Comment was successfully created.') }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "new" , :show_id => @show.id}
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
     end
@@ -58,7 +66,7 @@ class CommentsController < ApplicationController
   # PUT /comments/1.xml
   def update
     @comment = Comment.find(params[:id])
-
+	
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         format.html { redirect_to(@comment, :notice => 'Comment was successfully updated.') }

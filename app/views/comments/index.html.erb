@@ -14,9 +14,9 @@
 <% @comments.each do |comment| %>
   <tr>
     <td><%= comment.text %></td>
-    <td><%= comment.show_id %></td>
-    <td><%= comment.user_id %></td>
-    <td><%= comment.time %></td>
+    <td><%= Show.find(comment.show_id).name %></td>
+    <td><%= User.find(comment.user_id).username %></td>
+    <td><%= Time.at(comment.time).strftime('%D') %></td>
     <td><%= link_to 'Show', comment %></td>
     <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
     <td><%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete %></td>

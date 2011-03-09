@@ -3,6 +3,7 @@ Animurecs::Application.routes.draw do
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/signup',  :to => 'users#new'
+  match '/comments/new/:show_id',	:to => 'comments#new'
 
   resources :taggings
   resources :tags
