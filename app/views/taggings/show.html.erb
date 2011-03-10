@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Series:</b>
-  <%= @tagging.series_id %>
+  <b>Show:</b>
+  <%= Show.find(@tagging.show_id).name %>
 </p>
 
 <p>
   <b>Tag:</b>
-  <%= @tagging.tag_id %>
+  <%= Tag.find(@tagging.tag_id).name %>
 </p>
 
 

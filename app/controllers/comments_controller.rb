@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
   # POST /comments.xml
   def create
     @comment = Comment.new(params[:comment])
-	@comment.time = 
+	@comment.time = Time.now.to_i;
 	@show = Show.find(@comment.show_id)
 
     respond_to do |format|

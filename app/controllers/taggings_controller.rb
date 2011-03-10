@@ -14,6 +14,8 @@ class TaggingsController < ApplicationController
   # GET /taggings/1.xml
   def show
     @tagging = Tagging.find(params[:id])
+	@tag = Tag.find(@tagging.tag_id)
+	@show = Show.find(@tagging.show_id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,12 @@ class TaggingsController < ApplicationController
   # GET /taggings/new.xml
   def new
     @tagging = Tagging.new
+	unless params[:show_id].nil?
+		@show = Show.find(params[:show_id])
+		@tagging.show_id = @show.id
+	else
+		@show = Show.first
+	end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +43,8 @@ class TaggingsController < ApplicationController
   # GET /taggings/1/edit
   def edit
     @tagging = Tagging.find(params[:id])
+	@tag = Tag.find(@tagging.tag_id)
+	@show = Show.find(@tagging.show_id)
   end
 
   # POST /taggings

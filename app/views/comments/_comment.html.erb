@@ -3,7 +3,7 @@
     <p class="text"><%= comment.text %></p>
 	<span class="author"><%= User.find(comment.user_id).username %></span>
     <span class="timestamp">
-      Posted on <%= Time.at(comment.time).strftime('%D') %>.
+      Posted at <%= Time.at(comment.time).strftime('%r') %> on <%= Time.at(comment.time).strftime('%D') %>.
     </span>
   </td>
 </tr>

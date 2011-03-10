@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Series</th>
+    <th>Show</th>
     <th>Tag</th>
     <th></th>
     <th></th>
@@ -11,8 +11,8 @@
 
 <% @taggings.each do |tagging| %>
   <tr>
-    <td><%= tagging.series_id %></td>
-    <td><%= tagging.tag_id %></td>
+    <td><%= Show.find(tagging.show_id).name %></td>
+    <td><%= Tag.find(tagging.tag_id).name %></td>
     <td><%= link_to 'Show', tagging %></td>
     <td><%= link_to 'Edit', edit_tagging_path(tagging) %></td>
     <td><%= link_to 'Destroy', tagging, :confirm => 'Are you sure?', :method => :delete %></td>

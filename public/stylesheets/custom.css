@@ -4,6 +4,10 @@ body {
   min-width: 800px;
 }
 
+img {
+	border: none;
+}
+
 .container {
   width: 100%;
 }
@@ -171,6 +175,48 @@ margin: 0;
 #searchform_submit {
 	position: relative;
 	margin: 0;
+}
+
+table#show_list {
+	width: 800px;
+	border-collapse: collapse;
+}
+
+tr.show_list_a td, tr.show_list_b td {
+	margin:0;
+	border: 0;
+	padding-top: 10px;
+}
+tr.show_list_b  td {
+	border-bottom: 1px solid black;
+	padding-bottom: 10px;
+}
+
+td.show_list_animepic {
+	width: 120px;
+}
+
+span.like_button , span.dislike_button{
+	font-size: 7pt;
+}
+
+.list_show_title {
+	font-size: 12pt;
+	font-weight: bold;
+	margin-top: 0px;
+}
+
+.list_show_descrip {
+	font-size: 10pt;
+	font-style: italic;
+}
+
+#show_infobox {
+	margin: 0 10px;
+	padding: 0;
+	float: right;
+	width: 430px;
+	text-align: left;
 }
 
 p.text {

@@ -1,41 +1,37 @@
 <p id="notice"><%= notice %></p>
 
 <%= show_image %>
+<div id = 'show_infobox'>
+	<p>
+	  <b>Name:</b>
+	  <%= @show.name %>
+	</p>
 
-<p>
-  <b>Name:</b>
-  <%= @show.name %>
-</p>
+	<p>
+	  <b>Description:</b>
+	  <%= @show.description %>
+	</p>
 
-<p>
-  <b>Description:</b>
-  <%= @show.description %>
-</p>
+	<p>
+	  <b>Length:</b>
+	  <%= @show.length %>
+	</p>
 
-<p>
-  <b>Length:</b>
-  <%= @show.length %>
-</p>
+	<p>
+	  <b>Link:</b>
+	  <%= link_to @show.link, @show.link %>
+	</p>
 
-<p>
-  <b>Link:</b>
-  <%= link_to @show.link, @show.link %>
-</p>
+	<p>
+	  <b>Voting:</b>
+	  <%= like_image + " " + @show.upvotes.to_s %> | <%= dislike_image + " " + @show.downvotes.to_s %>
+	</p>
 
-<p>
-  <b>Upvotes:</b>
-  <%= @show.upvotes %>
-</p>
-
-<p>
-  <b>Downvotes:</b>
-  <%= @show.downvotes %>
-</p>
-
-<p>
-  <b>Tags:</b>
-  <%= tag_cloud %>
-</p>
+	<p>
+	  <b>Tags:</b>
+	  <%= tag_cloud %>
+	</p>
+</div>
 
 <h2>Comments:</h2>
 <% unless @comments.empty? %>
