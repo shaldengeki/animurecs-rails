@@ -42,10 +42,12 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+	@user.userlevel = 0;
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+		sign_in @user
+        format.html { redirect_to(@user, :notice => 'Welcome to LL Animu Recommendations!') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
 		@title = "Sign up"

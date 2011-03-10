@@ -1,11 +1,5 @@
 Animurecs::Application.routes.draw do
-  root :to => 'pages#home'
-  match '/contact', :to => 'pages#contact'
-  match '/about',   :to => 'pages#about'
-  match '/signup',  :to => 'users#new'
-  match '/comments/new/:show_id',	:to => 'comments#new'
-  match '/taggings/new/:show_id',	:to => 'taggings#new'
-
+  resources :sessions, :only => [:new, :create, :destroy]
   resources :taggings
   resources :tags
   resources :users
@@ -15,7 +9,17 @@ Animurecs::Application.routes.draw do
 		get :taggings, :taggeds
 	end
   end
-#  resources :genres
+
+  root :to => 'pages#home'
+  match '/contact', :to => 'pages#contact'
+  match '/about',   :to => 'pages#about'
+  match '/signup',  :to => 'users#new'
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+  match '/comments/new/:show_id',	:to => 'comments#new'
+  match '/taggings/new/:show_id',	:to => 'taggings#new'
+
+  #  resources :genres
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
