@@ -1,7 +1,7 @@
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2>There were <%= pluralize(@user.errors.count, "error") %> problems processing this registration:</h2>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
@@ -17,17 +17,13 @@
   </div>
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :color %><br />
-    <%= f.text_field :color %>
-  </div>
-  <div class="field">
-    <%= f.label :userlevel %><br />
-    <%= f.text_field :userlevel %>
+    <%= f.label :password_confirmation, "Confirmation" %><br />
+    <%= f.password_field :password_confirmation %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Sign up" %>
   </div>
 <% end %>

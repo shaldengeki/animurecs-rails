@@ -229,6 +229,25 @@ p.text {
 	margin: 0px 0px 0px 5px;
 }
 
+/* Form styling. */
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+.field_with_errors {
+  margin-top: 10px;
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.field_with_errors label {
+  color: #fff;
+}
+
+/* Footer styling. */
+
 footer {
   text-align: center;
   margin-top: 10px;
