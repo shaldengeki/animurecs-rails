@@ -5,7 +5,14 @@ gem 'rails', '3.0.5'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql'
+group :development do
+  gem 'rspec-rails', '2.5.0'
+end
+
+group :test do
+  gem 'rspec', '2.5.0'
+  gem 'webrat', '0.7.1'
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'
