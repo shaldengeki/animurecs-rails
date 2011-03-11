@@ -4,6 +4,7 @@ class TagsController < ApplicationController
   # GET /tags.xml
   def index
     @tags = Tag.all.sort_by(&:name)
+	@title = "Tags"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +16,7 @@ class TagsController < ApplicationController
   # GET /tags/1.xml
   def show
     @tag = Tag.find(params[:id])
+	@title = @tag.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +28,7 @@ class TagsController < ApplicationController
   # GET /tags/new.xml
   def new
     @tag = Tag.new
+	@title = "New tag"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,12 +39,27 @@ class TagsController < ApplicationController
   # GET /tags/1/edit
   def edit
     @tag = Tag.find(params[:id])
+	@title = "Editing " + @tag.name
   end
 
   # POST /tags
   # POST /tags.xml
   def create
     @tag = Tag.new(params[:tag])
+	# process the tagname to see if we have a tagtype in there.
+	if @tag.name.include? ":"
+		# lop off the first bit as the tag type and the second bit as the actual tag name.
+		tagarray = @tag.name.split(":")
+		if Tagtype.find_by_name(tagarray[0])
+			@tag.tagtype_id = Tagtype.find_by_name(tagarray[0]).id
+			@tag.name = tagarray.last(tagarray.length-1).join(":")
+		else
+			@tag.tagtype_id = Tagtype.find_by_name("general").id
+			@tag.name = tagarray.last(tagarray.length).join(":")
+		end
+	else
+		@tag.tagtype_id = Tagtype.find_by_name("general").id
+	end
 
     respond_to do |format|
       if @tag.save

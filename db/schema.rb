@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110310233041) do
+ActiveRecord::Schema.define(:version => 20110311070652) do
 
   create_table "comments", :force => true do |t|
     t.string   "text"
@@ -66,9 +66,17 @@ ActiveRecord::Schema.define(:version => 20110310233041) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tagtype_id"
   end
 
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
+
+  create_table "tagtypes", :force => true do |t|
+    t.string   "name"
+    t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username"

@@ -27,8 +27,8 @@ class ShowsController < ApplicationController
   # GET /shows/new
   # GET /shows/new.xml
   def new
-	
     @show = Show.new
+	@title = "New show"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,6 +39,7 @@ class ShowsController < ApplicationController
   # GET /shows/1/edit
   def edit
     @show = Show.find(params[:id])
+	@title = "Editing " + @show.name
   end
 
   # POST /shows

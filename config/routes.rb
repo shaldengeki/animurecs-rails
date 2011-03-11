@@ -1,14 +1,15 @@
 Animurecs::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :taggings
+  resources :tagtypes
   resources :tags
-  resources :users
-  resources :comments
   resources :shows do 
 	member do
 		get :taggings, :taggeds
 	end
   end
+  resources :taggings
+  resources :users
+  resources :comments
 
   root :to => 'pages#home'
   match '/contact', :to => 'pages#contact'

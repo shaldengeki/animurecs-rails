@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
   # GET /comments.xml
   def index
     @comments = Comment.find(:all, :order => 'time DESC')
+	@title = "Comments"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +18,7 @@ class CommentsController < ApplicationController
   def show
     @comment = Comment.find(params[:id])
     @user = @comment.user
+	@title = "Comment by " + @user.username
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,6 +30,8 @@ class CommentsController < ApplicationController
   # GET /comments/new.xml
   def new
     @comment = Comment.new
+	@title = "New comment"
+	
 	unless params[:show_id].nil?
 		@show = Show.find(params[:show_id])
 	else
@@ -44,6 +48,8 @@ class CommentsController < ApplicationController
   def edit
     @comment = Comment.find(params[:id])
 	@show = Show.find(@comment.show_id)
+	@title = "Editing comment"
+	
   end
 
   # POST /comments

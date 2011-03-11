@@ -4,6 +4,7 @@ class TaggingsController < ApplicationController
   # GET /taggings.xml
   def index
     @taggings = Tagging.all
+	@title = "Taggings"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +18,7 @@ class TaggingsController < ApplicationController
     @tagging = Tagging.find(params[:id])
 	@tag = Tag.find(@tagging.tag_id)
 	@show = Show.find(@tagging.show_id)
+	@title = "Tagging " + @tag.name + "-" + @show.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,6 +30,8 @@ class TaggingsController < ApplicationController
   # GET /taggings/new.xml
   def new
     @tagging = Tagging.new
+	@title = "New tagging"
+	
 	unless params[:show_id].nil?
 		@show = Show.find(params[:show_id])
 		@tagging.show_id = @show.id
@@ -46,6 +50,7 @@ class TaggingsController < ApplicationController
     @tagging = Tagging.find(params[:id])
 	@tag = Tag.find(@tagging.tag_id)
 	@show = Show.find(@tagging.show_id)
+	@title = "Editing " + @tag.name + "-" + @show.name
   end
 
   # POST /taggings

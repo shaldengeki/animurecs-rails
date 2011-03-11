@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
 	has_many	:taggings
+	belongs_to	:tagtype
   
 	validates :name, 	:presence => true,
 						:uniqueness => { :case_sensitive => false }, 

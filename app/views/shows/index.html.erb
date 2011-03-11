@@ -6,19 +6,10 @@
 	@shows.each do |show| %>
   <tr class = 'show_list_a'>
     <td><%= i %></td>
-    <td class = 'show_list_animepic'><%= if show.id.nil?
-				link_to image_tag("shows/blank_thumb.png", :alt => ""), show
-			else
-				link_to image_tag(show.image.url(:thumb),:alt => "#{show.name}"), show
-			end %></td>
+    <td class = 'show_list_animepic'><%= show_image_thumb(show) %></td>
     <td>
 		<div class = 'list_show_title'><%= link_to show.name, show %></div>
-		<div class = 'list_show_descrip'> 
-		<%= if show.description.to_s.length > 300
-			show.description.to_s.split('').first(300).to_s + "..."
-		else
-			show.description.to_s
-		end %></div>
+		<div class = 'list_show_descrip'><%= show_description_short(show) %></div>
 	</td>
   </tr>
   <tr class = 'show_list_b'>
@@ -28,19 +19,7 @@
 		<span class = 'dislike_button'><%= link_to dislike_image + " " + show.downvotes.to_s + " dislikes", '#' %></span>
 	</td>
     <td><span class = 'list_tags'>Tags: 
-	<%= output_string = ""
-		unless show.taggeds.empty?
-			show.taggeds.each do |tag|
-				if output_string.blank?
-					output_string = link_to(tag.name, tag)
-				else
-					output_string = "#{output_string}, " + link_to(tag.name, tag)
-				end
-			end
-		else
-			output_string = "None"
-		end
-		raw output_string %></span></td>
+	<%= tag_cloud(show) %></span></td>
   </tr>
 <%	i += 1
 	end %>
