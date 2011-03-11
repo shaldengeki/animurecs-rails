@@ -98,6 +98,6 @@ class CommentsController < ApplicationController
     end
     def correct_user
       @user = User.find(Comment.find(params[:id]).user_id)
-      redirect_to(root_path) unless ( current_user?(@user) || admin_user?(@user) )
+      redirect_to(root_path) unless ( current_user?(@user) || admin_user? )
     end
 end
