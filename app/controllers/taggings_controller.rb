@@ -1,4 +1,5 @@
 class TaggingsController < ApplicationController
+  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
   # GET /taggings
   # GET /taggings.xml
   def index
@@ -90,4 +91,9 @@ class TaggingsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  private
+
+    def authenticate
+      deny_access unless signed_in?
+    end
 end

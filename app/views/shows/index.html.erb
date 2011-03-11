@@ -9,7 +9,7 @@
     <td class = 'show_list_animepic'><%= if show.id.nil?
 				link_to image_tag("shows/blank_thumb.png", :alt => ""), show
 			else
-				link_to image_tag("shows/#{show.id}_thumb.png", :alt => "#{show.name}"), show
+				link_to image_tag(show.image.url(:thumb),:alt => "#{show.name}"), show
 			end %></td>
     <td>
 		<div class = 'list_show_title'><%= link_to show.name, show %></div>

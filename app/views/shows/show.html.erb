@@ -31,16 +31,22 @@
 	  <b>Tags:</b>
 	  <%= tag_cloud %>
 	</p>
-</div>
+</div><br />
+<%= link_to 'Edit Anime Information', edit_show_path(@show) %>
+
 
 <h2>Comments:</h2>
 <% unless @comments.empty? %>
 <table class="comments" summary="Show comments">
   <%= render @comments %>
 </table>
+<% else %>
+No comments on this series yet. Be the first!
 <% end %>
-
-<%= link_to 'Comment', new_comment_path(:show_id => @show.id)%><br /><br />
-
-<%= link_to 'Edit', edit_show_path(@show) %> |
-<%= link_to 'Back', shows_path %>
+<% if signed_in? 
+	if @comment.nil?
+		@comment = Comment.new
+	end
+%>
+	<%= render :partial => 'comments/form' %>
+<% end %>

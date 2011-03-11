@@ -14,6 +14,8 @@ group :test do
   gem 'webrat', '0.7.1'
 end
 
+gem "paperclip", "~> 2.3"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

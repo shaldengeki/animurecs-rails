@@ -1,6 +1,8 @@
 class Show < ActiveRecord::Base
 	belongs_to	:tag
-	
+
+	has_attached_file :image, :styles => { :medium => "225x320>", :thumb => "100x142>" }
+
 	has_many	:comments,	:dependent => :destroy
 	
 	has_many	:taggings,	:foreign_key => "show_id",

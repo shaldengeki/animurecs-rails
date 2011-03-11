@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :correct_user, :only => [:edit, :update, :destroy]
   # GET /comments
   # GET /comments.xml
   def index
@@ -53,8 +55,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to(@comment, :notice => 'Comment was successfully created.') }
-        format.xml  { render :xml => @comment, :status => :created, :location => @comment }
+        format.html { redirect_to(@show, :notice => 'Commented successfully.') }
+        format.xml  { render :xml => @show, :status => :created, :location => @comment }
       else
         format.html { render :action => "new" , :show_id => @show.id}
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
@@ -89,4 +91,13 @@ class CommentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  private
+
+    def authenticate
+      deny_access unless signed_in?
+    end
+    def correct_user
+      @user = User.find(Comment.find(params[:id]).user_id)
+      redirect_to(root_path) unless ( current_user?(@user) || admin_user?(@user) )
+    end
 end

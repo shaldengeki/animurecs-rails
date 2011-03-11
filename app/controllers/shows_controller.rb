@@ -1,4 +1,5 @@
 class ShowsController < ApplicationController
+  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
   # GET /shows
   # GET /shows.xml
   def index
@@ -15,7 +16,7 @@ class ShowsController < ApplicationController
   def show
     @show = Show.find(params[:id])
 	@title = @show.name	
-    @comments = @show.comments
+    @comments = @show.comments.sort_by(&:time).reverse
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +27,7 @@ class ShowsController < ApplicationController
   # GET /shows/new
   # GET /shows/new.xml
   def new
+	
     @show = Show.new
 
     respond_to do |format|
@@ -82,4 +84,9 @@ class ShowsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  private
+
+    def authenticate
+      deny_access unless admin_user?
+    end
 end

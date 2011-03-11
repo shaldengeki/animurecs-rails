@@ -1,8 +1,9 @@
 class TagsController < ApplicationController
+  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
   # GET /tags
   # GET /tags.xml
   def index
-    @tags = Tag.all
+    @tags = Tag.all.sort_by(&:name)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,4 +81,9 @@ class TagsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  private
+
+    def authenticate
+      deny_access unless signed_in?
+    end
 end

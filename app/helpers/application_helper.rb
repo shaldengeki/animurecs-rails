@@ -26,7 +26,8 @@ module ApplicationHelper
 		if @show.name.nil?
 			image_tag("shows/blank.png", :alt => "")
 		else
-			image_tag("shows/#{@show.id}.png", :alt => "#{@show.name}");
+			image_tag @show.image.url(:medium), :alt => "#{@show.name}"
+#			image_tag("shows/#{@show.id}.png", :alt => "#{@show.name}");
 		end
 	end
 	
@@ -35,7 +36,8 @@ module ApplicationHelper
 		if @show.name.nil?
 			image_tag("shows/blank_thumb.png", :alt => "")
 		else
-			image_tag("shows/#{@show.id}_thumb.png", :alt => "#{@show.name}");
+			image_tag @show.image.url(:thumb), :alt => "#{@show.name}"
+#			image_tag("shows/#{@show.id}_thumb.png", :alt => "#{@show.name}");
 		end
 	end
 	
@@ -62,6 +64,7 @@ module ApplicationHelper
 	def tag_cloud
 		output_string = ""
 		unless @show.taggeds.empty?
+			@show.taggeds = @show.taggeds.sort_by(&:name)
 			@show.taggeds.each do |tag|
 				if output_string.blank?
 					output_string = link_to(tag.name, tag, :title => tag.description)

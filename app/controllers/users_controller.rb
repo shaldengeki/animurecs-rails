@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, :only => [:edit, :update, :destroy]
+  before_filter :correct_user, :only => [:edit, :update, :destroy]
   # GET /users
   # GET /users.xml
   def index
+	@title = "All users"
     @users = User.all
-
+	
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
@@ -14,7 +17,8 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-
+	@title = @user.username
+	
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -35,7 +39,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @title = "Edit user"
   end
 
   # POST /users
@@ -84,4 +88,13 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  private
+
+    def authenticate
+      deny_access unless signed_in?
+    end
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless ( current_user?(@user) || admin_user?(@user) )
+    end
 end
