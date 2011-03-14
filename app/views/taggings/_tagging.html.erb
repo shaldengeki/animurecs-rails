@@ -1,0 +1,7 @@
+<% show = Show.find(tagging.show_id) %>
+<tr>
+  <td class="tagging">
+	<span class="tagging_show"><%= link_to show_image_thumb(show), show, :alt => show.name %></span><br />
+    <span class="show_name"><%= link_to show.name, show %></span>
+  </td>
+</tr>
