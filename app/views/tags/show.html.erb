@@ -1,15 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @tag.name %>
-</p>
+<h1><%= prettify_tag_title(@tag) %></h1>
+<%= @tag.description %>
 
-<p>
-  <b>Description:</b>
-  <%= @tag.description %>
-</p>
-
-
+<h2>Recent Series:</h2>
+<% unless @taggings.empty? %>
+<table class="taggings" summary="List tagged shows">
+  <%= render @taggings %>
+</table>
+<% else %>
+No series with this tag yet.
+<% end %>
+<br />
 <%= link_to 'Edit', edit_tag_path(@tag) %> |
 <%= link_to 'Back', tags_path %>

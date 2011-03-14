@@ -2,24 +2,18 @@
 
 <table>
   <tr>
+	<th>Shows</th>
     <th>Name</th>
+    <th>Type</th>
     <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @tags.each do |tag| %>
   <tr>
-    <td><%= tag.name %></td>
-    <td><%= tag.description %></td>
-    <td><%= link_to 'Show', tag %></td>
-    <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-    <td><%= link_to 'Destroy', tag, :confirm => 'Are you sure?', :method => :delete %></td>
+	<td><%= Tagging.where(:tag_id => tag.id).count %></td>
+    <td><%= prettify_tag_link(tag) %></td>
+    <td><%= Tagtype.find(tag.tagtype_id).name %> (<%= link_to 'edit', edit_tag_path(tag) %>)</td>
+    <td><%= tag_description_short(tag) %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Tag', new_tag_path %>

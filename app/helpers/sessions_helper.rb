@@ -25,6 +25,9 @@ module SessionsHelper
   def deny_access
     redirect_to signin_path, :notice => "Please sign in to access this page."
   end
+  def return_to_addr
+    session[:return_to]
+  end
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to

@@ -38,6 +38,7 @@ class TaggingsController < ApplicationController
 	else
 		@show = Show.first
 	end
+	@tagging.tagtext = ""
 
     respond_to do |format|
       format.html # new.html.erb
@@ -56,8 +57,34 @@ class TaggingsController < ApplicationController
   # POST /taggings
   # POST /taggings.xml
   def create
-    @tagging = Tagging.new(params[:tagging])
-
+	# process the tag to see if we have a text tagtype in there.
+	if params[:tagging][:tagtext].include? ":"
+		# lop off the first bit as the tag type and the second bit as the actual tag name.
+		tagarray = params[:tagging][:tagtext].split(":")
+		if Tagtype.find_by_name(tagarray[0])
+			tagtype_id = Tagtype.find_by_name(tagarray[0]).id
+			tagtext = tagarray.last(tagarray.length-1).join(":")
+		else
+			tagtype_id = Tagtype.find_by_name("general")
+			tagtext = tagarray.last(tagarray.length).join(":")
+		end
+	else
+		tagtype_id = Tagtype.find_by_name("general").id
+		tagtext = params[:tagging][:tagtext]
+	end
+	# save this tag into the db, if it doesn't already exist.
+	oldtag = Tag.find_by_name(tagtext)
+	if oldtag.nil? 
+		newtag = Tag.new(:name => tagtext, :description => "", :tagtype_id => tagtype_id)
+		newtag.save
+	else
+		newtag = oldtag
+	end
+	# now set the tag id in params and save this as a new tag.
+	params[:tagging][:tag_id] = newtag.id
+	@tagging = Tagging.new(params[:tagging])
+	@show = Show.find(@tagging.show_id)
+	
     respond_to do |format|
       if @tagging.save
         format.html { redirect_to(@tagging, :notice => 'Tagging was successfully created.') }

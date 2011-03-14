@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
   before_filter :correct_user, :only => [:edit, :update, :destroy]
+  before_filter :admin_user, :only => [:edit, :update]
   # GET /comments
   # GET /comments.xml
   def index
@@ -74,9 +75,11 @@ class CommentsController < ApplicationController
   # PUT /comments/1.xml
   def update
     @comment = Comment.find(params[:id])
+	@new_comment = params[:comment]
+	@new_comment[:user_id] = @comment.user_id
 	
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
+      if @comment.update_attributes(@new_comment)
         format.html { redirect_to(@comment, :notice => 'Comment was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -101,6 +104,9 @@ class CommentsController < ApplicationController
 
     def authenticate
       deny_access unless signed_in?
+    end
+    def admin_user
+      deny_access unless admin_user?
     end
     def correct_user
       @user = User.find(Comment.find(params[:id]).user_id)

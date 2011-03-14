@@ -1,6 +1,6 @@
 module TagsHelper
 	# Returns a dropdown list of all tags in the database, selecting the relevant one (if provided).
-	def tag_dropdown
+	def tags_dropdown
 		collection_select(:tagging, :tag_id, Tag.all, :id, :name, :prompt => true)
 	end
 
@@ -22,6 +22,23 @@ module TagsHelper
 		end
 	end
 
+	def prettify_tag_title(tag)
+		if tag.name.nil?
+			"None"
+		else
+			link_to(Tagtype.find(tag.tagtype).name + ":" + tag.name.gsub(/_/, ' '), tag, {:title => tag.description, :style=>'color:#'+Tagtype.find(tag.tagtype).color+';'})
+		end
+	end
+
+	# Displays the first n characters of a show's description (or the whole thing, if it's <= n characters long).
+	def tag_description_short(tag = @tag)
+		if tag.description.to_s.length > 50
+			tag.description.to_s.split('').first(50).to_s + "..."
+		else
+			tag.description.to_s
+		end
+	end
+	
 	# Returns a table-formatted tag cloud of tags associated with this show.
 	def tag_cloud(show)
 		output_string = ""

@@ -1,4 +1,5 @@
 class Tagging < ActiveRecord::Base
+	attr_accessor :tagtext
 	belongs_to	:tag
 	
 	validates :show_id,	:presence => true,

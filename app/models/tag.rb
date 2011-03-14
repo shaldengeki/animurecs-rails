@@ -5,7 +5,6 @@ class Tag < ActiveRecord::Base
 	validates :name, 	:presence => true,
 						:uniqueness => { :case_sensitive => false }, 
 						:length => { :within => 1..150 }
-						
-	validates :description, :presence => true,
-							:length => { :within => 15..1500 }
+	validates :tagtype_id,	:presence => true, 
+							:numericality => true
 end

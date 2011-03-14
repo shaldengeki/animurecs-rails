@@ -17,6 +17,7 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
 	@title = @tag.name
+	@taggings = Tagging.where(:tag_id => @tag.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -53,12 +54,7 @@ class TagsController < ApplicationController
 		if Tagtype.find_by_name(tagarray[0])
 			@tag.tagtype_id = Tagtype.find_by_name(tagarray[0]).id
 			@tag.name = tagarray.last(tagarray.length-1).join(":")
-		else
-			@tag.tagtype_id = Tagtype.find_by_name("general").id
-			@tag.name = tagarray.last(tagarray.length).join(":")
 		end
-	else
-		@tag.tagtype_id = Tagtype.find_by_name("general").id
 	end
 
     respond_to do |format|

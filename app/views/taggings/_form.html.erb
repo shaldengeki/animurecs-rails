@@ -11,13 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :show_id %><br />
-    <%= show_dropdown %>
+  <div class="field">  
+	<% if @show.nil? %>
+    <%= f.hidden_field :show_id, :value => Show.first.id %>
+	<% else %>
+    <%= f.hidden_field :show_id, :value => @show.id %>
+	<% end %>
   </div>
   <div class="field">
     <%= f.label :tag_id %><br />
-    <%= tag_dropdown %>
+    <%= f.text_field :tagtext %>
   </div>
   <div class="actions">
     <%= f.submit %>

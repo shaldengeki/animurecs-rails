@@ -229,6 +229,12 @@ p.text {
 	margin: 0px 0px 0px 5px;
 }
 
+/* Tag page styling. */
+
+td.tagging {
+	text-align: center;
+}
+
 /* Form styling. */
 
 div.field, div.actions {
