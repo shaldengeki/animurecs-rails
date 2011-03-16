@@ -1,9 +1,3 @@
-<% unless @show.nil? %>
-<h1>Commenting on: <%= @show.name %></h1>
-<% else %>
-<h1>New comment</h1>
-<% end %>
-
 <%= render 'form' %>
 
 <%= link_to 'Back', comments_path %>

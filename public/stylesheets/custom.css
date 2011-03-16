@@ -110,7 +110,16 @@ nav ul li a:hover {
 
 #mainmenu_inner {
 	float: left;
+	font-size: 16pt;
 }
+
+div#mainmenu_inner ul li.current-page {
+    background-color: #F7F7FF;
+}
+div#mainmenu_inner ul li.current-page a {
+    font-weight: bold;
+}
+
 
 /* Sign up button */
 
@@ -163,7 +172,7 @@ margin: 0;
 }
 
 #home_search {
-	padding: 0px 0 0 250px;
+	margin: -50px 10px 0 0;
 	float: right;
 }
 
@@ -230,6 +239,41 @@ p.text {
 }
 
 /* Tag page styling. */
+
+table.highlightable {
+	border-collapse:collapse;
+	border-spacing:0;
+	width: 100%;
+}
+
+table.highlightable > tbody > tr:hover {
+	background:#FFD;
+}
+
+table.highlightable th {
+    color: #171BB3;
+}
+table.highlightable td {
+    border: 1px dotted #EEE;
+    margin: 0;
+}
+table.highlightable th {
+    margin: 0;
+}
+table td {
+    padding: 1px 4px;
+    vertical-align: top;
+}
+table td.large-text p {
+    font-size: 1em;
+}
+table th {
+    font-weight: bold;
+    text-align: left;
+    vertical-align: top;
+    padding: 0.2em 0.5em;
+    white-space: nowrap;
+}
 
 td.tagging {
 	text-align: center;

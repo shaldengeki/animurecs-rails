@@ -1,19 +1,26 @@
-<h1>Tags</h1>
-
-<table>
+<table class="highlightable">
+  <thead>
   <tr>
 	<th>Shows</th>
     <th>Name</th>
     <th>Type</th>
     <th>Description</th>
   </tr>
+  </thead>
+  <tbody>
 
+<% i = 0 %>
 <% @tags.each do |tag| %>
-  <tr>
-	<td><%= Tagging.where(:tag_id => tag.id).count %></td>
-    <td><%= prettify_tag_link(tag) %></td>
-    <td><%= Tagtype.find(tag.tagtype_id).name %> (<%= link_to 'edit', edit_tag_path(tag) %>)</td>
-    <td><%= tag_description_short(tag) %></td>
-  </tr>
+<% if i % 2 == 1 %>
+    <tr class = 'even'>
+<% else %>
+    <tr class = 'odd'>
 <% end %>
+	  <td><%= Tagging.where(:tag_id => tag.id).count %></td>
+      <td><%= prettify_tag_link(tag) %></td>
+      <td><%= Tagtype.find(tag.tagtype_id).name %> (<%= link_to 'edit', edit_tag_path(tag) %>)</td>
+      <td><%= tag_description_short(tag) %></td>
+    </tr>
+<% end %>
+  </tbody>
 </table>
