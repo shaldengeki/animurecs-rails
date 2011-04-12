@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.xml
   def index
-    @tags = Tag.all.sort_by(&:name)
+    @tags = Tag.all.sort_by(&:name).paginate(:page => params[:page])
 	@title = "Tags"
 
     respond_to do |format|
@@ -17,7 +17,7 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
 	@title = @tag.name
-	@taggings = Tagging.where(:tag_id => @tag.id)
+	@taggings = Tagging.where(:tag_id => @tag.id).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # show.html.erb

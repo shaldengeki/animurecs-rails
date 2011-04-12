@@ -1,7 +1,7 @@
 <table id = 'show_list'>
-
+<%= will_paginate %>
 <%	i = 1
-	@shows.each do |show| %>
+		@shows.each do |show| %>
   <tr class = 'show_list_a'>
     <td><%= i %></td>
     <td class = 'show_list_animepic'><%= show_image_thumb(show) %></td>
@@ -22,7 +22,10 @@
 <%	i += 1
 	end %>
 </table>
-
+<%= will_paginate %>
+<% if @shows.empty? %>
+Nobody here but us chickens!
+<% end %>
 <br />
 
 <%= link_to 'New Show', new_show_path %>

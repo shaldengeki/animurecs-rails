@@ -5,7 +5,8 @@ class ShowsController < ApplicationController
   def index
 	if params[:tags].blank?
 		# if tags blank, display all shows.
-		@shows = Show.find(:all).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
+#		@shows = Show.find(:all).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
+		@shows = Show.paginate(:page => params[:page]).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
 	else
 		@shows = Array.new
 		# if tags non-blank, get a list of shows to display.
@@ -60,6 +61,7 @@ class ShowsController < ApplicationController
 			@shows.push(Show.find(intersect_shows_array[i]))
 			i += 1
 		end
+		@shows = @shows.paginate(:page => params[:page])
 	end
 	@title = "Shows"
     respond_to do |format|
@@ -143,7 +145,6 @@ class ShowsController < ApplicationController
     end
   end
   private
-
     def authenticate
       deny_access unless admin_user?
     end

@@ -20,4 +20,8 @@ module ApplicationHelper
 	def dislike_image
 		image_tag("dislike.png", :alt => "Disike", :class => "dislike")
 	end
+	
+	def format_time(time)
+		# formats a UNIX timestamp to show '<number> <plural unit of time> ago'
+	end
 end
