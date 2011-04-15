@@ -3,6 +3,11 @@
 <h1><%= prettify_tag_title(@tag) %></h1>
 <%= @tag.description %>
 
+<% if signed_in? %>
+	<%= link_to 'Edit', edit_tag_path(@tag) %> |
+	<%= link_to 'Back', tags_path %>
+<%	end %>
+
 <h2>Recent Series:</h2>
 <% unless @taggings.empty? %>
 <%= will_paginate @taggings %>
@@ -13,6 +18,3 @@
 <% else %>
 No series with this tag yet.
 <% end %>
-<br />
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>

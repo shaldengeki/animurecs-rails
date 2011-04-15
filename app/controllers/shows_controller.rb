@@ -6,7 +6,7 @@ class ShowsController < ApplicationController
 	if params[:tags].blank?
 		# if tags blank, display all shows.
 #		@shows = Show.find(:all).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
-		@shows = Show.paginate(:page => params[:page]).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
+		@shows = Show.all.sort{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}.paginate(:page => params[:page])
 	else
 		@shows = Array.new
 		# if tags non-blank, get a list of shows to display.
@@ -14,6 +14,8 @@ class ShowsController < ApplicationController
 		# assemble a list of show ids for each tag provided.
 		i = 0
 		all_shows_array = Array.new
+		not_shows_array = Array.new
+		or_shows_array = Array.new
 		while i < tags.length
 			if tags[i].include? ":"
 				# lop off the first bit as the tag type and the second bit as the actual tag name.
@@ -31,7 +33,15 @@ class ShowsController < ApplicationController
 				tagtype_id = Tagtype.find_by_name("general").id
 				tag_name = tags[i]
 			end
-			tag = Tag.where(:name => tag_name).limit(1)
+			
+			# check for control characters at the beginning of this tag and strip them if necessary.
+			if tag_name[0].chr =~ /[\-\+\~]/
+				short_tag_name = tag_name[1,tag_name.length-1]
+			else
+				short_tag_name = tag_name
+			end
+			
+			tag = Tag.where(:name => short_tag_name).limit(1)
 			if !tag.empty?
 				taggings = Tagging.where(:tag_id => tag.first.id)
 				j = 0
@@ -40,25 +50,47 @@ class ShowsController < ApplicationController
 					shows_array.push(taggings[j].show_id)
 					j += 1
 				end
-				all_shows_array.push(shows_array)
+				# if user has specified NOT, then push this onto the list of shows not to display.
+				if tag_name[0].chr == "-"
+					not_shows_array.push(shows_array)
+				elsif tag_name[0].chr == "~"
+					or_shows_array.push(shows_array)
+				else
+					all_shows_array.push(shows_array)
+				end
 			end
 			i += 1
+		end		
+		final_shows_array = Array.new
+		
+		# include all the shows in the OR array.
+		i = 0
+		while i < or_shows_array.length
+			final_shows_array = final_shows_array | or_shows_array[i]
+			i += 1
 		end
-		# now intersect each of these lists to get a list of shows with all of these tags.
-		intersect_shows_array = Array.new
+		
+		# intersect each of the lists in the ALL array.
 		i = 0
 		while i < all_shows_array.length
 			if i == 0
-				intersect_shows_array = all_shows_array[i]
+				final_shows_array = all_shows_array[i]
 			else
-				intersect_shows_array = intersect_shows_array &  all_shows_array[i]
+				final_shows_array = final_shows_array & all_shows_array[i]
 			end
+			i += 1
+		end
+		
+		# exclude any of the shows in the NOT array.
+		i = 0
+		while i < not_shows_array.length
+			final_shows_array = final_shows_array - not_shows_array[i]
 			i += 1
 		end
 		# now get information for each of these shows.
 		i = 0
-		while i < intersect_shows_array.length
-			@shows.push(Show.find(intersect_shows_array[i]))
+		while i < final_shows_array.length
+			@shows.push(Show.find(final_shows_array[i]))
 			i += 1
 		end
 		@shows = @shows.paginate(:page => params[:page])
