@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= prettify_tag_title(@tag) %></h1>
-<%= @tag.description %>
-
+<p>
+	<%= @tag.description %>
+</p>
 <% if signed_in? %>
 	<%= link_to 'Edit', edit_tag_path(@tag) %> |
 	<%= link_to 'Back', tags_path %>

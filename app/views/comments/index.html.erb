@@ -1,4 +1,5 @@
 <table>
+<%= will_paginate %>
   <tr>
     <th>Text</th>
     <th>Show</th>
@@ -14,12 +15,13 @@
     <td><%= comment.text %></td>
     <td><%= Show.find(comment.show_id).name %></td>
     <td><%= User.find(comment.user_id).username %></td>
-    <td><%= Time.at(comment.time).strftime('%D') %></td>
-    <td><%= link_to 'Show', comment %></td>
+    <td><%= time_ago_in_words(Time.at(comment.time)) %> ago</td>
+    <td><%= link_to 'Show', Show.find(comment.show_id) %></td>
     <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
     <td><%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
+<%= will_paginate %>
 </table>
 
 <br />

@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.xml
   def index
-    @comments = Comment.find(:all, :order => 'time DESC')
+    @comments = Comment.find(:all, :order => 'time DESC').paginate(:page => params[:page])
 	@title = "Comments"
 
     respond_to do |format|

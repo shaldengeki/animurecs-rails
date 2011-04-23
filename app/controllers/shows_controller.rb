@@ -3,10 +3,16 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.xml
   def index
+	page = params[:page].to_i; page = 1 if page == 0
+	limit = 30
 	if params[:tags].blank?
 		# if tags blank, display all shows.
 #		@shows = Show.find(:all).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
-		@shows = Show.all.sort{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}.paginate(:page => params[:page])
+#		@shows = Show.all.sort{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
+		post_count = Show.count
+		@shows = WillPaginate::Collection.create(page, limit, post_count) do |page|
+			page.replace(Show.find_by_sql("SELECT * FROM `shows` ORDER BY `upvotes` - `downvotes` DESC LIMIT " + page.offset.to_s + "," + page.per_page.to_s))
+		end
 	else
 		@shows = Array.new
 		# if tags non-blank, get a list of shows to display.
@@ -16,6 +22,7 @@ class ShowsController < ApplicationController
 		all_shows_array = Array.new
 		not_shows_array = Array.new
 		or_shows_array = Array.new
+		show_title_array = Array.new
 		while i < tags.length
 			if tags[i].include? ":"
 				# lop off the first bit as the tag type and the second bit as the actual tag name.
@@ -41,9 +48,9 @@ class ShowsController < ApplicationController
 				short_tag_name = tag_name
 			end
 			
-			tag = Tag.where(:name => short_tag_name).limit(1)
-			if !tag.empty?
-				taggings = Tagging.where(:tag_id => tag.first.id)
+			tag = Tag.find_by_name(short_tag_name)
+			if !tag.nil?
+				taggings = Tagging.where(:tag_id => tag.id)
 				j = 0
 				shows_array = Array.new
 				while j < taggings.length
@@ -59,6 +66,7 @@ class ShowsController < ApplicationController
 					all_shows_array.push(shows_array)
 				end
 			end
+			# finally, get shows which have titles like this tag name.
 			i += 1
 		end		
 		final_shows_array = Array.new
@@ -95,6 +103,12 @@ class ShowsController < ApplicationController
 		end
 		@shows = @shows.paginate(:page => params[:page])
 	end
+	
+	# now get the most-frequently used tags in this group of shows.
+	@popularTaggings = Hash.new(0)
+	Tagging.where(:show_id => @shows).each{|tagging| @popularTaggings[tagging.tag_id] += 1}
+	@popularTaggings = @popularTaggings.sort_by{|key,value| value}.reverse.take(25)
+	
 	@title = "Shows"
     respond_to do |format|
       format.html # index.html.erb

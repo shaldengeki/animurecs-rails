@@ -2,15 +2,7 @@
 
 <%= show_image %>
 <div id = 'show_infobox'>
-	<p>
-	  <b>Name:</b>
-	  <%= @show.name %>
-	</p>
-
-	<p>
-	  <b>Description:</b>
-	  <%= @show.description %>
-	</p>
+	<%= simple_format(@show.description) %>
 
 	<p>
 	  <b>Length:</b>

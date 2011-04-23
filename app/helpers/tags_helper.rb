@@ -42,9 +42,14 @@ module TagsHelper
 	# Returns a table-formatted tag cloud of tags associated with this show.
 	def tag_cloud(show)
 		output_string = ""
-		unless show.taggeds.empty?
-			show.taggeds = show.taggeds.sort_by(&:name)
-			show.taggeds.each do |tag|
+		show_taggings = Tagging.where(:show_id => show.id)
+		show_tags = Array.new()
+		unless show_taggings.empty?
+			show_taggings.each{|tagging| show_tags.push(Tag.find(tagging.tag_id))}
+			show_tags = show_tags.sort_by(&:name)
+#			show.taggeds = show.taggeds.sort_by(&:name)
+#			show.taggeds.each do |tag|
+			show_tags.each do |tag|
 				if output_string.blank?
 					output_string = prettify_tag_link(tag)
 				else
