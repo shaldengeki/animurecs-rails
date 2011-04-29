@@ -18,7 +18,8 @@ module TagsHelper
 		if tag.name.nil?
 			""
 		else
-			link_to(tag.name.gsub(/_/, ' '), tag, {:title => tag.description, :style=>'color:#'+Tagtype.find(tag.tagtype).color+';'})
+#			%{<a href="/shows?tags=#{u(tag.name)}+#{u(params[:tags])}" title="#{u(tag.description)}" style="color:\##{@tagtypes.find{|tagtype| tagtype.id == tag.tagtype_id}.color};">#{tag.name.tr("_", " ")}</a>}
+			link_to(tag.name.gsub(/_/, ' '), tag, {:title => tag.description, :style=>'color:#'+@tagtypes.find{|tagtype| tagtype.id == tag.tagtype_id}.color+';'})
 		end
 	end
 
@@ -26,7 +27,7 @@ module TagsHelper
 		if tag.name.nil?
 			"None"
 		else
-			link_to(Tagtype.find(tag.tagtype).name + ":" + tag.name.gsub(/_/, ' '), tag, {:title => tag.description, :style=>'color:#'+Tagtype.find(tag.tagtype).color+';'})
+			link_to(Tagtype.find(tag.tagtype).name + ":" + tag.name.gsub(/_/, ' '), tag, {:title => tag.description, :style=>'color:#'+@tagtypes.find{|tagtype| tagtype.id == tag.tagtype_id}.color+';'})
 		end
 	end
 

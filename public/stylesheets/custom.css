@@ -3,7 +3,14 @@ body {
   font: 13px / 20px "Lucida Grande",Arial,Sans-serif;
   min-width: 800px;
 }
+h1,h2,h3,h4,h5 {
+	margin: 0;
+	padding: 0;
+}
 
+h5 {
+	font-size:1.2em;
+}
 img {
 	border: none;
 }
@@ -120,7 +127,6 @@ div#mainmenu_inner ul li.current-page a {
     font-weight: bold;
 }
 
-
 /* Sign up button */
 
 a.signup_button {
@@ -185,6 +191,40 @@ margin: 0;
 	position: relative;
 	margin: 0;
 }
+
+/* Sidebar styling. */
+div.sidebar {
+	position: absolute;
+    width: 20%;
+    left: 1em;
+    float: left;
+    overflow: visible;
+}
+div.sidebar li {
+    list-style-type: none;
+    margin: 0;
+}
+div.sidebar ul {
+    margin: 10px 0px 0px 0px;
+}
+li.tag-type-general, li.tag-type-general a {
+	font-size: 0.9em;
+	color: #006FFA;
+}
+li.tag-type-studio, li.tag-type-studio a {
+	font-size: 0.9em;
+	color: #AA0000;
+}
+li.tag-type-va, li.tag-type-va a {
+	font-size: 0.9em;
+	color: #00AA00;
+}
+span.shows-count {
+    color: #AAA;
+	margin-left: 5px;
+}
+
+/* Mainbody content styling. */
 
 table#show_list {
 	width: 800px;

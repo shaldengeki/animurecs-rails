@@ -5,6 +5,7 @@ class TagsController < ApplicationController
   def index
     @tags = Tag.all.sort_by(&:name).paginate(:page => params[:page])
 	@title = "Tags"
+	@tagtypes = Tagtype.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,6 +19,13 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
 	@title = @tag.name
 	@taggings = Tagging.where(:tag_id => @tag.id).paginate(:page => params[:page])
+	@tagtypes = Tagtype.all
+	# get popular related tags for this tag.
+	@popularTags = Hash.new(0)
+	@taggings.each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] += 1}}
+#	Tagging.where(:tag_id => @tag.id).each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] = Tagging.count(:conditions => "`tag_id` = " + newTagging.tag_id.to_s)}}
+	@popularTags = @popularTags.sort_by{|key,value| value}.reverse.take(25)
+
 
     respond_to do |format|
       format.html # show.html.erb

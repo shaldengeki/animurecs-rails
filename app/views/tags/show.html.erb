@@ -1,3 +1,12 @@
+<div class="sidebar">  
+	<div style="margin-bottom: 1em;">
+		<h5>Tags</h5>
+		<div id="sidebar-tags">
+			<%= show_tag_sidebar(@popularTags) %>
+		</div>      
+	</div>
+</div>
+
 <p id="notice"><%= notice %></p>
 
 <h1><%= prettify_tag_title(@tag) %></h1>
@@ -7,13 +16,30 @@
 <% if signed_in? %>
 	<%= link_to 'Edit', edit_tag_path(@tag) %> |
 	<%= link_to 'Back', tags_path %>
+<br /><br />
 <%	end %>
 
 <h2>Recent Series:</h2>
+<br />
 <% unless @taggings.empty? %>
 <%= will_paginate @taggings %>
 <table class="taggings" summary="List tagged shows">
-  <%= render @taggings %>
+	<tr>
+<% tagging_i = 0
+@taggings.each do |tagging|
+	show = Show.find(tagging.show_id) %>
+		<td class="tagging">
+			<span class="tagging_show"><%= link_to show_image_thumb(show), show, :alt => show.name %></span><br />
+			<span class="show_name"><%= link_to show.name, show %></span>
+		</td>
+<%	tagging_i += 1
+		if tagging_i > 3
+		tagging_i = 0	%>
+	</tr>
+	<tr>
+<%		end
+end %>
+	</tr>
 </table>
 <%= will_paginate @taggings %>
 <% else %>

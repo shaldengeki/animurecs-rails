@@ -33,4 +33,31 @@ module ShowsHelper
 	def show_dropdown
 		collection_select(:tagging, :show_id, Show.all, :id, :name, :prompt => true)
 	end
+	def show_tag_sidebar_helper(tag_id, post_count)
+		tag = Tag.find(tag_id)
+		tag_name = tag.name
+		type_name = Tagtype.find(tag.tagtype_id).name
+
+		html = %{<li class="tag-type-#{u(type_name)}">}
+
+		html << %{<a href="/shows?tags=#{u(tag_name)}+#{u(params[:tags])}">+</a> }
+		html << %{<a href="/shows?tags=-#{u(tag_name)}+#{u(params[:tags])}">&ndash;</a> }
+		html << %{<a href="/tags/#{u(tag_id)}">?</a> }
+#		html << %{<a href="/shows?tags=#{u(tag_name)}+#{u(params[:tags])}">#{tag_name.tr("_", " ")}</a>}
+		html << %{<a href="/shows?tags=#{u(tag_name)}">#{tag_name.tr("_", " ")}</a>}
+		html << %{<span class="shows-count">#{post_count}</span>}
+		html << '</li>'
+		return html.html_safe
+	end
+  
+  def show_tag_sidebar(tags)
+    html = ['<div style="margin-bottom: 1em;">', '<ul id="tag-sidebar">']
+
+	tags.each do |tag, count|
+		html << show_tag_sidebar_helper(tag, count)
+	end
+    
+    html += ['</ul>', '</div>']
+    html.join("\n").html_safe
+  end
 end

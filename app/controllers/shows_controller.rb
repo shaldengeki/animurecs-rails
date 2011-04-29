@@ -5,6 +5,7 @@ class ShowsController < ApplicationController
   def index
 	page = params[:page].to_i; page = 1 if page == 0
 	limit = 30
+	@tagtypes = Tagtype.all
 	if params[:tags].blank?
 		# if tags blank, display all shows.
 #		@shows = Show.find(:all).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
@@ -105,9 +106,9 @@ class ShowsController < ApplicationController
 	end
 	
 	# now get the most-frequently used tags in this group of shows.
-	@popularTaggings = Hash.new(0)
-	Tagging.where(:show_id => @shows).each{|tagging| @popularTaggings[tagging.tag_id] += 1}
-	@popularTaggings = @popularTaggings.sort_by{|key,value| value}.reverse.take(25)
+	@popularTags = Hash.new(0)
+	Tagging.where(:show_id => @shows).each{|tagging| @popularTags[tagging.tag_id] += 1}
+	@popularTags = @popularTags.sort_by{|key,value| value}.reverse.take(25)
 	
 	@title = "Shows"
     respond_to do |format|
@@ -122,6 +123,12 @@ class ShowsController < ApplicationController
     @show = Show.find(params[:id])
 	@title = @show.name	
     @comments = @show.comments.sort_by(&:time).reverse
+	@tagtypes = Tagtype.all
+	
+	# get the tags for this show, and the number of posts which use each of these tags.
+	@popularTags = Hash.new(0)
+	Tagging.where(:show_id => @show).each{|tagging| @popularTags[tagging.tag_id] = Tagging.count(:conditions => "`tag_id` = " + tagging.tag_id.to_s)}
+	@popularTags = @popularTags.sort_by{|key,value| value}.reverse.take(25)
 
     respond_to do |format|
       format.html # show.html.erb
