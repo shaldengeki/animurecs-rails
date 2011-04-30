@@ -11,9 +11,11 @@ class ShowsController < ApplicationController
 #		@shows = Show.find(:all).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
 #		@shows = Show.all.sort{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
 		post_count = Show.count
+
 		@shows = WillPaginate::Collection.create(page, limit, post_count) do |page|
 			page.replace(Show.find_by_sql("SELECT * FROM `shows` ORDER BY `upvotes` - `downvotes` DESC LIMIT " + page.offset.to_s + "," + page.per_page.to_s))
 		end
+		relevantTaggings = Tagging.all		
 	else
 		@shows = Array.new
 		# if tags non-blank, get a list of shows to display.
@@ -102,14 +104,15 @@ class ShowsController < ApplicationController
 			@shows.push(Show.find(final_shows_array[i]))
 			i += 1
 		end
-		@shows = @shows.paginate(:page => params[:page])
+		relevantTaggings = Tagging.where(:show_id => @shows)
+		@shows = @shows.paginate(:page => params[:page])		
 	end
-	
+
 	# now get the most-frequently used tags in this group of shows.
 	@popularTags = Hash.new(0)
-	Tagging.where(:show_id => @shows).each{|tagging| @popularTags[tagging.tag_id] += 1}
+	relevantTaggings.each{|tagging| @popularTags[tagging.tag_id] += 1}
 	@popularTags = @popularTags.sort_by{|key,value| value}.reverse.take(25)
-	
+
 	@title = "Shows"
     respond_to do |format|
       format.html # index.html.erb
