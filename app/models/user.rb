@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	attr_accessible :username, :color, :userlevel, :password, :password_confirmation
+	attr_accessible :username, :color, :userlevel, :password, :password_confirmation, :avatar
 	attr_accessor :password
 
 	has_many :comments
@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 							:numericality => true
 
 	before_save :encrypt_password
+
+	has_attached_file :avatar, :styles => { :medium => "225x320>", :thumb => "100x142>" }
 
 	def has_password?(submitted_password)
 		encrypted_password == encrypt(submitted_password)

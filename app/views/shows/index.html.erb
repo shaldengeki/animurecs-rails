@@ -1,12 +1,3 @@
-<div class="sidebar">  
-	<div style="margin-bottom: 1em;">
-		<h5>Tags</h5>
-		<div id="sidebar-tags">
-			<%= show_tag_sidebar(@popularTags) %>
-		</div>      
-	</div>
-</div>
-
 <table id = 'show_list'>
 <%= will_paginate %>
 <%	i = 1
@@ -22,8 +13,8 @@
   <tr class = 'show_list_b'>
     <td></td>
     <td>
-		<span class = 'like_button'><%= link_to like_image + " " + show.upvotes.to_s + " likes", '#' %></span>
-		<span class = 'dislike_button'><%= link_to dislike_image + " " + show.downvotes.to_s + " dislikes", '#' %></span>
+		<span class = 'like_button'><% if signed_in? %><%= link_to like_image + " " + show.upvotes.to_s + " likes", '#' %><% else %><%= like_image + " " + show.upvotes.to_s + " likes" %><% end %></span>
+		<span class = 'dislike_button'><% if signed_in? %><%= link_to dislike_image + " " + show.downvotes.to_s + " dislikes", '#' %><% else %><%= dislike_image + " " + show.downvotes.to_s + " likes" %><% end %></span>
 	</td>
     <td><span class = 'list_tags'>Tags: 
 	<%= tag_cloud(show) %></span></td>

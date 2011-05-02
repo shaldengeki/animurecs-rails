@@ -1,25 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
+<%= avatar_image %>
 
-<p>
-  <b>Password:</b>
-  <%= @user.password %>
-</p>
+<div id = 'user_infobox'>
+	<p>
+		<b>Username:</b>
+		<%= @user.username %>
+	</p>
 
-<p>
-  <b>Color:</b>
-  <%= @user.color %>
-</p>
+	<p>
+		<b>Color:</b>
+		<%= @user.color %>
+	</p>
 
-<p>
-  <b>Userlevel:</b>
-  <%= @user.userlevel %>
-</p>
-
-
+	<p>
+		<b>User type:</b>
+		<%= user_type(@user) %>
+	</p>
+</div>
+<br />
+<% if current_user?(@user) || admin_user? %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
 <%= link_to 'Back', users_path %>

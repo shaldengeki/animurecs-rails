@@ -3,20 +3,18 @@ module ShowsHelper
 	# Returns the image associated with this show.
 	def show_image(show = @show)
 		if show.name.nil?
-			image_tag("shows/blank.png", :alt => "")
+			image_tag("shows/blank.png", :alt => "", :class => 'show_image')
 		else
-			image_tag show.image.url(:medium), :alt => "#{show.name}"
-#			image_tag("shows/#{@show.id}.png", :alt => "#{@show.name}");
+			image_tag show.image.url(:medium), :alt => "#{show.name}", :class => 'show_image'
 		end
 	end
 	
 	# Returns the image thumbnail associated with this show.
 	def show_image_thumb(show = @show)
 		if show.name.nil?
-			image_tag("shows/blank_thumb.png", :alt => "")
+			image_tag("shows/blank_thumb.png", :alt => "", :class => 'show_image_thumb')
 		else
-			image_tag show.image.url(:thumb), :alt => "#{show.name}"
-#			image_tag("shows/#{@show.id}_thumb.png", :alt => "#{@show.name}");
+			image_tag show.image.url(:thumb), :alt => "#{show.name}", :class => 'show_image_thumb'
 		end
 	end
 	

@@ -1,22 +1,32 @@
-<header>
-  <div id = "header_inner">
-	  <nav class="round signin">
-		<ul>
-		  <% if signed_in? %>
-		  <li><%= link_to "Profile", @current_user %></li>
-		  <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
-		  <% else %>
-		  <li><%= link_to "Sign in", signin_path %></li>
-		  <% end %>
-		</ul>
-	  </nav>
-	  <div id = "logo_search">
-		  <%= link_to logo, root_path %>
-		  <%= render 'layouts/search' %>
-	  </div>
-  </div>
-</header>
-<div id = "mainmenu">
-	<%= render 'layouts/mainmenu' %>
-</div>
-<br />
+		<header>
+		  <div id = "header_inner">
+			  <nav class="round signin">
+				<ul>
+				  <% if signed_in? %>
+				  <li><%= link_to "Profile", @current_user %></li>
+				  <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+				  <% else %>
+				  <li><%= link_to "Sign in", signin_path %></li>
+				  <% end %>
+				</ul>
+			  </nav>
+			  <div id = "logo_search">
+				  <%= link_to logo, root_path %>
+				  <%= render 'layouts/search' %>
+			  </div>
+		  </div>
+		</header>
+		<div id = "mainmenu">
+<%= render 'layouts/mainmenu' %>
+		</div>
+		<br /><br />
+<% if @popularTags %>
+		<div class="sidebar">  
+			<div style="margin-bottom: 1em;">
+				<h5>Tags</h5>
+				<div id="sidebar-tags">
+					<%= show_tag_sidebar(@popularTags) %>
+				</div>      
+			</div>
+		</div>
+<% end %>

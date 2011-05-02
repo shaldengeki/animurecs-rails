@@ -32,6 +32,18 @@ module SessionsHelper
     redirect_to(session[:return_to] || default)
     clear_return_to
   end
+  def user_type(user)
+		case user.userlevel
+		when 0
+			"Normal"
+		when 1
+			"Moderator"
+		when 2
+			"Administrator"
+		else
+			"Unknown"
+		end
+  end
 
   private
 

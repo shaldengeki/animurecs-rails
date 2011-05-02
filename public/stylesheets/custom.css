@@ -1,7 +1,6 @@
 body {
   background: #FFFFFF;
   font: 13px / 20px "Lucida Grande",Arial,Sans-serif;
-  min-width: 800px;
 }
 h1,h2,h3,h4,h5 {
 	margin: 0;
@@ -15,15 +14,12 @@ img {
 	border: none;
 }
 
-.container {
-  width: 100%;
-}
-
 header {
-  display: block;
-  height: 150px;
-  width: 100%;
-  background-color: #3EA055;
+  display: 				block;
+  height: 				150px;
+  width:				100%;
+  min-width: 			800px;
+  background-color: 	#3EA055;
 }
 
 header img {
@@ -36,6 +32,9 @@ header img {
   margin: 0 auto;
 }
 
+.container {
+	padding:	0 160px;
+}
 
 section {
   display: block;
@@ -194,11 +193,10 @@ margin: 0;
 
 /* Sidebar styling. */
 div.sidebar {
-	position: absolute;
-    width: 20%;
-    left: 1em;
-    float: left;
-    overflow: visible;
+	margin-left: 0px;
+	float: left;
+	overflow: visible;
+	width: 160px;
 }
 div.sidebar li {
     list-style-type: none;
@@ -206,17 +204,18 @@ div.sidebar li {
 }
 div.sidebar ul {
     margin: 10px 0px 0px 0px;
+	padding: 0 10px;
 }
 li.tag-type-general, li.tag-type-general a {
-	font-size: 0.9em;
+/*	font-size: 0.9em;*/
 	color: #006FFA;
 }
 li.tag-type-studio, li.tag-type-studio a {
-	font-size: 0.9em;
+/*	font-size: 0.9em;*/
 	color: #AA0000;
 }
 li.tag-type-va, li.tag-type-va a {
-	font-size: 0.9em;
+/*	font-size: 0.9em;*/
 	color: #00AA00;
 }
 span.shows-count {
@@ -225,6 +224,20 @@ span.shows-count {
 }
 
 /* Mainbody content styling. */
+
+div.pagination {
+	text-align: center;
+}
+div.pagination a, div.pagination em, div.pagination span{
+	border: 			1px solid #EAEAEA;
+	padding: 			2px 6px;
+	margin: 			0 3px;
+	text-decoration:	none;
+}
+div.pagination a:hover {
+	background:	rgb(60,60,220);
+	color:		white;
+}
 
 table#show_list {
 	width: 800px;
@@ -266,6 +279,30 @@ span.like_button , span.dislike_button{
 	float: right;
 	width: 430px;
 	text-align: left;
+}
+
+#user_infobox  {
+	margin: 0 10px;
+	padding: 0;
+	float: right;
+	width: 550px;
+	text-align: left;
+}
+
+.avatar, .show_image {
+	min-height: 320px;
+	max-height: 320px;
+	min-width: 225px;
+	max-width: 225px;
+	overflow: hidden;
+}
+
+.avatar_thumb, .show_image_thumb {
+	min-height: 142px;
+	max-height: 142px;
+	min-width: 100px;
+	max-width: 100px;
+	overflow: hidden;
 }
 
 p.text {
