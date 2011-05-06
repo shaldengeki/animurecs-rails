@@ -1,31 +1,32 @@
 class UsersController < ApplicationController
   before_filter :authenticate, :only => [:edit, :update, :destroy]
-  # GET /users
-  # GET /users.xml
+
+  # Displays list of users.
+  # Can be accessed by GETting /users or  /users.xml
   def index
 	@title = "All users"
     @users = User.all
 	
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @users }
+      format.xml  { render :xml => @users.to_xml(:except => [:encrypted_password, :salt])}
     end
   end
 
-  # GET /users/1
-  # GET /users/1.xml
+  # Displays a user's information.
+  # Can be accessed by GETting /users/1 or  /users/1.xml
   def show
     @user = User.find(params[:id])
 	@title = @user.username
 	
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @user }
+      format.xml  { render :xml => @user.to_xml(:except => [:encrypted_password, :salt])}
     end
   end
 
-  # GET /users/new
-  # GET /users/new.xml
+  # Displays the form to add a new user.
+  # Can be accessed by GETting /users/new or  /users/new.xml
   def new
     @user = User.new
 	@title = "Sign Up"
@@ -36,13 +37,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
+  # Displays the form to edit a user's information.
+  # Can be accessed by GETting /users/edit/1
   def edit
     @title = "Edit user"
   end
 
-  # POST /users
-  # POST /users.xml
+  # Creates a user.
+  # Can be accessed by POSTING /users or  /users.xml
   def create
     @user = User.new(params[:user])
 	
@@ -62,8 +64,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
+  # Updates a user with new information.
+  # Can be accessed by PUTting /users/1 or  /users/1.xml
   def update
     @user = User.find(params[:id])
 	
@@ -84,8 +86,8 @@ class UsersController < ApplicationController
 	end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.xml
+  # Deletes a user.
+  # Can be accessed by DELETEing /users/1 or  /users/1.xml
   def destroy
     @user = User.find(params[:id])
     @user.destroy

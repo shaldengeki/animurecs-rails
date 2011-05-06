@@ -2,8 +2,9 @@ class CommentsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
   before_filter :correct_user, :only => [:edit, :update, :destroy]
   before_filter :admin_user, :only => [:edit, :update]
-  # GET /comments
-  # GET /comments.xml
+  
+  # Displays list of comments.
+  # Can be accessed by GETting /comments or  /comments.xml
   def index
     @comments = Comment.find(:all, :order => 'time DESC').paginate(:page => params[:page])
 	@title = "Comments"
@@ -14,8 +15,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # GET /comments/1
-  # GET /comments/1.xml
+  # Displays a comment's information.
+  # Can be accessed by GETting /comments/1 or  /comments/1.xml
   def show
     @comment = Comment.find(params[:id])
     @user = @comment.user
@@ -27,8 +28,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # GET /comments/new
-  # GET /comments/new.xml
+  # Displays comment adding form.
+  # Can be accessed by GETting /comments/new or /comments/new.xml
   def new
     @comment = Comment.new
 	@title = "New comment"
@@ -45,7 +46,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # GET /comments/1/edit
+  # Displays comment editing form.
+  # Can be accessed by GETting /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
 	@show = Show.find(@comment.show_id)
@@ -53,8 +55,8 @@ class CommentsController < ApplicationController
 	
   end
 
-  # POST /comments
-  # POST /comments.xml
+  # Creates a new comment.
+  # Can be accessed by POSTing to /comments or /comments.xml
   def create
     @comment = Comment.new(params[:comment])
 	@comment.time = Time.now.to_i;
@@ -71,8 +73,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PUT /comments/1
-  # PUT /comments/1.xml
+  # Updates a comment with new details.
+  # Can be accessed by PUTting to /comments/1 or /comments/1.xml
   def update
     @comment = Comment.find(params[:id])
 	@new_comment = params[:comment]
@@ -89,8 +91,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1
-  # DELETE /comments/1.xml
+  # Deletes a comment.
+  # Can be accessed by DELETE-ing to /comments/1 or /comments/1.xml
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy

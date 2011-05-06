@@ -1,6 +1,8 @@
 class SeriesController < ApplicationController
-  # GET /series
-  # GET /series.xml
+  # This model is deprecated, and any methods listed here are not guaranteed to provide useful data.
+
+  # Displays list of series.
+  # Can be accessed by GETting /series or  /series.xml
   def index
     @series = Series.all
 
@@ -10,8 +12,8 @@ class SeriesController < ApplicationController
     end
   end
 
-  # GET /series/1
-  # GET /series/1.xml
+  # Displays a series's information.
+  # Can be accessed by GETting /series/1 or  /series/1.xml
   def show
     @series = Series.find(params[:id])
     @comments = @series.comments
@@ -22,8 +24,8 @@ class SeriesController < ApplicationController
     end
   end
 
-  # GET /series/new
-  # GET /series/new.xml
+  # Displays the form to add a new series.
+  # Can be accessed by GETting /series/new or  /series/new.xml
   def new
     @series = Series.new
 
@@ -33,13 +35,14 @@ class SeriesController < ApplicationController
     end
   end
 
-  # GET /series/1/edit
+  # Displays the form to edit a series's information.
+  # Can be accessed by GETting /series/edit/1
   def edit
     @series = Series.find(params[:id])
   end
 
-  # POST /series
-  # POST /series.xml
+  # Creates a series.
+  # Can be accessed by POSTING /series or  /series.xml
   def create
     @series = Series.new(params[:series])
 
@@ -54,8 +57,8 @@ class SeriesController < ApplicationController
     end
   end
 
-  # PUT /series/1
-  # PUT /series/1.xml
+  # Updates a series with new information.
+  # Can be accessed by PUTting /series/1 or  /series/1.xml
   def update
     @series = Series.find(params[:id])
 
@@ -70,8 +73,8 @@ class SeriesController < ApplicationController
     end
   end
 
-  # DELETE /series/1
-  # DELETE /series/1.xml
+  # Deletes a series.
+  # Can be accessed by DELETEing /series/1 or  /series/1.xml
   def destroy
     @series = Series.find(params[:id])
     @series.destroy

@@ -1,6 +1,8 @@
 class TagtypesController < ApplicationController
-  # GET /tagtypes
-  # GET /tagtypes.xml
+  before_filter :authenticate, :only => [:new, :edit, :create, :update, :destroy]
+
+  # Displays list of tagtypes.
+  # Can be accessed by GETting /tagtypes or  /tagtypes.xml
   def index
     @tagtypes = Tagtype.all
 	@title = "Tag types"
@@ -11,8 +13,8 @@ class TagtypesController < ApplicationController
     end
   end
 
-  # GET /tagtypes/1
-  # GET /tagtypes/1.xml
+  # Displays a tagtype's information.
+  # Can be accessed by GETting /tagtypes/1 or  /tagtypes/1.xml
   def show
     @tagtype = Tagtype.find(params[:id])
 	@title = @tagtype.name
@@ -23,8 +25,8 @@ class TagtypesController < ApplicationController
     end
   end
 
-  # GET /tagtypes/new
-  # GET /tagtypes/new.xml
+  # Displays the form to add a new tagtype.
+  # Can be accessed by GETting /tagtypes/new or  /tagtypes/new.xml
   def new
     @tagtype = Tagtype.new
 	@title = "New tag type"
@@ -35,14 +37,15 @@ class TagtypesController < ApplicationController
     end
   end
 
-  # GET /tagtypes/1/edit
+  # Displays the form to edit a tagtype's information.
+  # Can be accessed by GETting /tagtypes/edit/1
   def edit
     @tagtype = Tagtype.find(params[:id])
 	@title = "Editing "+@tagtype.name	
   end
 
-  # POST /tagtypes
-  # POST /tagtypes.xml
+  # Creates a tagtype.
+  # Can be accessed by POSTING /tagtypes or  /tagtypes.xml
   def create
     @tagtype = Tagtype.new(params[:tagtype])
 
@@ -57,8 +60,8 @@ class TagtypesController < ApplicationController
     end
   end
 
-  # PUT /tagtypes/1
-  # PUT /tagtypes/1.xml
+  # Updates a tagtype with new information.
+  # Can be accessed by PUTting /tagtypes/1 or  /tagtypes/1.xml
   def update
     @tagtype = Tagtype.find(params[:id])
 
@@ -73,8 +76,8 @@ class TagtypesController < ApplicationController
     end
   end
 
-  # DELETE /tagtypes/1
-  # DELETE /tagtypes/1.xml
+  # Deletes a tagtype.
+  # Can be accessed by DELETEing /tagtypes/1 or  /tagtypes/1.xml
   def destroy
     @tagtype = Tagtype.find(params[:id])
     @tagtype.destroy
@@ -84,4 +87,11 @@ class TagtypesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+
+	def authenticate
+	  deny_access unless signed_in?
+	end
+
 end

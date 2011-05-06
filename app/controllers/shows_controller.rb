@@ -1,7 +1,9 @@
 class ShowsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
-  # GET /shows
-  # GET /shows.xml
+
+  # Displays list of shows.
+  # Can be accessed by GETting /shows or  /shows.xml
+  # Takes an HTTP parameter, tags, which takes a list of tags to search for separated by plus signs.
   def index
 	page = params[:page].to_i; page = 1 if page == 0
 	limit = 30
@@ -121,8 +123,8 @@ class ShowsController < ApplicationController
     end
   end
 
-  # GET /shows/1
-  # GET /shows/1.xml
+  # Displays a show's information.
+  # Can be accessed by GETting /shows/1 or  /shows/1.xml
   def show
     @show = Show.find(params[:id])
 	@title = @show.name	
@@ -141,8 +143,8 @@ class ShowsController < ApplicationController
     end
   end
 
-  # GET /shows/new
-  # GET /shows/new.xml
+  # Displays the form to add a new show.
+  # Can be accessed by GETting /shows/new or  /shows/new.xml
   def new
     @show = Show.new
 	@title = "New show"
@@ -153,14 +155,15 @@ class ShowsController < ApplicationController
     end
   end
 
-  # GET /shows/1/edit
+  # Displays the form to edit a show's information.
+  # Can be accessed by GETting /shows/edit/1
   def edit
     @show = Show.find(params[:id])
 	@title = "Editing " + @show.name
   end
 
-  # POST /shows
-  # POST /shows.xml
+  # Creates a show.
+  # Can be accessed by POSTING /shows or  /shows.xml
   def create
     @show = Show.new(params[:show])
 
@@ -175,8 +178,8 @@ class ShowsController < ApplicationController
     end
   end
 
-  # PUT /shows/1
-  # PUT /shows/1.xml
+  # Updates a show with new information.
+  # Can be accessed by PUTting /shows/1 or  /shows/1.xml
   def update
     @show = Show.find(params[:id])
 
@@ -191,8 +194,8 @@ class ShowsController < ApplicationController
     end
   end
 
-  # DELETE /shows/1
-  # DELETE /shows/1.xml
+  # Deletes a show.
+  # Can be accessed by DELETEing /shows/1 or  /shows/1.xml
   def destroy
     @show = Show.find(params[:id])
     @show.destroy

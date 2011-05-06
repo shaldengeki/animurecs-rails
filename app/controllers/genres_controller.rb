@@ -1,6 +1,8 @@
 class GenresController < ApplicationController
-  # GET /genres
-  # GET /genres.xml
+  # This model is deprecated, and any methods listed here are not guaranteed to provide useful data.
+
+  # Displays list of genres.
+  # Can be accessed by GETting /genres or  /genres.xml
   def index
     @genres = Genre.all
 
@@ -10,8 +12,8 @@ class GenresController < ApplicationController
     end
   end
 
-  # GET /genres/1
-  # GET /genres/1.xml
+  # Displays a genre's information.
+  # Can be accessed by GETting /genres/1 or  /genres/1.xml
   def show
     @genre = Genre.find(params[:id])
     @series = @genre.series
@@ -22,8 +24,8 @@ class GenresController < ApplicationController
     end
   end
 
-  # GET /genres/new
-  # GET /genres/new.xml
+  # Displays the form to add a new genre.
+  # Can be accessed by GETting /genres/new or  /genres/new.xml
   def new
     @genre = Genre.new
 
@@ -33,13 +35,14 @@ class GenresController < ApplicationController
     end
   end
 
-  # GET /genres/1/edit
+  # Displays the form to edit a genre's information.
+  # Can be accessed by GETting /genres/edit/1
   def edit
     @genre = Genre.find(params[:id])
   end
 
-  # POST /genres
-  # POST /genres.xml
+  # Creates a genre.
+  # Can be accessed by POSTING /genres or  /genres.xml
   def create
     @genre = Genre.new(params[:genre])
 
@@ -54,8 +57,8 @@ class GenresController < ApplicationController
     end
   end
 
-  # PUT /genres/1
-  # PUT /genres/1.xml
+  # Updates a genre with new information.
+  # Can be accessed by PUTting /genres/1 or  /genres/1.xml
   def update
     @genre = Genre.find(params[:id])
 
@@ -70,8 +73,8 @@ class GenresController < ApplicationController
     end
   end
 
-  # DELETE /genres/1
-  # DELETE /genres/1.xml
+  # Deletes a genre.
+  # Can be accessed by DELETEing /genres/1 or  /genres/1.xml
   def destroy
     @genre = Genre.find(params[:id])
     @genre.destroy

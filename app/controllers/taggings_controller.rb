@@ -1,7 +1,8 @@
 class TaggingsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
-  # GET /taggings
-  # GET /taggings.xml
+
+  # Displays list of taggings.
+  # Can be accessed by GETting /taggings or  /taggings.xml
   def index
     @taggings = Tagging.all
 	@title = "Taggings"
@@ -12,8 +13,8 @@ class TaggingsController < ApplicationController
     end
   end
 
-  # GET /taggings/1
-  # GET /taggings/1.xml
+  # Displays a tagging's information.
+  # Can be accessed by GETting /taggings/1 or  /taggings/1.xml
   def show
     @tagging = Tagging.find(params[:id])
 	@tag = Tag.find(@tagging.tag_id)
@@ -26,8 +27,8 @@ class TaggingsController < ApplicationController
     end
   end
 
-  # GET /taggings/new
-  # GET /taggings/new.xml
+  # Displays the form to add a new tagging.
+  # Can be accessed by GETting /taggings/new or  /taggings/new.xml
   def new
     @tagging = Tagging.new
 	@title = "New tagging"
@@ -46,7 +47,8 @@ class TaggingsController < ApplicationController
     end
   end
 
-  # GET /taggings/1/edit
+  # Displays the form to edit a tagging's information.
+  # Can be accessed by GETting /taggings/edit/1
   def edit
     @tagging = Tagging.find(params[:id])
 	@tag = Tag.find(@tagging.tag_id)
@@ -54,8 +56,8 @@ class TaggingsController < ApplicationController
 	@title = "Editing " + @tag.name + "-" + @show.name
   end
 
-  # POST /taggings
-  # POST /taggings.xml
+  # Creates a tagging.
+  # Can be accessed by POSTing to /taggings or  /taggings.xml
   def create
 	# process the tag to see if we have a text tagtype in there.
 	if params[:tagging][:tagtext].include? ":"
@@ -96,8 +98,8 @@ class TaggingsController < ApplicationController
     end
   end
 
-  # PUT /taggings/1
-  # PUT /taggings/1.xml
+  # Updates a tagging with new information.
+  # Can be accessed by PUTting /taggings/1 or  /taggings/1.xml
   def update
     @tagging = Tagging.find(params[:id])
 
@@ -112,8 +114,8 @@ class TaggingsController < ApplicationController
     end
   end
 
-  # DELETE /taggings/1
-  # DELETE /taggings/1.xml
+  # Deletes a tagging.
+  # Can be accessed by DELETEing /taggings/1 or  /taggings/1.xml
   def destroy
     @tagging = Tagging.find(params[:id])
     @tagging.destroy

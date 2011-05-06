@@ -1,8 +1,9 @@
 class TagsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create]
   before_filter :moderator, :only => [:edit, :update, :destroy]
-  # GET /tags
-  # GET /tags.xml
+  
+  # Displays list of tags.
+  # Can be accessed by GETting /tags or  /tags.xml
   def index
     @tags = Tag.all.sort_by(&:name).paginate(:page => params[:page])
 	@title = "Tags"
@@ -14,8 +15,8 @@ class TagsController < ApplicationController
     end
   end
 
-  # GET /tags/1
-  # GET /tags/1.xml
+  # Displays a tag's information.
+  # Can be accessed by GETting /tags/1 or  /tags/1.xml
   def show
     @tag = Tag.find(params[:id])
 	params[:tags] = @tag.name
@@ -35,8 +36,8 @@ class TagsController < ApplicationController
     end
   end
 
-  # GET /tags/new
-  # GET /tags/new.xml
+  # Displays the form to add a new tag.
+  # Can be accessed by GETting /tags/new or  /tags/new.xml
   def new
     @tag = Tag.new
 	@title = "New tag"
@@ -47,14 +48,15 @@ class TagsController < ApplicationController
     end
   end
 
-  # GET /tags/1/edit
+  # Displays the form to edit a tag's information.
+  # Can be accessed by GETting /tags/edit/1
   def edit
     @tag = Tag.find(params[:id])
 	@title = "Editing " + @tag.name
   end
 
-  # POST /tags
-  # POST /tags.xml
+  # Creates a tag.
+  # Can be accessed by POSTING /tags or  /tags.xml
   def create
     @tag = Tag.new(params[:tag])
 	# process the tagname to see if we have a tagtype in there.
@@ -78,8 +80,8 @@ class TagsController < ApplicationController
     end
   end
 
-  # PUT /tags/1
-  # PUT /tags/1.xml
+  # Updates a tag with new information.
+  # Can be accessed by PUTting /tags/1 or  /tags/1.xml
   def update
     @tag = Tag.find(params[:id])
 
@@ -94,8 +96,8 @@ class TagsController < ApplicationController
     end
   end
 
-  # DELETE /tags/1
-  # DELETE /tags/1.xml
+  # Deletes a tag.
+  # Can be accessed by DELETEing /tags/1 or  /tags/1.xml
   def destroy
     @tag = Tag.find(params[:id])
     @tag.destroy
