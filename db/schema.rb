@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20110502133812) do
 
   create_table "series", :force => true do |t|
     t.string   "name"
-    t.text     "description", :limit => 2147483647
+    t.string   "description"
     t.string   "link"
     t.integer  "genre_id"
     t.datetime "created_at"

@@ -1,5 +1,6 @@
 body {
   background: #FFFFFF;
+  margin: 0;
   font: 13px / 20px "Lucida Grande",Arial,Sans-serif;
 }
 h1,h2,h3,h4,h5 {
@@ -61,7 +62,7 @@ a {
 
 a:hover {
   color: #069;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:visited {
@@ -206,21 +207,28 @@ div.sidebar ul {
     margin: 10px 0px 0px 0px;
 	padding: 0 10px;
 }
-li.tag-type-general, li.tag-type-general a {
+a.tag-type-general, li.tag-type-general, li.tag-type-general a {
 /*	font-size: 0.9em;*/
 	color: #006FFA;
 }
-li.tag-type-studio, li.tag-type-studio a {
+a.tag-type-studio, li.tag-type-studio, li.tag-type-studio a {
 /*	font-size: 0.9em;*/
 	color: #AA0000;
 }
-li.tag-type-va, li.tag-type-va a {
+a.tag-type-va, li.tag-type-va, li.tag-type-va a {
 /*	font-size: 0.9em;*/
 	color: #00AA00;
 }
 span.shows-count {
     color: #AAA;
 	margin-left: 5px;
+}
+span.list_tags {
+	font-size: 0.9em;
+}
+a.delete-tagging {
+	vertical-align: super;
+	font-size: 0.5em;
 }
 
 /* Mainbody content styling. */
@@ -244,14 +252,12 @@ table#show_list {
 	border-collapse: collapse;
 }
 
-tr.show_list_a td, tr.show_list_b td {
+tr.show_list_entry td {
 	margin:0;
 	border: 0;
 	padding-top: 10px;
-}
-tr.show_list_b  td {
-	border-bottom: 1px solid black;
 	padding-bottom: 10px;
+	border-bottom: 1px solid black;
 }
 
 td.show_list_animepic {
@@ -378,7 +384,7 @@ div.field, div.actions {
 footer {
   text-align: center;
   margin-top: 10px;
-  width: 710px;
+  width: 800px;
   margin-left: auto;
   margin-right: auto;
 }

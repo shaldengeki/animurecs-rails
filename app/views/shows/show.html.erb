@@ -24,8 +24,9 @@
 	  <%= tag_cloud(@show) %>
 	</p>
 </div><br />
-<% if admin_user? %>
-<%= link_to 'Edit Anime Information', edit_show_path(@show) %>
+<% if moderator_user? %>
+<%= link_to 'Edit Anime Information', edit_show_path(@show) %><br />
+<%= link_to 'Delete Anime', @show, :confirm => 'Are you sure?', :method => :delete %>
 <% end %>
 
 

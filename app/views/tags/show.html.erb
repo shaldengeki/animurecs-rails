@@ -4,7 +4,7 @@
 <p>
 	<%= @tag.description %>
 </p>
-<% if signed_in? %>
+<% if moderator_user? %>
 	<%= link_to 'Edit', edit_tag_path(@tag) %> |
 	<%= link_to 'Back', tags_path %>
 <br /><br />

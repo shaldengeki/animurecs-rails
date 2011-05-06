@@ -20,8 +20,8 @@ module ShowsHelper
 	
 	# Displays the first n characters of a show's description (or the whole thing, if it's <= n characters long).
 	def show_description_short(show = @show)
-		if show.description.to_s.length > 300
-			show.description.to_s.split('').first(300).to_s + "..."
+		if show.description.to_s.length > 500
+			show.description.to_s.split('').first(500).to_s + "..."
 		else
 			show.description.to_s
 		end

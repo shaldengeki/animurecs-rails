@@ -13,6 +13,9 @@ module SessionsHelper
     !current_user.nil?
   end
   def admin_user?
+    (!current_user.nil? && current_user.userlevel > 1)
+  end
+  def moderator_user?
     (!current_user.nil? && current_user.userlevel > 0)
   end
   def sign_out

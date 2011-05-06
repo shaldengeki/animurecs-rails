@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :authenticate, :only => [:new, :create]
+  before_filter :moderator, :only => [:edit, :update, :destroy]
   # GET /tags
   # GET /tags.xml
   def index
@@ -17,13 +18,14 @@ class TagsController < ApplicationController
   # GET /tags/1.xml
   def show
     @tag = Tag.find(params[:id])
+	params[:tags] = @tag.name
 	@title = @tag.name
 	@taggings = Tagging.where(:tag_id => @tag.id).paginate(:page => params[:page])
 	@tagtypes = Tagtype.all
 	# get popular related tags for this tag.
 	@popularTags = Hash.new(0)
-	@taggings.each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] += 1}}
-#	Tagging.where(:tag_id => @tag.id).each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] = Tagging.count(:conditions => "`tag_id` = " + newTagging.tag_id.to_s)}}
+#	@taggings.each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] += 1}}
+	Tagging.where(:tag_id => @tag.id).each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] = Tagging.count(:conditions => "`tag_id` = " + newTagging.tag_id.to_s)}}
 	@popularTags = @popularTags.sort_by{|key,value| value}.reverse.take(25)
 
 
@@ -105,7 +107,10 @@ class TagsController < ApplicationController
   end
   private
 
-    def authenticate
-      deny_access unless signed_in?
-    end
+	def authenticate
+	  deny_access unless signed_in?
+	end
+	def moderator
+		deny_access unless moderator_user?
+	end
 end

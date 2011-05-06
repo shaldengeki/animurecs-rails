@@ -2,26 +2,22 @@
 <%= will_paginate %>
 <%	i = 1
 		@shows.each do |show| %>
-  <tr class = 'show_list_a'>
+  <tr class = 'show_list_entry'>
     <td><%= i %></td>
-    <td class = 'show_list_animepic'><%= show_image_thumb(show) %></td>
-    <td>
-		<div class = 'list_show_title'><%= link_to show.name, show %></div>
-		<div class = 'list_show_descrip'><%= show_description_short(show) %></div>
-	</td>
-  </tr>
-  <tr class = 'show_list_b'>
-    <td></td>
-    <td>
+    <td class = 'show_list_animepic'>
+		<%= link_to show_image_thumb(show), show %><br />
 		<span class = 'like_button'><% if signed_in? %><%= link_to like_image + " " + show.upvotes.to_s + " likes", '#' %><% else %><%= like_image + " " + show.upvotes.to_s + " likes" %><% end %></span>
 		<span class = 'dislike_button'><% if signed_in? %><%= link_to dislike_image + " " + show.downvotes.to_s + " dislikes", '#' %><% else %><%= dislike_image + " " + show.downvotes.to_s + " likes" %><% end %></span>
 	</td>
-    <td><span class = 'list_tags'>Tags: 
-	<%= tag_cloud(show) %></span></td>
+    <td>
+		<div class = 'list_show_title'><%= link_to show.name, show %></div>
+		<div class = 'list_show_descrip'><%= show_description_short(show) %></div>
+		<span class = 'list_tags'>Tags: <%= tag_cloud(show, 25) %></span>
+	</td>
   </tr>
 <%	i += 1
 	end %>
-</table>
+</table><br />
 <%= will_paginate %>
 <% if @shows.empty? %>
 Nobody here but us chickens!

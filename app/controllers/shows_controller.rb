@@ -6,6 +6,7 @@ class ShowsController < ApplicationController
 	page = params[:page].to_i; page = 1 if page == 0
 	limit = 30
 	@tagtypes = Tagtype.all
+	@tags = Hash.new
 	if params[:tags].blank?
 		# if tags blank, display all shows.
 #		@shows = Show.find(:all).sort!{|t1,t2|t1.downvotes-t1.upvotes<=>t2.downvotes-t2.upvotes}
@@ -45,7 +46,7 @@ class ShowsController < ApplicationController
 			end
 			
 			# check for control characters at the beginning of this tag and strip them if necessary.
-			if tag_name[0].chr =~ /[\-\+\~]/
+			if !tag_name[0].nil? && tag_name[0].chr =~ /[\-\+\~]/
 				short_tag_name = tag_name[1,tag_name.length-1]
 			else
 				short_tag_name = tag_name
@@ -61,9 +62,9 @@ class ShowsController < ApplicationController
 					j += 1
 				end
 				# if user has specified NOT, then push this onto the list of shows not to display.
-				if tag_name[0].chr == "-"
+				if !tag_name[0].nil? && tag_name[0].chr == "-"
 					not_shows_array.push(shows_array)
-				elsif tag_name[0].chr == "~"
+				elsif !tag_name[0].nil? && tag_name[0].chr == "~"
 					or_shows_array.push(shows_array)
 				else
 					all_shows_array.push(shows_array)
@@ -127,6 +128,7 @@ class ShowsController < ApplicationController
 	@title = @show.name	
     @comments = @show.comments.sort_by(&:time).reverse
 	@tagtypes = Tagtype.all
+	@tags = Hash.new
 	
 	# get the tags for this show, and the number of posts which use each of these tags.
 	@popularTags = Hash.new(0)
@@ -202,6 +204,6 @@ class ShowsController < ApplicationController
   end
   private
     def authenticate
-      deny_access unless admin_user?
+      deny_access unless moderator_user?
     end
 end
