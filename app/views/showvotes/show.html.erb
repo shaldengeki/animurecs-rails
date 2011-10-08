@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Show:</b>
+  <%= Show.find(@showvote.show_id).name %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= User.find(@showvote.user_id).username %>
+</p>
+
+<p>
+  <b>Vote:</b>
+  <%= @showvote.vote %>
+</p>
+
+
+<%= link_to 'Edit', edit_showvote_path(@showvote) %> |
+<%= link_to 'Back', showvotes_path %>

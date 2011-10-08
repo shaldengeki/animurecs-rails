@@ -1,0 +1,25 @@
+<h1>Listing show votes</h1>
+
+<table>
+  <tr>
+    <th>Show</th>
+    <th>User</th>
+    <th>Vote</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @showvotes.each do |showvote| %>
+  <tr>
+    <td><%= Show.find(showvote.show_id).name %></td>
+    <td><%= User.find(showvote.user_id).username %></td>
+    <td><%= link_to 'Show', showvote %></td>
+    <td><%= link_to 'Edit', edit_showvote_path(showvote) %></td>
+    <td><%= link_to 'Destroy', showvote, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Show Vote', new_showvote_path %>

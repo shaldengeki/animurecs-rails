@@ -1,0 +1,34 @@
+<%= form_for(@showvote) do |f| %>
+  <% if @showvote.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@showvote.errors.count, "error") %> prohibited this show vote from being saved:</h2>
+
+      <ul>
+      <% @showvote.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">  
+	<% if @show.nil? %>
+    <%= f.hidden_field :show_id, :value => Show.first.id %>
+	<% else %>
+    <%= f.hidden_field :show_id, :value => @show.id %>
+	<% end %>
+  <div class="field">  
+	<% if @user.nil? %>
+    <%= f.hidden_field :user_id, :value =>current_user.id %>
+	<% else %>
+    <%= f.hidden_field :user_id, :value => @user.id %>
+	<% end %>
+  </div>
+  <div class="field">
+    <%= f.label :vote %><br />
+    <%= f.text_field :vote %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
