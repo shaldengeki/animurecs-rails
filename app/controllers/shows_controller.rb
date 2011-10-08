@@ -27,8 +27,7 @@ class ShowsController < ApplicationController
 		i = 0
 		all_shows_array = Array.new
 		not_shows_array = Array.new
-		or_shows_array = Array.new
-		show_title_array = Array.new
+		orTagsProcessed = 0
 		
 		while i < tags.length
 			# check for control characters at the beginning of this tag and strip them if necessary.
@@ -59,7 +58,7 @@ class ShowsController < ApplicationController
 			end
 			
 			# now get all of the taggings for this particular tag.
-			tag = Tag.find_by_name(short_tag_name)
+			tag = Tag.find_by_name(tag_name)
 			if !tag.nil?
 				taggings = Tagging.where(:tag_id => tag.id)
 				j = 0
@@ -81,13 +80,10 @@ class ShowsController < ApplicationController
 			# TODO: get shows which have titles like this tag name.
 			i += 1
 		end
-		
-		# include all the shows in the OR array.
-#		i = 0
-#		while i < or_shows_array.length
-#			final_shows_array = final_shows_array | or_shows_array[i]
-#			i += 1
-#		end
+		if all_shows_array.length == 0 and orTagsProcessed == 0
+			# there are no positive tags in this tag search. set the base search field to be all tags.
+			final_shows_array = Show.all.collect{|show| show.id}
+		end
 		
 		# intersect each of the lists in the ALL array.
 		i = 0
@@ -102,11 +98,7 @@ class ShowsController < ApplicationController
 		
 		# exclude any of the shows in the NOT array.
 		final_shows_array = final_shows_array - not_shows_array
-#		i = 0
-#		while i < not_shows_array.length
-#			final_shows_array = final_shows_array - not_shows_array[i]
-#			i += 1
-#		end
+		
 		# now get information for each of these shows.
 		i = 0
 		while i < final_shows_array.length
