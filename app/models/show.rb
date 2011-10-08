@@ -12,6 +12,8 @@ class Show < ActiveRecord::Base
 							:source => "tag", 
 							:dependent => :destroy
 	
+	has_many	:showvotes,	:dependent => :destroy
+	
 	validates :name, 	:presence => true,
 						:uniqueness => { :case_sensitive => false }, 
 						:length => { :within => 1..150 }

@@ -34,7 +34,7 @@ header img {
 }
 
 .container {
-	padding:	0 160px;
+	padding:	0 200px;
 }
 
 section {
@@ -43,7 +43,8 @@ section {
   padding: 20px;
   background: #fff;
   margin: 0 auto;
-  width: 800px;
+  min-width: 800px;
+  width: 90%;
 }
 
 section h1 {
@@ -194,10 +195,10 @@ margin: 0;
 
 /* Sidebar styling. */
 div.sidebar {
-	margin-left: 0px;
+	margin-left: 10px;
 	float: left;
 	overflow: visible;
-	width: 160px;
+	width: 190px;
 }
 div.sidebar li {
     list-style-type: none;
@@ -248,7 +249,7 @@ div.pagination a:hover {
 }
 
 table#show_list {
-	width: 800px;
+	width: 100%;
 	border-collapse: collapse;
 }
 

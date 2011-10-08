@@ -5,7 +5,7 @@ class TagsController < ApplicationController
   # Displays list of tags.
   # Can be accessed by GETting /tags or  /tags.xml
   def index
-    @tags = Tag.all.sort_by(&:name).paginate(:page => params[:page])
+	@tags = Tag.paginate(:page => params[:page], :order => 'name ASC')
 	@title = "Tags"
 	@tagtypes = Tagtype.all
 
@@ -21,8 +21,11 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
 	params[:tags] = @tag.name
 	@title = @tag.name
-	@taggings = Tagging.where(:tag_id => @tag.id).paginate(:page => params[:page])
+#	@taggings = Tagging.where(:tag_id => @tag.id).paginate(:page => params[:page])
+	@taggings = Tagging.paginate(:page => params[:page], 
+									:conditions => { :tag_id => @tag.id })
 	@tagtypes = Tagtype.all
+	
 	# get popular related tags for this tag.
 	@popularTags = Hash.new(0)
 #	@taggings.each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] += 1}}

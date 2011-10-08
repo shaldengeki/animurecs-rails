@@ -1,4 +1,6 @@
-<%= will_paginate %>
+<%= if @tags.length > 0
+will_paginate 
+end %>
 <table class="highlightable">
   <thead>
   <tr>
@@ -25,4 +27,6 @@
 <% end %>
   </tbody>
 </table>
-<%= will_paginate %>
+<%= if @tags.length > 0
+will_paginate 
+end %>

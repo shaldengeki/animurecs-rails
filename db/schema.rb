@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110502133812) do
+ActiveRecord::Schema.define(:version => 20111007210846) do
 
   create_table "comments", :force => true do |t|
     t.string   "text"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20110502133812) do
 
   create_table "series", :force => true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description", :limit => 2147483647
     t.string   "link"
     t.integer  "genre_id"
     t.datetime "created_at"
@@ -54,12 +54,26 @@ ActiveRecord::Schema.define(:version => 20110502133812) do
 
   add_index "shows", ["name"], :name => "index_shows_on_name", :unique => true
 
+  create_table "showvotes", :force => true do |t|
+    t.integer  "show_id"
+    t.integer  "user_id"
+    t.integer  "vote"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "showvotes", ["show_id"], :name => "index_showvotes_on_show_id"
+  add_index "showvotes", ["user_id"], :name => "index_showvotes_on_user_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "show_id"
     t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "taggings", ["show_id"], :name => "index_taggings_on_show_id"
+  add_index "taggings", ["tag_id", "show_id"], :name => "index_taggings_on_tag_id_and_show_id", :unique => true
 
   create_table "tags", :force => true do |t|
     t.string   "name"

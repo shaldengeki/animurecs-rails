@@ -74,7 +74,6 @@ module TagsHelper
 		else
 			show_taggings = Tagging.where(:show_id => show.id)
 		end
-		show_tags = Array.new()
 		unless show_taggings.empty?
 			# show_taggings.each{|tagging| show_tags.push(Tag.find(tagging.tag_id))}
 			# show_tags = show_tags.sort_by(&:name)
@@ -87,13 +86,21 @@ module TagsHelper
 					# output_string = "#{output_string}, " + prettify_tag_link(tag)
 				# end
 			# end
+			tagging_link_list = Hash.new()
 			show_taggings.each do |tagging|
-				if output_string.blank?
-					output_string = prettify_tagging_link(tagging)
+				tagging_link_list[find_tag(tagging.tag_id).name] = prettify_tagging_link(tagging)
+#				if output_string == ""
+#					output_string = prettify_tagging_link(tagging)
+#				else
+#					output_string = "#{output_string}, " + prettify_tagging_link(tagging)
+#				end
+			end
+			tagging_link_list.keys.sort.each do |key|
+				if output_string == ""
+					output_string = tagging_link_list[key]
 				else
-					output_string = "#{output_string}, " + prettify_tagging_link(tagging)
+					output_string = output_string + " " + tagging_link_list[key]
 				end
-			
 			end
 		else
 			output_string = "None"

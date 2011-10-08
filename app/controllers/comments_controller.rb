@@ -6,7 +6,11 @@ class CommentsController < ApplicationController
   # Displays list of comments.
   # Can be accessed by GETting /comments or  /comments.xml
   def index
-    @comments = Comment.find(:all, :order => 'time DESC').paginate(:page => params[:page])
+	begin
+		@comments = Comment.find(:all, :order => 'time DESC').paginate(:page => params[:page])
+	rescue
+		@comments = Hash.new
+	end
 	@title = "Comments"
 
     respond_to do |format|

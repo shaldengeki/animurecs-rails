@@ -1,13 +1,21 @@
 <table id = 'show_list'>
-<%= will_paginate %>
-<%	i = 1
-		@shows.each do |show| %>
+<%= if @shows.length > 0
+will_paginate 
+end %>
+<%	if params[:page].to_i == 0 then
+		i = 1
+	else
+		i = (params[:page].to_i - 1) * 30 + 1
+	end
+		@shows.each do |show| 
+			if !show.nil?
+%>
   <tr class = 'show_list_entry'>
     <td><%= i %></td>
     <td class = 'show_list_animepic'>
 		<%= link_to show_image_thumb(show), show %><br />
-		<span class = 'like_button'><% if signed_in? %><%= link_to like_image + " " + show.upvotes.to_s + " likes", '#' %><% else %><%= like_image + " " + show.upvotes.to_s + " likes" %><% end %></span>
-		<span class = 'dislike_button'><% if signed_in? %><%= link_to dislike_image + " " + show.downvotes.to_s + " dislikes", '#' %><% else %><%= dislike_image + " " + show.downvotes.to_s + " likes" %><% end %></span>
+		<span class = 'like_button'><% if signed_in? %><%= link_to like_image + " " + show.upvotes.to_s + " likes", '#', :method => :create, :remote => true, :class => 'upvote_show' %><% else %><%= like_image + " " + show.upvotes.to_s + " likes" %><% end %></span>
+		<span class = 'dislike_button'><% if signed_in? %><%= link_to dislike_image + " " + show.downvotes.to_s + " dislikes", '#', :method => :create, :remote => true, :class => 'upvote_show' %><% else %><%= dislike_image + " " + show.downvotes.to_s + " likes" %><% end %></span>
 	</td>
     <td>
 		<div class = 'list_show_title'><%= link_to show.name, show %></div>
@@ -15,10 +23,13 @@
 		<span class = 'list_tags'>Tags: <%= tag_cloud(show, 25) %></span>
 	</td>
   </tr>
-<%	i += 1
+<%				i += 1
+			end
 	end %>
 </table><br />
-<%= will_paginate %>
+<%= if @shows.length > 0
+will_paginate 
+end %>
 <% if @shows.empty? %>
 Nobody here but us chickens!
 <% end %>

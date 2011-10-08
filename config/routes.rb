@@ -10,6 +10,7 @@ Animurecs::Application.routes.draw do
   resources :taggings
   resources :users
   resources :comments
+  resources :showvotes
 
   root :to => 'pages#home'
   match '/contact', :to => 'pages#contact'

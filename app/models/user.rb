@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	attr_accessor :password
 
 	has_many :comments
+	has_many	:showvotes,	:dependent => :destroy
 
 	validates :username,	:presence => true,
 							:length   => { :maximum => 50 },

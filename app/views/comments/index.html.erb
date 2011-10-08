@@ -1,5 +1,7 @@
 <table>
-<%= will_paginate %>
+<%= if @comments.length > 0
+will_paginate 
+end %>
   <tr>
     <th>Text</th>
     <th>Show</th>
@@ -21,7 +23,9 @@
     <td><%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
-<%= will_paginate %>
+<%= if @comments.length > 0
+will_paginate 
+end %>
 </table>
 
 <br />
