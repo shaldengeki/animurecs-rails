@@ -14,8 +14,8 @@ end %>
     <td><%= i %></td>
     <td class = 'show_list_animepic'>
 		<%= link_to show_image_thumb(show), show %><br />
-		<span class = 'like_button'><% if signed_in? %><%= link_to like_image + " " + show.upvotes.to_s + " likes", '#', :method => :create, :remote => true, :class => 'upvote_show' %><% else %><%= like_image + " " + show.upvotes.to_s + " likes" %><% end %></span>
-		<span class = 'dislike_button'><% if signed_in? %><%= link_to dislike_image + " " + show.downvotes.to_s + " dislikes", '#', :method => :create, :remote => true, :class => 'upvote_show' %><% else %><%= dislike_image + " " + show.downvotes.to_s + " likes" %><% end %></span>
+		<%= display_show_like_button(show) %>
+		<%= display_show_dislike_button(show) %>		
 	</td>
     <td>
 		<div class = 'list_show_title'><%= link_to show.name, show %></div>

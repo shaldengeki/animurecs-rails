@@ -3,9 +3,9 @@ Animurecs::Application.routes.draw do
   resources :tagtypes
   resources :tags
   resources :shows do 
-	member do
-		get :taggings, :taggeds
-	end
+    member do
+      get :taggings, :taggeds
+    end
   end
   resources :taggings
   resources :users
