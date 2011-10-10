@@ -69,7 +69,7 @@ class ShowvotesController < ApplicationController
       # create this showvote.
       voteOnShow = Showvote.new(:show_id => params[:show_id], :user_id => params[:user_id], :vote => params[:vote_val]).save
     else
-      # update this showvote.
+      # update this showvote if it's changed.
       @showvote = @showvote[0]
       if @showvote.vote != params[:vote_val]
         voteOnShow = Showvote.find(@showvote.id).update_attributes(:show_id => params[:show_id], :user_id => params[:user_id], :vote => params[:vote_val])

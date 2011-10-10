@@ -104,6 +104,7 @@ class ShowsController < ApplicationController
 			@shows.push(Show.find(final_shows_array[i]))
 			i += 1
 		end
+    @shows.sort! { |a,b| b.upvotes - b.downvotes <=> a.upvotes - a.downvotes }
 		relevantTaggings = Tagging.where(:show_id => @shows)
 		@shows = @shows.paginate(:page => params[:page])		
 	end
