@@ -21,7 +21,6 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
 	params[:tags] = @tag.name
 	@title = @tag.name
-#	@taggings = Tagging.where(:tag_id => @tag.id).paginate(:page => params[:page])
 	@taggings = Tagging.paginate(:page => params[:page], 
 									:conditions => { :tag_id => @tag.id })
 	@tagtypes = Tagtype.all
@@ -29,6 +28,7 @@ class TagsController < ApplicationController
 	# get popular related tags for this tag.
 	@popularTags = Hash.new(0)
 #	@taggings.each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] += 1}}
+	# TODO: make this not horrible.
 	Tagging.where(:tag_id => @tag.id).each{|tagging| Tagging.where(:show_id => tagging.show_id).each{|newTagging| @popularTags[newTagging.tag_id] = Tagging.count(:conditions => "`tag_id` = " + newTagging.tag_id.to_s)}}
 	@popularTags = @popularTags.sort_by{|key,value| value}.reverse.take(25)
 
@@ -71,6 +71,8 @@ class TagsController < ApplicationController
 			@tag.name = tagarray.last(tagarray.length-1).join(":")
 		end
 	end
+	# replace all whitespace in this tag with underscores.
+	@tag.name.gsub!(/\s+/, '_')
 
     respond_to do |format|
       if @tag.save
@@ -103,6 +105,11 @@ class TagsController < ApplicationController
   # Can be accessed by DELETEing /tags/1 or  /tags/1.xml
   def destroy
     @tag = Tag.find(params[:id])
+	
+	# destroy all taggings belonging to this tag.
+	Tagging.destroy_all(:tag_id => @tag.id)
+	
+	# now destroy the tag itself.
     @tag.destroy
 
     respond_to do |format|
@@ -112,10 +119,13 @@ class TagsController < ApplicationController
   end
   private
 
-	def authenticate
-	  deny_access unless signed_in?
-	end
-	def moderator
-		deny_access unless moderator_user?
-	end
+    def authenticate
+      deny_access unless signed_in?
+    end
+    def moderator
+      deny_access unless moderator_user?
+    end
+    def admin_user
+      deny_access unless admin_user?
+    end
 end

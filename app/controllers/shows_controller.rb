@@ -1,5 +1,6 @@
 class ShowsController < ApplicationController
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :moderator, :only => [:new, :create, :edit, :update, :destroy]
+  
   require 'will_paginate/array'
   # Displays list of shows.
   # Can be accessed by GETting /shows or  /shows.xml
@@ -21,22 +22,21 @@ class ShowsController < ApplicationController
 		@shows = Array.new
 		
 		# if tags non-blank, get a list of shows to display.
-		tags = params[:tags].split(" ")
+		tags = params[:tags].split(" ").to_set
 		
 		# assemble a list of show ids for each tag provided.
-		i = 0
 		all_shows_array = Array.new
 		not_shows_array = Array.new
 		orTagsProcessed = 0
-		
-		while i < tags.length
+
+		for tagString in tags
 			# check for control characters at the beginning of this tag and strip them if necessary.
-			if !tags[i][0].nil? && tags[i][0].chr =~ /[\-\+\~]/
-				control_character = tags[i][0].chr
-				short_tag_name = tags[i][1,tags[i].length-1]
+			if !tagString[0].nil? && tagString[0].chr =~ /[\-\+\~]/
+				control_character = tagString[0].chr
+				short_tag_name = tagString[1,tagString.length-1]
 			else
 				control_character = ""
-				short_tag_name = tags[i]
+				short_tag_name = tagString
 			end
 
 			if short_tag_name.include? ":"
@@ -78,7 +78,6 @@ class ShowsController < ApplicationController
 				end
 			end
 			# TODO: get shows which have titles like this tag name.
-			i += 1
 		end
 		if all_shows_array.length == 0 and orTagsProcessed == 0
 			# there are no positive tags in this tag search. set the base search field to be all tags.
@@ -196,6 +195,12 @@ class ShowsController < ApplicationController
   # Can be accessed by DELETEing /shows/1 or  /shows/1.xml
   def destroy
     @show = Show.find(params[:id])
+	
+	# first, destroy any comments or taggings belonging to this show.	
+	Comment.destroy_all(:show_id => @show.id)
+	Tagging.destroy_all(:show_id => @show.id)
+	
+	# now destroy the show itself.
     @show.destroy
 
     respond_to do |format|
@@ -205,6 +210,12 @@ class ShowsController < ApplicationController
   end
   private
     def authenticate
+      deny_access unless signed_in?
+    end
+    def moderator
       deny_access unless moderator_user?
+    end
+    def admin_user
+      deny_access unless admin_user?
     end
 end

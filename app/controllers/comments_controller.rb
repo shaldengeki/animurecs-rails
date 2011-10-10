@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
   before_filter :correct_user, :only => [:edit, :update, :destroy]
-  before_filter :admin_user, :only => [:edit, :update]
+  before_filter :moderator, :only => [:edit, :update]
   
   # Displays list of comments.
   # Can be accessed by GETting /comments or  /comments.xml
@@ -107,9 +107,11 @@ class CommentsController < ApplicationController
     end
   end
   private
-
     def authenticate
       deny_access unless signed_in?
+    end
+    def moderator
+      deny_access unless moderator_user?
     end
     def admin_user
       deny_access unless admin_user?

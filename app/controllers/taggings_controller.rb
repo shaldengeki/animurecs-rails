@@ -1,6 +1,7 @@
 class TaggingsController < ApplicationController
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
-
+  before_filter :authenticate, :only => [:new, :create]
+  before_filter :moderator, :only => [:index, :edit, :update, :destroy]
+  
   # Displays list of taggings.
   # Can be accessed by GETting /taggings or  /taggings.xml
   def index
@@ -74,6 +75,8 @@ class TaggingsController < ApplicationController
 		tagtype_id = Tagtype.find_by_name("general").id
 		tagtext = params[:tagging][:tagtext]
 	end
+	# replace whitespace with an underscore.
+	tagtext.gsub!(/\s+/, '_')
 	# save this tag into the db, if it doesn't already exist.
 	oldtag = Tag.find_by_name(tagtext)
 	if oldtag.nil? 
@@ -130,4 +133,11 @@ class TaggingsController < ApplicationController
     def authenticate
       deny_access unless signed_in?
     end
+    def moderator
+      deny_access unless moderator_user?
+    end
+    def admin_user
+      deny_access unless admin_user?
+    end
+	
 end
