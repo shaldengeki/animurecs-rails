@@ -16,7 +16,8 @@
 
 	<p>
 	  <b>Voting:</b>
-	  <%= like_image + " " + @show.upvotes.to_s %> | <%= dislike_image + " " + @show.downvotes.to_s %>
+		<%= display_show_like_button(@show) %>
+		<%= display_show_dislike_button(@show) %>
 	</p>
 
 	<p>

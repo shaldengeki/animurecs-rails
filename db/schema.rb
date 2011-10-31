@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111010174811) do
+ActiveRecord::Schema.define(:version => 20111010231430) do
 
   create_table "comments", :force => true do |t|
-    t.string   "text"
+    t.string   "text",       :limit => 1500
     t.integer  "show_id"
     t.integer  "user_id"
     t.integer  "time"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20111010174811) do
   end
 
   add_index "shows", ["name"], :name => "index_shows_on_name", :unique => true
+  add_index "shows", ["upvotes", "downvotes"], :name => "index_shows_on_upvotes_and_downvotes"
 
   create_table "showvotes", :force => true do |t|
     t.integer  "show_id"

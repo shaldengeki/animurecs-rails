@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  autocomplete :tag, :name
   before_filter :authenticate, :only => [:new, :create]
   before_filter :moderator, :only => [:edit, :update, :destroy]
   
@@ -62,6 +63,8 @@ class TagsController < ApplicationController
   # Can be accessed by POSTING /tags or  /tags.xml
   def create
     @tag = Tag.new(params[:tag])
+	@tag.name.downcase!
+	
 	# process the tagname to see if we have a tagtype in there.
 	if @tag.name.include? ":"
 		# lop off the first bit as the tag type and the second bit as the actual tag name.

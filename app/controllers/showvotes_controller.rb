@@ -65,15 +65,18 @@ class ShowvotesController < ApplicationController
     redirect_to(root_path) unless ( current_user?(thisUser) || admin_user? )
     
     @showvote = Showvote.where(:show_id => params[:show_id], :user_id => params[:user_id]).limit(1)
+	
     if @showvote.length < 1
       # create this showvote.
       voteOnShow = Showvote.new(:show_id => params[:show_id], :user_id => params[:user_id], :vote => params[:vote_val]).save
+      @show = Show.find(params[:show_id])
     else
       # update this showvote if it's changed.
       @showvote = @showvote[0]
       if @showvote.vote != params[:vote_val]
         voteOnShow = Showvote.find(@showvote.id).update_attributes(:show_id => params[:show_id], :user_id => params[:user_id], :vote => params[:vote_val])
         @showvote = Showvote.find(@showvote.id)
+		@show = Show.find(params[:show_id])
       else
         voteOnShow = true
       end

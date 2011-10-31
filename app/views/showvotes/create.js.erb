@@ -1,0 +1,4 @@
+<% if not @show.nil? %>
+$('#upvote_show_<%= @show.id %>').html("<%= escape_javascript(display_show_like_button(@show)) %>");
+$('#downvote_show_<%= @show.id %>').html("<%= escape_javascript(display_show_dislike_button(@show)) %>");
+<% end %>

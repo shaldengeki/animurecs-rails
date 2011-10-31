@@ -20,7 +20,7 @@
   </div>
   <div class="field">
     <%= f.label :tag_id %><br />
-    <%= f.text_field :tagtext %>
+    <%= f.text_field :tagtext, :autocomplete => autocomplete_tag_name_tags_path %>
   </div>
   <div class="actions">
     <%= f.submit %>

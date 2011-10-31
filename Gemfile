@@ -3,6 +3,10 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.3'
 gem 'mysql2', '~> 0.2.7'
 
+# use jQuery instead of prototype, and bundle the autocomplete gem.
+gem "jquery-rails"
+gem 'rails3-jquery-autocomplete'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

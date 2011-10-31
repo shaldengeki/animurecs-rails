@@ -60,7 +60,7 @@ module TagsHelper
 	# Displays the first n characters of a show's description (or the whole thing, if it's <= n characters long).
 	def tag_description_short(tag = @tag)
 		if tag.description.to_s.length > 50
-			tag.description.to_s.split('').first(50).to_s + "..."
+			tag.description[0,50] + "..."
 		else
 			tag.description.to_s
 		end

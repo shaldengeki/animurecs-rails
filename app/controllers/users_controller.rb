@@ -70,10 +70,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 	
 	# if user is trying to elevate privileges past their own userlevel, return error.
-	if params[:user]["userlevel"].to_i > @current_user.userlevel
+	if params[:user][:id] != @current_user.id and (params[:user]["userlevel"].to_i > @current_user.userlevel or @user.userlevel >= @current_user.userlevel)
 		format.html { render :action => "edit" }
 		format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }		
 	else
+		params[:user].delete(:password) if params[:user][:password].blank?
+		params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
+		params[:user].delete(:avatar) if params[:user][:avatar].blank?
+		
+		logger.info "params: #{params[:user]}"
+		
 		respond_to do |format|
 		  if @user.update_attributes(params[:user])
 			format.html { redirect_to(@user, :notice => 'User was successfully updated.') }

@@ -2,6 +2,12 @@ class Show < ActiveRecord::Base
 	belongs_to	:tag
 
 	has_attached_file :image, :styles => { :medium => "225x320>", :thumb => "100x142>" }
+  
+  validates_attachment_content_type :image, :content_type => ["image/jpeg", "image/png", "image/gif" ,"image/pjpeg","image/x-png"],
+                                              :message => "Oops! Make sure you are uploading an image file."
+                                    
+  validates_attachment_size :image,  :less_than => 10.megabyte,
+                                      :message => "Maximum show image size is 10M."  
 
 	has_many	:comments,	:dependent => :destroy
 	

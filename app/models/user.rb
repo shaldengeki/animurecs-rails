@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
 	# Automatically create the virtual attribute 'password_confirmation'.
 	validates :password, 	:presence     => true,
 							:confirmation => true,
-							:length       => { :within => 6..40 }
+							:length       => { :within => 6..40 }, 
+							:on           => :create
 							
 	validates :userlevel,	:presence => true,
 							:numericality => true
@@ -20,6 +21,12 @@ class User < ActiveRecord::Base
 	before_save :encrypt_password
 
 	has_attached_file :avatar, :styles => { :medium => "225x320>", :thumb => "100x142>" }
+  
+  validates_attachment_content_type :avatar, :content_type => ["image/jpeg", "image/png", "image/gif" ,"image/pjpeg","image/x-png"],
+                                              :message => "Oops! Make sure you are uploading an image file."
+                                    
+  validates_attachment_size :avatar,  :less_than => 10.megabyte,
+                                      :message => "Maximum avatar size is 10M."
 
 	def has_password?(submitted_password)
 		encrypted_password == encrypt(submitted_password)

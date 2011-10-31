@@ -1,7 +1,9 @@
 Animurecs::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :tagtypes
-  resources :tags
+  resources :tags do
+	get :autocomplete_tag_name, :on => :collection
+  end
   resources :shows do 
     member do
       get :taggings, :taggeds

@@ -21,7 +21,7 @@ end %>
 <% end %>
 	  <td><%= Tagging.where(:tag_id => tag.id).count %></td>
       <td><%= prettify_tag_link(tag) %></td>
-      <td><%= Tagtype.find(tag.tagtype_id).name %><% if admin_user? then %> (<%=link_to 'edit', edit_tag_path(tag) %>) (<%= link_to 'delete', tag, :confirm => 'Are you sure you want to delete tag:' + tag.name + '?', :method => :delete %>)<% end %></td>
+      <td><%= Tagtype.find(tag.tagtype_id).name %><% if moderator_user? then %> (<%=link_to 'edit', edit_tag_path(tag) %>) (<%= link_to 'delete', tag, :confirm => 'Are you sure you want to delete tag:' + tag.name + '?', :method => :delete %>)<% end %></td>
       <td><%= tag_description_short(tag) %></td>
     </tr>
 <% end %>
