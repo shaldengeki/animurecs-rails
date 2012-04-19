@@ -18,15 +18,17 @@
 		</header>
 		<div id = "mainmenu">
 <%= render 'layouts/mainmenu' %>
-		</div>
-		<br /><br />
+		</div><br /><br />
+		<div id="content">
 <% if @popularTags %>
-		<div class="sidebar">  
-			<div style="margin-bottom: 1em;">
-				<h5>Tags</h5>
-				<div id="sidebar-tags">
-					<%= show_tag_sidebar(@popularTags) %>
-				</div>      
+			<div id="sidebar">  
+				<div style="margin-bottom: 1em;">
+					<h5>Tags</h5>
+					<div id="sidebar-tags">
+						<%= show_tag_sidebar(@popularTags) %>
+					</div>      
+				</div>
 			</div>
-		</div>
 <% end %>
+			<div id="ads">
+			</div>

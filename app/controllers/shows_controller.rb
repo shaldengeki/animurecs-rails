@@ -7,20 +7,15 @@ class ShowsController < ApplicationController
   # Takes an HTTP parameter, tags, which takes a list of tags to search for separated by plus signs.
   def index
 	page = params[:page].to_i; page = 1 if page == 0
-	limit = 30
 	@tagtypes = Tagtype.all
 	@tags = Hash.new
 	final_shows_array = Array.new
 	
 	if params[:tags].blank?
 		# if tags blank, display all shows.
-		post_count = Show.count
-		@shows = Show.paginate(:page => params[:page],
-								:order => '`upvotes` DESC, `downvotes` ASC')
-		relevantTaggings = Tagging.all
+		@shows = Show.order('upvotes DESC, downvotes ASC').paginate(:page => params[:page])
 	else
 		@shows = Array.new
-    
 		# cast all tags to lowercase.
 		# if tags non-blank, get a set of shows to display.
 		tags = params[:tags].downcase.split(" ").to_set
@@ -99,23 +94,23 @@ class ShowsController < ApplicationController
 		final_shows_array = final_shows_array - not_shows_array
 		
 		# now get information for each of these shows.
-#    @shows = Show.find_all(final_shows_array, :order => "`upvotes` DESC, `downvotes` ASC")
+		# @shows = Show.find_all(final_shows_array, :order => "`upvotes` DESC, `downvotes` ASC")
 		i = 0
 		while i < final_shows_array.length
-			@shows.push(Show.find(final_shows_array[i]))
+			@shows.push(final_shows_array[i])
 			i += 1
 		end
-		@shows.sort! { |a,b| a.upvotes == b.upvotes ? a.downvotes <=> b.downvotes : b.upvotes <=> a.upvotes }
-		relevantTaggings = Tagging.select("`tag_id`, COUNT(*)").order("COUNT(*) DESC").where(:show_id => @shows).group("`tag_id`").limit(25)
-		relevantTaggings = Tagging.where(:show_id => @shows)
-		@shows = @shows.paginate(:page => params[:page])		
+		# sort and paginate.
+		@shows = Show.where(:id => @shows).order('upvotes DESC, downvotes ASC').paginate(:page => params[:page])
+		# @shows.sort! { |a,b| a.upvotes == b.upvotes ? a.downvotes <=> b.downvotes : b.upvotes <=> a.upvotes }
+		# @shows = @shows.paginate(:page => params[:page])		
 	end
 
 	# now get the most-frequently used tags in this group of shows.
 	@popularTags = Hash.new(0)
-#	relevantTaggings.each{|tagging| @popularTags[tagging.tag_id] += 1}
-#	@popularTags = @popularTags.sort_by{|key,value| value}.reverse.take(25)
-	relevantTaggings.each{|tagging| @popularTags[tagging.tag_id] = tagging["COUNT(*)"]}
+	relevantTaggings = Tagging.count(:select => '`tag_id` AS `tagid`, COUNT(*) AS `numTaggings`', :conditions=>['show_id IN (?)', @shows], :group=>'tag_id', :limit=>25, :order=>"COUNT(*) DESC")
+	relevantTaggings.each{|tagging| @popularTags[tagging[0]] = tagging[1]}
+	#relevantTaggings = Tagging.select("`tag_id`, COUNT(*) as numTaggings").where(:show_id => @shows).group("`tag_id`").order("numTaggings DESC").limit(25)
 
 	@title = "Shows"
     respond_to do |format|

@@ -7,8 +7,9 @@ end %>
 	else
 		i = (params[:page].to_i - 1) * 30 + 1
 	end
-		@shows.each do |show| 
-			if !show.nil?
+	@shows.each do |show|
+		logger.debug show
+		if !show.nil?
 %>
   <tr class = 'show_list_entry'>
     <td><%= i %></td>
@@ -23,8 +24,8 @@ end %>
 		<span class = 'list_tags'>Tags: <%= tag_cloud(show, 25) %></span>
 	</td>
   </tr>
-<%				i += 1
-			end
+<%			i += 1
+		end
 	end %>
 </table><br />
 <%= if @shows.length > 0
@@ -35,4 +36,6 @@ Nobody here but us chickens!
 <% end %>
 <br />
 
+<% if moderator_user? %>
 <%= link_to 'New Show', new_show_path %>
+<% end %>

@@ -1,7 +1,8 @@
 body {
-  background: #FFFFFF;
-  margin: 0;
-  font: 13px / 20px "Lucida Grande",Arial,Sans-serif;
+	background: #FFFFFF;
+	margin: 0;
+	font: 12pt / 16pt "Lucida Grande",Arial,Sans-serif;
+	min-width: 640px;
 }
 h1,h2,h3,h4,h5 {
 	margin: 0;
@@ -16,140 +17,143 @@ img {
 }
 
 header {
-  display: 				block;
-  height: 				150px;
-  width:				100%;
-  min-width: 			800px;
-  background-color: 	#3EA055;
+	display: 			block;
+	height: 			150px;
+	width:				100%;
+	min-width: 			640px;
+	background-color: 	#3EA055;
 }
 
 header img {
-  padding: 0;
+	padding: 0;
 }
 
 #header_inner {
-  width: 800px;
-  height: 150px;
-  margin: 0 auto;
+	padding: 0 240px;
+	min-width: 640px;
+	height: 150px;
+/*	margin: 0 auto;*/
 }
 
-.container {
-	padding:	0 200px;
-	width: 800px;
-	margin: 0 auto;
+#content {
+
 }
 
 section {
-  display: block;
-  font-size: 120%;
-  padding: 20px;
-  background: #fff;
-  margin: 0 auto;
-  min-width: 800px;
+	display: block;
+	padding: 0 120px 0 240px;
+	min-width: 280px;;
+/*  font-size: 120%;
+	padding: 20px;
+	background: #fff;
+	margin: 0 auto;
+	min-width: 640px;
+*/
 }
 
 section h1 {
-  font-size: 200%;
+	font-size: 2em;
 }
 
-.content {
-}
 
 /* Links */
 
 a {
-  color: #09c;
-  text-decoration: none;
+	color: #09c;
+	text-decoration: none;
 }
 
 a:hover {
-  color: #069;
-  text-decoration: none;
+	color: #069;
+	text-decoration: none;
 }
 
 a:visited {
-  color: #069;
+	color: #069;
 }
 
 /* Navigation */
 
 nav {
-  float: right;
-}
-
-nav {
-  background-color: white;
-  padding: 0 0.7em;
-  white-space: nowrap;
+	background-color: white;
+	padding: 0;
+	white-space: nowrap;
+	float: right;
 }
 
 nav ul {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 nav ul li {
-  list-style-type: none;
-  display: inline-block;
-  padding: 0.2em 0;
+	list-style-type: none;
+	display: inline-block;
+	padding: 0.2em 0;
 }
 
 nav ul li a {
-  padding: 0 5px;
-  font-weight: bold;
+	padding: 0 10px 0 0;
+	font-weight: bold;
 }
 
 nav ul li a:visited {
-  color: #09c;
+	color: #09c;
 }
 
 nav ul li a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .signin {
+	font-size: 0.8em;
 	margin-top: 10px;
+}
+
+.signin ul li a {
+	padding: 0 5px;
 }
 
 #mainmenu {
 	position: relative;
-	width: 800px;
+	min-width: 640px;
 	margin: 0 auto;
 }
 
 #mainmenu_inner {
+	padding: 0 240px;
 	float: left;
-	font-size: 16pt;
+	font-size: 1em;
 }
 
 div#mainmenu_inner ul li.current-page {
-    background-color: #F7F7FF;
+	  background-color: #F7F7FF;
 }
 div#mainmenu_inner ul li.current-page a {
-    font-weight: bold;
+	  font-weight: bold;
 }
 
 /* Sign up button */
 
 a.signup_button {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  text-align: center;
-  width: 190px;
-  color: #fff;
-  background: #006400;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	text-align: center;
+	width: 190px;
+	color: #fff;
+	background: #006400;
+	font-size: 150%;
+	font-weight: bold;
+	padding: 20px;
 }
 
 /* Round corners */
 
 .round {
-  -moz-border-radius:    10px;
-  -webkit-border-radius: 10px;
-  border-radius:         10px;
+	-moz-border-radius:    10px;
+	-webkit-border-radius: 10px;
+	border-radius:         10px;
 }
 .round-left {
 	-moz-border-radius-topleft: 5px;
@@ -195,18 +199,25 @@ margin: 0;
 }
 
 /* Sidebar styling. */
-div.sidebar {
-	margin-left: 10px;
+div#sidebar {
+	top: -10px;
+	left: -10px;
 	float: left;
+	width: 200px;
+	margin: 0 0 -10px 0;
+	padding: 10px;
+	z-index: 100;
 	overflow: visible;
-	width: 190px;
 }
-div.sidebar li {
-    list-style-type: none;
-    margin: 0;
+div#sidebar-tags {
+	font-size: 0.9em;
 }
-div.sidebar ul {
-    margin: 10px 0px 0px 0px;
+div#sidebar li {
+	list-style-type: none;
+	margin: 0;
+}
+div#sidebar ul {
+	margin: 10px 0px 0px 0px;
 	padding: 0 10px;
 }
 a.tag-type-general, li.tag-type-general, li.tag-type-general a {
@@ -222,7 +233,7 @@ a.tag-type-va, li.tag-type-va, li.tag-type-va a {
 	color: #00AA00;
 }
 span.shows-count {
-    color: #AAA;
+	color: #AAA;
 	margin-left: 5px;
 }
 span.list_tags {
@@ -233,9 +244,21 @@ a.delete-tagging {
 	font-size: 0.5em;
 }
 
+div#ads {
+	top: -10px;
+	right: -10px;
+	float: right;
+	width: 100px;
+	margin: 0 0 -10px 0;
+	padding: 10px;
+	z-index: 99;
+}
+
 /* Mainbody content styling. */
 
 div.pagination {
+	margin-left: auto;
+	margin-right: auto;
 	text-align: center;
 }
 div.pagination a, div.pagination em, div.pagination span{
@@ -336,28 +359,28 @@ table.highlightable > tbody > tr:hover {
 }
 
 table.highlightable th {
-    color: #171BB3;
+	  color: #171BB3;
 }
 table.highlightable td {
-    border: 1px dotted #EEE;
-    margin: 0;
+	  border: 1px dotted #EEE;
+	  margin: 0;
 }
 table.highlightable th {
-    margin: 0;
+	  margin: 0;
 }
 table td {
-    padding: 1px 4px;
-    vertical-align: top;
+	  padding: 1px 4px;
+	  vertical-align: top;
 }
 table td.large-text p {
-    font-size: 1em;
+	  font-size: 1em;
 }
 table th {
-    font-weight: bold;
-    text-align: left;
-    vertical-align: top;
-    padding: 0.2em 0.5em;
-    white-space: nowrap;
+	  font-weight: bold;
+	  text-align: left;
+	  vertical-align: top;
+	  padding: 0.2em 0.5em;
+	  white-space: nowrap;
 }
 
 td.tagging {
@@ -367,30 +390,32 @@ td.tagging {
 /* Form styling. */
 
 div.field, div.actions {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .field_with_errors {
-  margin-top: 10px;
-  padding: 2px;
-  background-color: red;
-  display: table;
+	margin-top: 10px;
+	padding: 2px;
+	background-color: red;
+	display: table;
 }
 
 .field_with_errors label {
-  color: #fff;
+	color: #fff;
 }
 
 /* Footer styling. */
 
 footer {
-  text-align: center;
-  margin-top: 10px;
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+	clear: both;
+	text-align: center;
+	margin-top: 10px;
+	width: 640px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 0.8em;
 }
 
 footer nav {
-  float: none;
+	float: none;
 }

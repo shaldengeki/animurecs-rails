@@ -1,12 +1,16 @@
 class User < ActiveRecord::Base
 	attr_accessible :username, :color, :userlevel, :password, :password_confirmation, :avatar
 	attr_accessor :password
+	extend FriendlyId
+	
+	friendly_id :username, :use => :slugged
 
 	has_many :comments
 	has_many	:showvotes,	:dependent => :destroy
 
 	validates :username,	:presence => true,
 							:length   => { :maximum => 50 },
+							:format => {:with => /^[a-z0-9\ ]+[-a-z0-9\ ]*[a-z0-9\ ]+$/i},
 							:uniqueness => { :case_sensitive => false }
 							
 	# Automatically create the virtual attribute 'password_confirmation'.
@@ -22,11 +26,11 @@ class User < ActiveRecord::Base
 
 	has_attached_file :avatar, :styles => { :medium => "225x320>", :thumb => "100x142>" }
   
-  validates_attachment_content_type :avatar, :content_type => ["image/jpeg", "image/png", "image/gif" ,"image/pjpeg","image/x-png"],
-                                              :message => "Oops! Make sure you are uploading an image file."
-                                    
-  validates_attachment_size :avatar,  :less_than => 10.megabyte,
-                                      :message => "Maximum avatar size is 10M."
+	validates_attachment_content_type :avatar, :content_type => ["image/jpeg", "image/png", "image/gif" ,"image/pjpeg","image/x-png"],
+												:message => "Oops! Make sure you are uploading an image file."
+									
+	validates_attachment_size :avatar,  :less_than => 10.megabyte,
+										:message => "Maximum avatar size is 10M."
 
 	def has_password?(submitted_password)
 		encrypted_password == encrypt(submitted_password)
@@ -41,7 +45,6 @@ class User < ActiveRecord::Base
 		user = find_by_id(id)
 		(user && user.salt == cookie_salt) ? user : nil
 	end
-
 
 	private
 
@@ -61,5 +64,4 @@ class User < ActiveRecord::Base
 	def secure_hash(string)
 		Digest::SHA256.hexdigest(string)
 	end
-				
 end

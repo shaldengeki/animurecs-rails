@@ -23,7 +23,7 @@ class TagsController < ApplicationController
 	params[:tags] = @tag.name
 	@title = @tag.name
 	@taggings = Tagging.paginate(:page => params[:page], 
-									:conditions => { :tag_id => @tag.id })
+								:conditions => { :tag_id => @tag.id })
 	@tagtypes = Tagtype.all
 	
 	# get popular related tags for this tag.

@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
-gem 'mysql2', '~> 0.2.7'
+gem 'rails', '3.2.0'
+gem 'mysql2', :git => 'git://github.com/brianmario/mysql2.git'
 
 # use jQuery instead of prototype, and bundle the autocomplete gem.
 gem "jquery-rails"
@@ -22,6 +22,8 @@ end
 gem "paperclip", "~> 2.4"
 
 gem 'will_paginate', '~> 3.0.2'
+
+gem "friendly_id", "~> 4.0.1"
 
 # Use unicorn as the web server
 # gem 'unicorn'

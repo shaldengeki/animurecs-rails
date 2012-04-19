@@ -1,13 +1,16 @@
 class Show < ActiveRecord::Base
 	belongs_to	:tag
+	extend FriendlyId
+	
+	friendly_id :name, :use => :slugged
 
 	has_attached_file :image, :styles => { :medium => "225x320>", :thumb => "100x142>" }
   
-  validates_attachment_content_type :image, :content_type => ["image/jpeg", "image/png", "image/gif" ,"image/pjpeg","image/x-png"],
-                                              :message => "Oops! Make sure you are uploading an image file."
-                                    
-  validates_attachment_size :image,  :less_than => 10.megabyte,
-                                      :message => "Maximum show image size is 10M."  
+	validates_attachment_content_type :image, :content_type => ["image/jpeg", "image/png", "image/gif" ,"image/pjpeg","image/x-png"],
+												:message => "Oops! Make sure you are uploading an image file."
+									
+	validates_attachment_size :image,  :less_than => 10.megabyte,
+										:message => "Maximum show image size is 10M."  
 
 	has_many	:comments,	:dependent => :destroy
 	
@@ -37,7 +40,7 @@ class Show < ActiveRecord::Base
 
 	validates :downvotes, 	:presence => true,
 							:numericality => true
-
+							
 	def tagging?(tagged)
 		taggings.find_by_tag_id(tagged)
 	end

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111010231430) do
+ActiveRecord::Schema.define(:version => 20120419013518) do
 
   create_table "comments", :force => true do |t|
     t.string   "text",       :limit => 1500
@@ -50,9 +51,11 @@ ActiveRecord::Schema.define(:version => 20111010231430) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "slug"
   end
 
   add_index "shows", ["name"], :name => "index_shows_on_name", :unique => true
+  add_index "shows", ["slug"], :name => "index_shows_on_slug", :unique => true
   add_index "shows", ["upvotes", "downvotes"], :name => "index_shows_on_upvotes_and_downvotes"
 
   create_table "showvotes", :force => true do |t|
@@ -82,9 +85,11 @@ ActiveRecord::Schema.define(:version => 20111010231430) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tagtype_id"
+    t.string   "slug"
   end
 
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
+  add_index "tags", ["slug"], :name => "index_tags_on_slug", :unique => true
 
   create_table "tagtypes", :force => true do |t|
     t.string   "name"
@@ -105,8 +110,10 @@ ActiveRecord::Schema.define(:version => 20111010231430) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "slug"
   end
 
+  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end
