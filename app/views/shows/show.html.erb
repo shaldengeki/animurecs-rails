@@ -1,35 +1,37 @@
 <p id="notice"><%= notice %></p>
+<div id = 'show_box'>
+	<div id = 'show_imagebox'>
+	<%= show_image %>
+	<% if moderator_user? %><br />
+	<%= link_to 'Edit Anime Information', edit_show_path(@show) %><br />
+	<%= link_to 'Delete Anime', @show, :confirm => 'Are you sure you want to delete show: ' + @show.name + '?', :method => :delete %>
+	<% end %>
+	</div>
+	<div id = 'show_infobox'>
+		<%= simple_format(@show.description) %>
 
-<%= show_image %>
-<div id = 'show_infobox'>
-	<%= simple_format(@show.description) %>
+		<p>
+		  <b>Length:</b>
+		  <%= @show.length %>
+		</p>
 
-	<p>
-	  <b>Length:</b>
-	  <%= @show.length %>
-	</p>
+		<p>
+		  <b>Link:</b>
+		  <%= link_to @show.link, @show.link %>
+		</p>
 
-	<p>
-	  <b>Link:</b>
-	  <%= link_to @show.link, @show.link %>
-	</p>
+		<p>
+		  <b>Voting:</b>
+			<%= display_show_like_button(@show) %>
+			<%= display_show_dislike_button(@show) %>
+		</p>
 
-	<p>
-	  <b>Voting:</b>
-		<%= display_show_like_button(@show) %>
-		<%= display_show_dislike_button(@show) %>
-	</p>
-
-	<p>
-	  <b>Tags:</b>
-	  <%= tag_cloud(@show) %>
-	</p>
-</div><br />
-<% if moderator_user? %>
-<%= link_to 'Edit Anime Information', edit_show_path(@show) %><br />
-<%= link_to 'Delete Anime', @show, :confirm => 'Are you sure you want to delete show: ' + @show.name + '?', :method => :delete %>
-<% end %>
-
+		<p>
+		  <b>Tags:</b>
+		  <%= tag_cloud(@show) %>
+		</p>
+	</div>
+</div><br /><br />
 
 <h2>Comments:</h2>
 <% unless @comments.empty? %>

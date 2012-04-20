@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<div id = 'user_imagebox'>
 <%= avatar_image %>
-
+<% if current_user?(@user) || admin_user? %><br />
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
+<%= link_to 'Back', users_path %>
+</div>
 <div id = 'user_infobox'>
 	<p>
 		<b>Username:</b>
@@ -18,8 +23,3 @@
 		<%= user_type(@user) %>
 	</p>
 </div>
-<br />
-<% if current_user?(@user) || admin_user? %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<% end %>
-<%= link_to 'Back', users_path %>

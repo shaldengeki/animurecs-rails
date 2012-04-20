@@ -304,20 +304,9 @@ span.like_button , span.dislike_button{
 	font-style: italic;
 }
 
-#show_infobox {
-	margin: 0 10px;
-	padding: 0;
-	float: right;
-	width: 430px;
-	text-align: left;
-}
-
-#user_infobox  {
-	margin: 0 10px;
-	padding: 0;
-	float: right;
-	width: 550px;
-	text-align: left;
+#show_imagebox, #user_imagebox {
+	float: left;
+	overflow: hidden;
 }
 
 .avatar, .show_image {
@@ -334,6 +323,22 @@ span.like_button , span.dislike_button{
 	min-width: 100px;
 	max-width: 100px;
 	overflow: hidden;
+}
+
+#show_infobox {
+	margin: 0 10px 0 235px;
+	min-height: 320px;
+	padding: 0;
+/*	width: 430px;*/
+	text-align: left;
+}
+
+#user_infobox  {
+	margin: 0 10px 0 235px;
+	padding: 0;
+/*	float: right;
+	width: 550px;*/
+	text-align: left;
 }
 
 p.text {
