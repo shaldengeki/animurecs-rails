@@ -1,0 +1,17 @@
+      <div id="sidebar">
+        <% if @user %>
+          <div id = 'userprofile' class="sidebar">
+            <%= avatar_image %>
+            <% if current_user?(@user) || admin_user? %><br />
+            <%= link_to 'Edit', edit_user_path(@user) %> |
+            <% end %>
+          </div>
+
+        <% elsif @popularTags %>
+          <h5>Tags</h5>
+          <%= render 'layouts/search' %>
+          <div id="sidebar-tags">
+            <%= show_tag_sidebar(@popularTags) %>
+          </div>
+        <% end %>
+      </div>

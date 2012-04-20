@@ -11,29 +11,48 @@
     </div>
   <% end %>
 
-	<div class="field">
-		<%= f.label :username %><br />
-		<%= f.text_field :username %>
-	</div>
-	<div class="field">
-		<%= f.label :password %><br />
-		<%= f.password_field :password %>
-	</div>
-	<div class="field">
-		<%= f.label :password_confirmation, "Confirmation" %><br />
-		<%= f.password_field :password_confirmation %>
-	</div>
-	<div class="field">
-		<%= f.label :avatar, "Avatar" %><br />
-		<%= f.file_field :avatar %>
-	</div>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Confirmation" %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label :avatar, "Avatar" %><br />
+    <%= f.file_field :avatar %>
+  </div>
+<%  if signed_in? %>
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.text_field :age %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.text_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :size => "50x10" %>
+  </div>
 <% if admin_user? %>
-	<div class="field">
-		<%= f.label :userlevel %><br />
-		<%= f.text_field :userlevel %>
-	</div>
+  <div class="field">
+    <%= f.label :userlevel %><br />
+    <%= f.text_field :userlevel %>
+  </div>
 <% end %>
-	<div class="actions">
-		<%= f.submit "Sign up" %>
-	</div>
+  <%= f.hidden_field :id, :value => @user.id %>
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% else %>
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
 <% end %>

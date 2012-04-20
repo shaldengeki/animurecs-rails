@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.0'
-gem 'mysql2', :git => 'git://github.com/brianmario/mysql2.git'
+gem 'mysql2', '0.3.11'
 
 # use jQuery instead of prototype, and bundle the autocomplete gem.
 gem "jquery-rails"

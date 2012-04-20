@@ -1,0 +1,27 @@
+		<header>
+                  <nav>
+                  <div class="topbar">
+                    <%= link_to "", home_path, :id=>"logo" %>
+                    <ul class="nav">
+                      <li><%= link_to "Home", home_path, :class=>"home" %></li>
+                      <li><%= link_to "Connect", connect_path, :class=>"connect" %></li>
+                      <li><%= link_to "Discover", discover_path, :class=>"discover" %></li>
+                    </ul>
+                    <div class="pull-right">
+                    <% if signed_in? %>
+                      <%= link_to user_header_profile_pic, signout_path, :id=>"header_profile_pic" %>
+                      <div id="mini-profile" class="callout">Stuff here!</div>
+                      <div class="notification_bubble" id="global_notification_bubble">
+                        <%= link_to user_notifications_div, '#' %>
+                      </div>
+                      <div id="global_notifications" class="callout">
+                        peekaboo :3
+                      </div>
+                      <script type="text/javascript">$('#global_notification_bubble').click(function(){$('#global_notifications').toggle();});</script>
+                    <% else %>
+                      <%= link_to "Sign in or register", signin_path %>
+                    <% end %>
+                    </div>
+                  </nav>
+
+		</header>

@@ -12,6 +12,9 @@ Animurecs::Application.routes.draw do
   resources :taggings, :users, :comments, :showvotes
 
   root :to => 'pages#home'
+  match '/home', :to => 'shows#index'
+  match '/connect', :to => 'pages#connect'
+  match '/discover', :to => 'pages#discover'
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/signup',  :to => 'users#new'
@@ -19,24 +22,6 @@ Animurecs::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/comments/new/:show_id',	:to => 'comments#new'
   match '/taggings/new/:show_id',	:to => 'taggings#new'
-  match '/tags/:id',
-		:via => :get,
-		:constraints => { :id => /[^\/]+/ },
-		:format => false,
-		:to => 'tags#show',
-		:as => :tag
-  match '/shows/:id',
-		:via => :get,
-		:constraints => { :id => /[^\/]+/ },
-		:format => false,
-		:to => 'shows#show',
-		:as => :show
-  match '/users/:id',
-		:via => :get,
-		:constraints => { :id => /[^\/]+/ },
-		:format => false,
-		:to => 'users#show',
-		:as => :user
   #  resources :genres
 
   # The priority is based upon order of creation:

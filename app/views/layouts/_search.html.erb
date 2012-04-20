@@ -1,6 +1,6 @@
-<%= form_tag '/shows', :id => "home_search", :method => 'get' do %>
+                  <%= form_tag '/shows', :id => "home_search", :method => 'get' do %>
 		    <p>
-		      <%= text_field_tag :tags, params[:tags], :size => 30, :class => 'round-left', :id => 'searchform_q', :autocomplete => autocomplete_tag_name_tags_path, :"data-delimiter" => ' ' %>
+		      <%= text_field_tag :tags, params[:tags], :size => 10, :class => 'round-left', :id => 'searchform_q', :autocomplete => autocomplete_tag_name_tags_path, :"data-delimiter" => ' ' %>
 		      <%= submit_tag "Search", :class => 'submit round-right', :id => 'searchform_submit' %>
 		    </p>
 		  <% end %>

@@ -1,25 +1,28 @@
-<p id="notice"><%= notice %></p>
-
-<div id = 'user_imagebox'>
-<%= avatar_image %>
-<% if current_user?(@user) || admin_user? %><br />
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<% end %>
-<%= link_to 'Back', users_path %>
-</div>
-<div id = 'user_infobox'>
-	<p>
-		<b>Username:</b>
-		<%= @user.username %>
-	</p>
-
-	<p>
-		<b>Color:</b>
-		<%= @user.color %>
-	</p>
-
-	<p>
-		<b>User type:</b>
-		<%= user_type(@user) %>
-	</p>
-</div>
+  <p id="notice"><%= notice %></p>
+  <div id="user_header">
+    <div id="user_header_leftcol">
+	<h1><%= @user.username %></h1>
+        <h2><%= @user.gender %>, <%= @user.age %> years old</h2>
+        <p class="user_description"><%= @user.description %></p>
+        powerlevel thing goes here
+    </div>
+    <div id="user_header_rightcol">
+      <%= button_tag "Friend", :class=>"Friend" %>
+    </div>
+  </div>
+  <div id="user_feedlist">
+    <div id="user_feed_selector">
+      <ul>
+        <li><%= link_to 'Feed', '#', :id=>'active_feed_link' %> </li>
+        <li><%= link_to 'List', '#', :id=>'' %> </li>
+        <li><%= link_to 'Reviews', '#', :id=>'' %> </li>
+      </ul>
+    </div>
+    <div id="user_feed">
+      <ul>
+        <li>Feed </li>
+        <li>Goes</li>
+        <li>Here</li>
+      </ul>
+    </div>
+  </div>

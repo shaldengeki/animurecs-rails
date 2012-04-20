@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419013518) do
+ActiveRecord::Schema.define(:version => 20120420190710) do
 
   create_table "comments", :force => true do |t|
     t.string   "text",       :limit => 1500
@@ -111,8 +111,12 @@ ActiveRecord::Schema.define(:version => 20120419013518) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "slug"
+    t.integer  "age"
+    t.text     "gender"
+    t.text     "description"
   end
 
+  add_index "users", ["gender"], :name => "index_users_on_gender", :length => {"gender"=>5}
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 

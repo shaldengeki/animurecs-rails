@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   # Displays list of users.
   # Can be accessed by GETting /users or  /users.xml
   def index
-	@title = "All users"
+    @title = "All users"
     @users = User.all
-	
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users.to_xml(:except => [:encrypted_password, :salt])}
@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   # Can be accessed by GETting /users/1 or  /users/1.xml
   def show
     @user = User.find(params[:id])
-	@title = @user.username
-	
+    @title = @user.username
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user.to_xml(:except => [:encrypted_password, :salt])}
@@ -29,8 +29,8 @@ class UsersController < ApplicationController
   # Can be accessed by GETting /users/new or  /users/new.xml
   def new
     @user = User.new
-	@title = "Sign Up"
-	
+    @title = "Sign Up"
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user }
@@ -47,49 +47,50 @@ class UsersController < ApplicationController
   # Can be accessed by POSTING /users or  /users.xml
   def create
     @user = User.new(params[:user])
-	
-	# new users are ALWAYS normal users.
-	@user.userlevel = 0;
+    # new users are ALWAYS normal users.
+    @user.userlevel = 0;
 
-    respond_to do |format|
-      if @user.save
-		sign_in @user
-        format.html { redirect_to(@user, :notice => 'Welcome to LL Animu Recommendations!') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-		@title = "Sign up"
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      respond_to do |format|
+        if @user.save
+      sign_in @user
+          format.html { redirect_to(@user, :notice => 'Welcome to LL Animu Recommendations!') }
+          format.xml  { render :xml => @user, :status => :created, :location => @user }
+        else
+      @title = "Sign up"
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        end
       end
-    end
   end
 
   # Updates a user with new information.
   # Can be accessed by PUTting /users/1 or  /users/1.xml
   def update
     @user = User.find(params[:id])
-	
-	# if user is trying to elevate privileges past their own userlevel, return error.
-	if params[:user][:id] != @current_user.id and (params[:user]["userlevel"].to_i > @current_user.userlevel or @user.userlevel >= @current_user.userlevel)
-		format.html { render :action => "edit" }
-		format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }		
-	else
-		params[:user].delete(:password) if params[:user][:password].blank?
-		params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
-		params[:user].delete(:avatar) if params[:user][:avatar].blank?
-		
-		logger.info "params: #{params[:user]}"
-		
-		respond_to do |format|
-		  if @user.update_attributes(params[:user])
-			format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-			format.xml  { head :ok }
-		  else
-			format.html { render :action => "edit" }
-			format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-		  end
-		end
-	end
+    if params[:user]["userlevel"].blank?
+      params[:user]["userlevel"] = @user.userlevel
+    end
+    # if user is trying to elevate privileges past their own userlevel, return error.
+    if params[:user]["userlevel"].to_i > @current_user.userlevel or (@user.id != @current_user.id and @user.userlevel >= @current_user.userlevel)
+      respond_to do |format|
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    else
+      params[:user].delete(:password) if params[:user][:password].blank?
+      params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
+      params[:user].delete(:avatar) if params[:user][:avatar].blank?
+
+      respond_to do |format|
+        if @user.update_attributes(params[:user])
+          format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
   end
 
   # Deletes a user.

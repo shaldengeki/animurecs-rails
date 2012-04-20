@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	attr_accessible :username, :color, :userlevel, :password, :password_confirmation, :avatar
+	attr_accessible :username, :age, :gender, :description, :color, :userlevel, :password, :password_confirmation, :avatar
 	attr_accessor :password
 	extend FriendlyId
 	
@@ -12,7 +12,11 @@ class User < ActiveRecord::Base
 							:length   => { :maximum => 50 },
 							:format => {:with => /^[a-z0-9\ ]+[-a-z0-9\ ]*[a-z0-9\ ]+$/i},
 							:uniqueness => { :case_sensitive => false }
-							
+
+  validates :age, :numericality => true
+
+  validates :description, :length => {:maximum => 140}
+
 	# Automatically create the virtual attribute 'password_confirmation'.
 	validates :password, 	:presence     => true,
 							:confirmation => true,
@@ -22,9 +26,9 @@ class User < ActiveRecord::Base
 	validates :userlevel,	:presence => true,
 							:numericality => true
 
-	before_save :encrypt_password
+	before_save :encrypt_password, :unless => Proc.new { |u| u.password.blank? }
 
-	has_attached_file :avatar, :styles => { :medium => "225x320>", :thumb => "100x142>" }
+	has_attached_file :avatar, :styles => { :medium => "225x320>", :thumb => "100x142>", :tiny => "25x25>" }
   
 	validates_attachment_content_type :avatar, :content_type => ["image/jpeg", "image/png", "image/gif" ,"image/pjpeg","image/x-png"],
 												:message => "Oops! Make sure you are uploading an image file."
