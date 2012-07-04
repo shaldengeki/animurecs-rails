@@ -1,26 +1,20 @@
 class SessionsController < ApplicationController
-  # Displays sign in page.
-  def new
-    @title = "Sign in"
-  end
-
-  # Creates a new user session.
+  skip_authorization_check
+  skip_load_and_authorize_resource
   def create
-    user = User.authenticate(params[:session][:username],
-                             params[:session][:password])
-    if user.nil?
-      flash.now[:error] = "Invalid username/password combination."
-      @title = "Sign in"
-      render 'new'
-    else
+    user = User.find_by_username(params[:session][:username])
+    if user and user.authenticate(params[:session][:password])
       sign_in user
-      redirect_back_or user
+      flash[:success] = "Welcome, " + user.username + "."
+      redirect_to user_path(user)
+    else
+      flash[:error] = 'Invalid username/password combination.'
+      redirect_to root_path
     end
   end
-
-  # Destroys a user session.
   def destroy
     sign_out
+    flash[:success] = "Successfully signed out."
     redirect_to root_path
   end
 end

@@ -1,0 +1,10 @@
+<%= form_for(:session, :url => sessions_path, :html=>{:class => "form"}) do |f| %>
+  <%= f.label :username %><br />
+  <%= f.text_field :username %>
+
+  <%= f.label :password %><br />
+  <%= f.password_field :password %>
+
+  <%= f.submit "Sign in", :class => "btn btn-small btn-primary" %>
+  <%= button_to "Register", {:controller => 'users', :action => 'new'}, :class => "btn btn-small" %>
+<% end %>

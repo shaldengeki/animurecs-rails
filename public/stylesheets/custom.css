@@ -1,45 +1,48 @@
 body {
-	background: #FFFFFF;
-	margin: 0;
-	font: 12pt / 16pt "Lucida Grande",Arial,Sans-serif;
+    background: whiteSmoke;
+    margin: 0;
+    font: 12pt / 16pt "Lucida Grande",Arial,Sans-serif;
 }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tfoot, thead, tr, th, td, input {
     vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
 }
 
 h1,h2,h3,h4,h5 {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 h5 {
-	font-size:1.2em;
+    font-size:1.2em;
 }
 img {
-	border: none;
+    border: none;
 }
 
 /* Header styles. */
 
 header {
-	position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        background-color: #3EA055;
-        z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #2a8c41;
+    z-index: 1000;
 }
 
 nav {
     display: block;
     width: 90%;
     margin: 0 auto;
-    height: 40px;
 }
 
 header img {
-	padding: 0;
+    padding: 0;
 }
 
 nav > .topbar {
@@ -64,18 +67,18 @@ nav > .topbar {
 nav > .topbar > ul {
     margin: 0 0 0 150px;
     width: 64%;
-/*    margin: 0 auto;
-    width: 64%;
-    display: block;*/
+    /*    margin: 0 auto;
+   width: 64%;
+   display: block;*/
 }
 
 nav > .topbar > ul a {
     font-weight: bold;
     display: block;
     border-right: 1px solid #49bf65;
-    padding: 11px 10px 5px 10px;
-    height: 24px;
-    text-transform: uppercase;
+    padding: 10px 10px 5px 10px;
+    height: 25px;
+    /*    text-transform: uppercase;*/
 }
 
 nav > .topbar > ul a:hover {
@@ -103,11 +106,15 @@ div.pull-right {
 
 #header_profile_pic {
     margin: 0 8px 0 5px;
-    padding: 8px 8px;
+    padding: 8px 8px 7px 8px;
     display: block;
     float: left;
     width: 25px;
     height: 25px;
+}
+
+a#header_profile_pic:hover {
+    background-color: white;
 }
 
 #header_profile_pic img {
@@ -118,11 +125,15 @@ div.pull-right {
 #mini-profile {
     display: none;
     position: absolute;
-    top: 46px;
-    right: 47px;
+    top: 41px;
+    right: 16px;
     z-index: 999;
     padding: 0;
     line-height: 150%;
+    background: whiteSmoke;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
 #global_notification_bubble {
@@ -150,16 +161,16 @@ div.pull-right {
 /* Navigation */
 
 ul {
-        list-style: none;
+    list-style: none;
 }
 
 .signin {
-	font-size: 0.8em;
-	margin-top: 10px;
+    font-size: 0.8em;
+    margin-top: 10px;
 }
 
 .signin ul li a {
-	padding: 0 5px;
+    padding: 0 5px;
 }
 
 #content {
@@ -169,265 +180,269 @@ ul {
 }
 
 section {
-	display: block;
-	padding: 0 120px 0 246px;
-	min-width: 280px;
+    display: block;
+    margin: 0 auto;
+    padding: 0 120px 0 246px;
+    min-width: 280px;
 }
 
 #maincontent {
     border-left: 1px solid grey;
+    background: #F9FAFA;
 }
 
 section h1 {
-	font-size: 2em;
+    font-size: 2em;
 }
 
 
 /* Links */
 
 a {
-	color: #09c;
-	text-decoration: none;
+    color: #09c;
+    text-decoration: none;
 }
 
 a:hover {
-	color: #069;
-	text-decoration: none;
+    color: #069;
+    text-decoration: none;
 }
 
 a:visited {
-	color: #069;
+    color: #069;
 }
 
 #mainmenu {
-	position: relative;
-	min-width: 640px;
-	margin: 0 auto;
+    position: relative;
+    min-width: 640px;
+    margin: 0 auto;
 }
 
 #mainmenu_inner {
-	padding: 0 240px;
-	float: left;
-	font-size: 1em;
+    padding: 0 240px;
+    float: left;
+    font-size: 1em;
 }
 
 div#mainmenu_inner ul li.current-page {
-	  background-color: #F7F7FF;
+    background-color: #F7F7FF;
 }
 div#mainmenu_inner ul li.current-page a {
-	  font-weight: bold;
+    font-weight: bold;
 }
 
 /* Sign up button */
 
 a.signup_button {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	text-align: center;
-	width: 190px;
-	color: #fff;
-	background: #006400;
-	font-size: 150%;
-	font-weight: bold;
-	padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    width: 190px;
+    color: #fff;
+    background: #006400;
+    font-size: 150%;
+    font-weight: bold;
+    padding: 20px;
 }
 
 /* Round corners */
 
 .round {
-	-moz-border-radius:    10px;
-	-webkit-border-radius: 10px;
-	border-radius:         10px;
+    -moz-border-radius:    10px;
+    -webkit-border-radius: 10px;
+    border-radius:         10px;
 }
 .round-left {
-	-moz-border-radius-topleft: 5px;
-	-moz-border-radius-bottomleft: 5px;
-	-webkit-border-top-left-radius: 5px;
-	-webkit-border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px 5px;
-	border-bottom-left-radius: 5px 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px 5px;
+    border-bottom-left-radius: 5px 5px;
 }
 
 .round-right {
-	-moz-border-radius-topright: 5px;
-	-moz-border-radius-bottomright: 5px;
-	-webkit-border-top-right-radius: 5px;
-	-webkit-border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px 5px;
-	border-bottom-right-radius: 5px 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px 5px;
+    border-bottom-right-radius: 5px 5px;
 }
 
 .logo {
-	position: relative;
-	border: none;
+    position: relative;
+    border: none;
 }
 
 #logo_search {
-padding-bottom: 25px;
-margin: 0;
+    padding-bottom: 20px;
+    margin: 0;
 }
 
 #home_search {
-/*	margin: -50px 10px 0 0;*/
-/*	float: right;*/
+    /*	margin: -50px 10px 0 0;*/
+    /*	float: right;*/
 }
 
 #searchform_q {
-	position: relative;
-	margin: 0;
+    position: relative;
+    margin: 0;
 }
 
 #searchform_submit {
-	position: relative;
-	margin: 0 0 0 -4px;
+    position: relative;
+    margin: 0 0 0 -4px;
 }
 
 /* Sidebar styling. */
 div#sidebar {
-	top: -10px;
-	left: -10px;
-	float: left;
-	width: 225px;
-	margin: 0 0 -10px 0;
-	padding: 10px;
-	z-index: 100;
-	overflow: visible;
+    top: -10px;
+    left: -10px;
+    float: left;
+    width: 225px;
+    margin: 0 0 -10px 0;
+    padding: 10px;
+    z-index: 100;
+    overflow: visible;
 }
 div#sidebar-tags {
-	font-size: 0.9em;
+    font-size: 0.9em;
 }
 div#sidebar li {
-	list-style-type: none;
-	margin: 0;
+    list-style-type: none;
+    margin: 0;
 }
 div#sidebar ul {
-	margin: 10px 0px 0px 0px;
-	padding: 0 10px;
+    margin: 10px 0px 0px 0px;
+    padding: 0 10px;
 }
 a.tag-type-general, li.tag-type-general, li.tag-type-general a {
-/*	font-size: 0.9em;*/
-	color: #006FFA;
+    /*	font-size: 0.9em;*/
+    color: #006FFA;
 }
 a.tag-type-studio, li.tag-type-studio, li.tag-type-studio a {
-/*	font-size: 0.9em;*/
-	color: #AA0000;
+    /*	font-size: 0.9em;*/
+    color: #AA0000;
 }
 a.tag-type-va, li.tag-type-va, li.tag-type-va a {
-/*	font-size: 0.9em;*/
-	color: #00AA00;
+    /*	font-size: 0.9em;*/
+    color: #00AA00;
 }
 span.shows-count {
-	color: #AAA;
-	margin-left: 5px;
+    color: #AAA;
+    margin-left: 5px;
 }
 span.list_tags {
-	font-size: 0.9em;
+    font-size: 0.9em;
 }
 a.delete-tagging {
-	vertical-align: super;
-	font-size: 0.5em;
+    vertical-align: super;
+    font-size: 0.5em;
 }
 
 div#ads {
-	top: -10px;
-	right: -10px;
-	float: right;
-	width: 100px;
-	margin: 0 0 -10px 0;
-	padding: 10px;
-	z-index: 99;
+    top: -10px;
+    right: -10px;
+    float: right;
+    width: 100px;
+    margin: 0 0 -10px 0;
+    padding: 10px;
+    z-index: 99;
 }
 
 /* Mainbody content styling. */
 
 div.pagination {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 div.pagination a, div.pagination em, div.pagination span{
-	border: 			1px solid #EAEAEA;
-	padding: 			2px 6px;
-	margin: 			0 3px;
-	text-decoration:	none;
+    border: 			1px solid #EAEAEA;
+    padding: 			2px 6px;
+    margin: 			0 3px;
+    text-decoration:	none;
 }
 div.pagination a:hover {
-	background:	rgb(60,60,220);
-	color:		white;
+    background:	rgb(60,60,220);
+    color:		white;
 }
 
 table#show_list {
-	width: 100%;
-	border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 tr.show_list_entry td {
-	margin:0;
-	border: 0;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border-bottom: 1px solid black;
+    margin:0;
+    border: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
 }
 
 td.show_list_animepic {
-	width: 120px;
+    width: 120px;
 }
 
 span.like_button , span.dislike_button{
-	font-size: 7pt;
+    font-size: 7pt;
 }
 
 .list_show_title {
-	font-size: 12pt;
-	font-weight: bold;
-	margin-top: 0px;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 0px;
 }
 
 .list_show_descrip {
-	font-size: 10pt;
-	font-style: italic;
+    font-size: 10pt;
+    font-style: italic;
 }
 
 #show_imagebox, #user_imagebox {
-	float: left;
-	overflow: hidden;
+    float: left;
+    overflow: hidden;
 }
 
 .avatar, .show_image {
-	min-height: 320px;
-	max-height: 320px;
-	min-width: 225px;
-	max-width: 225px;
-	overflow: hidden;
+    min-height: 320px;
+    max-height: 320px;
+    min-width: 225px;
+    max-width: 225px;
+    overflow: hidden;
 }
 
 .avatar_thumb, .show_image_thumb {
-	min-height: 142px;
-	max-height: 142px;
-	min-width: 100px;
-	max-width: 100px;
-	overflow: hidden;
+    min-height: 142px;
+    max-height: 142px;
+    min-width: 100px;
+    max-width: 100px;
+    overflow: hidden;
 }
 
-#show_infobox {
-	margin: 0 10px 0 235px;
-	min-height: 320px;
-	padding: 0;
-/*	width: 430px;*/
-	text-align: left;
+#show_box, #user_header  {
+    background: #EBEDEE;
+    margin: 0 auto;
+    padding: 0 0 0 10px;
+    min-height: 320px;
+    border-bottom: 1px solid grey;
 }
 
-#user_header  {
-        width: 100%;
-	padding: 0 0 0 10px;
-        height: 320px;
-        border-bottom: 1px solid grey;
+#user_header {
+    padding: 20px;
 }
 
 #user_header_leftcol {
     float: left;
     width: 50%;
+}
+
+.username, .userinfo, .user_description {
+    margin: 0;
+    padding-bottom: 10px;
 }
 
 #user_header_rightcol {
@@ -436,15 +451,16 @@ span.like_button , span.dislike_button{
 
 #user_feedlist {
     padding: 0 0 0 10px;
-    width: 100%;
+    margin: 0 auto;
 }
 
 #user_feedlist > #user_feed_selector {
-    height: 40px;
-    padding-bottom: 2px;
+    height: 33px;
+    padding: 2px 0 0 0;
 }
 
 #user_feedlist > #user_feed_selector > ul {
+    height: 31px;
     padding: 0;
     margin: 0;
     display: block;
@@ -461,99 +477,113 @@ span.like_button , span.dislike_button{
 }
 
 #user_feedlist > #user_feed_selector > ul li a#active_feed_link, #user_feedlist > #user_feed_selector > ul li a:hover {
-    padding-bottom: 5px;
+    padding: 5px 0 2px 0;
     border-bottom: 3px solid #3EA055;
     color: black;
 }
 
-#user_feed > ul {
+#user_feed {
     margin: 0px 0px 0px -10px;
+}
+
+#user_feed > ul {
     border-top: 1px solid grey;
     clear: both;
     display: block;
-    padding: 0 0 0 10px;
+    padding: 0 0 0 5px;
 }
 
 p.text {
-	font-size: 10pt;
-	margin: 1px 0px;
+    font-size: 10pt;
+    margin: 1px 0px;
 }
 
 .author, .timestamp {
-	font-size: 8pt;
-	margin: 0px 0px 0px 5px;
+    font-size: 8pt;
+    margin: 0px 0px 0px 5px;
 }
 
 /* Tag page styling. */
 
 table.highlightable {
-	border-collapse:collapse;
-	border-spacing:0;
-	width: 100%;
+    border-collapse:collapse;
+    border-spacing:0;
+    width: 100%;
 }
 
 table.highlightable > tbody > tr:hover {
-	background:#FFD;
+    background:#FFD;
 }
 
 table.highlightable th {
-	  color: #171BB3;
+    color: #171BB3;
 }
 table.highlightable td {
-	  border: 1px dotted #EEE;
-	  margin: 0;
+    border: 1px dotted #EEE;
+    margin: 0;
 }
 table.highlightable th {
-	  margin: 0;
+    margin: 0;
 }
 table td {
-	  padding: 1px 4px;
-	  vertical-align: top;
+    padding: 1px 4px;
+    vertical-align: top;
 }
 table td.large-text p {
-	  font-size: 1em;
+    font-size: 1em;
 }
 table th {
-	  font-weight: bold;
-	  text-align: left;
-	  vertical-align: top;
-	  padding: 0.2em 0.5em;
-	  white-space: nowrap;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: top;
+    padding: 0.2em 0.5em;
+    white-space: nowrap;
 }
 
 td.tagging {
-	text-align: center;
+    text-align: center;
 }
 
 /* Form styling. */
 
 div.field, div.actions {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .field_with_errors {
-	margin-top: 10px;
-	padding: 2px;
-	background-color: red;
-	display: table;
+    margin-top: 10px;
+    padding: 2px;
+    background-color: red;
+    display: table;
 }
 
 .field_with_errors label {
-	color: #fff;
+    color: #fff;
 }
 
 /* Footer styling. */
 
 footer {
-	clear: both;
-	text-align: center;
-	margin-top: 10px;
-	width: 640px;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 0.8em;
+    clear: both;
+    text-align: center;
+    margin: 10px auto;
+    width: 100%;
+    font-size: 0.8em;
 }
 
 footer nav {
-	float: none;
+
+}
+
+footer > nav > ul {
+    margin: 0 auto;
+    text-align: center;
+    width: 10%;
+    height: 40px;
+    padding: 0;
+}
+
+footer > nav > ul > li {
+    float: left;
+    padding-right: 10px;
 }

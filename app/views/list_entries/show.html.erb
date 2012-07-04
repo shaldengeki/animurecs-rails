@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>List:</b>
+  <%= @list_entry.list %>
+</p>
+
+<p>
+  <b>Show:</b>
+  <%= @list_entry.show %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @list_entry.score %>
+</p>
+
+<p>
+  <b>Last watched at:</b>
+  <%= @list_entry.last_watched_at %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @list_entry.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_list_entry_path(@list_entry) %> |
+<%= link_to 'Back', list_entries_path %>

@@ -2,25 +2,37 @@
 <html>
   <head>
     <title><%= title %></title>
-    <%= csrf_meta_tag %>
-    <%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery-ui-1.8.16.custom.min.js', 'autocomplete-rails.js', 'rails.js'  %>
-    <%= render 'layouts/stylesheets' %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
 <%= render 'layouts/topbar' %>
-    <div id="content">
-      <div id="ads">
-      </div>
-<% if @popularTags or @user %>
-<%= render 'layouts/sidebar' %>
-<% end %>
-      <section class="center">
-        <div id="maincontent">
-<%= yield %>
+    <div class='container-fluid'>
+      <div class='row-fluid'>
+        <% if @show or @popularTags or @user %>
+        <div class='span3'>
+          <%= render 'layouts/sidebar' %>
         </div>
-      </section>
-<%= render 'layouts/footer' %>
+        <div class='span7'>
+        <% else %>
+        <div class='span10'>
+        <% end %>
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>">
+            <button class="close" data-dismiss="alert">×</button>
+            <%= value %>
+          </div>
+        <% end %>
+          <%= yield %>
+        </div>
+        <div class='span2' id="ads">
+          Nothing to see here.
+        </div>
+      </div>
+      <%= debug(params) if Rails.env.development? %>
+      <%= render 'layouts/footer' %>
     </div>
-    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

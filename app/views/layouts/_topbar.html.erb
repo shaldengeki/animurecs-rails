@@ -1,27 +1,50 @@
-		<header>
-                  <nav>
-                  <div class="topbar">
-                    <%= link_to "", home_path, :id=>"logo" %>
-                    <ul class="nav">
-                      <li><%= link_to "Home", home_path, :class=>"home" %></li>
-                      <li><%= link_to "Connect", connect_path, :class=>"connect" %></li>
-                      <li><%= link_to "Discover", discover_path, :class=>"discover" %></li>
-                    </ul>
-                    <div class="pull-right">
-                    <% if signed_in? %>
-                      <%= link_to user_header_profile_pic, signout_path, :id=>"header_profile_pic" %>
-                      <div id="mini-profile" class="callout">Stuff here!</div>
-                      <div class="notification_bubble" id="global_notification_bubble">
-                        <%= link_to user_notifications_div, '#' %>
+                  <div class="navbar navbar-fixed-top">
+                    <div class='navbar-inner'>
+                      <div class='container-fluid'>
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </a>
+                        <% if signed_in? %>
+                          <%= link_to "Animurecs", users_path, :class => "brand" %>
+                        <% else %>
+                          <%= link_to "Animurecs", root_path, :class => "brand" %>
+                        <% end %>
+                        <div class="nav-collapse">
+                          <ul class="nav">
+                            <li><%= link_to "Home", home_path, :class=>"home" %></li>
+                            <li><%= link_to "Connect", connect_path, :class=>"connect" %></li>
+                            <li><%= link_to "Discover", discover_path, :class=>"discover" %></li>
+                          </ul>
+                          <ul class="nav pull-right">
+                            <li class="dropdown">
+                            <% if signed_in? %>
+                              <%= render :partial => 'users/notification_bubble', :locals => {:user => current_user} %>
+                              <div id="global_notifications" class="dropdown-menu">
+                                peekaboo :3
+                              </div>
+                              <script type="text/javascript">$('#global_notification_bubble').click(function(){$('#global_notifications').toggle();});</script>
+                            </li>
+                            <li class="dropdown">
+                              <%= link_to user_header_profile_pic, '#', :id=>"header_profile_pic" %>
+                              <div id="mini-profile" class="dropdown-menu">
+                                <h2><%= @current_user.username %></h2>
+                                <ul>
+                                  <li><%= link_to "Profile", user_path(@current_user) %></li>
+                                  <li><%= link_to "Sign out", signout_path, :class=>"signout_link" %></li>
+                                </ul>
+                              </div>
+                              <script type="text/javascript">$('#header_profile_pic').click(function(){$('#mini-profile').toggle();});</script>
+                            <% else %>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                  <%= render :partial => 'sessions/form' %>
+                                </ul>
+                              <% end %>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
-                      <div id="global_notifications" class="callout">
-                        peekaboo :3
-                      </div>
-                      <script type="text/javascript">$('#global_notification_bubble').click(function(){$('#global_notifications').toggle();});</script>
-                    <% else %>
-                      <%= link_to "Sign in or register", signin_path %>
-                    <% end %>
                     </div>
-                  </nav>
-
-		</header>
+                  </div>

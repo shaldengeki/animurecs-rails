@@ -33,13 +33,11 @@ class Show < ActiveRecord::Base
 	validates :length,	:presence => true,
 						:length => { :within => 15..150 }
 								
-	validates :link, :length => { :within => 0..1500 }
-								
 	validates :upvotes, :presence => true,
-						:numericality => true
+						:numericality => {:greater_than_or_equal_to => 0}
 
 	validates :downvotes, 	:presence => true,
-							:numericality => true
+							:numericality => {:greater_than_or_equal_to => 0}
 							
 	def tagging?(tagged)
 		taggings.find_by_tag_id(tagged)

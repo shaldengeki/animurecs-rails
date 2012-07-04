@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
   before_filter :authenticate, :only => [:edit, :update, :destroy]
 
   # Displays list of users.
@@ -47,48 +48,42 @@ class UsersController < ApplicationController
   # Can be accessed by POSTING /users or  /users.xml
   def create
     @user = User.new(params[:user])
+    @user.lists.build
+    @user.lists.each do |list|
+      list[:user_id] = "some fake data here"
+    end
     # new users are ALWAYS normal users.
-    @user.userlevel = 0;
-
-      respond_to do |format|
-        if @user.save
-      sign_in @user
-          format.html { redirect_to(@user, :notice => 'Welcome to LL Animu Recommendations!') }
-          format.xml  { render :xml => @user, :status => :created, :location => @user }
-        else
-      @title = "Sign up"
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-        end
+    @user.userlevel = 0
+    respond_to do |format|
+      if @user.save
+    sign_in @user
+        format.html { redirect_to(@user, :notice => 'Welcome to LL Animu Recommendations!') }
+        format.xml  { render :xml => @user, :status => :created, :location => @user }
+      else
+    @title = "Sign up"
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
+    end
   end
 
   # Updates a user with new information.
   # Can be accessed by PUTting /users/1 or  /users/1.xml
   def update
     @user = User.find(params[:id])
-    if params[:user]["userlevel"].blank?
-      params[:user]["userlevel"] = @user.userlevel
-    end
-    # if user is trying to elevate privileges past their own userlevel, return error.
-    if params[:user]["userlevel"].to_i > @current_user.userlevel or (@user.id != @current_user.id and @user.userlevel >= @current_user.userlevel)
-      respond_to do |format|
+    params[:user].delete(:id)
+    params[:user].delete(:role_ids)
+    params[:user].delete(:password) if params[:user][:password].blank?
+    params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
+    params[:user].delete(:avatar) if params[:user][:avatar].blank?
+
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to(@user, :notice => 'Your information has been updated.') }
+        format.xml  { head :ok }
+      else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
-    else
-      params[:user].delete(:password) if params[:user][:password].blank?
-      params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
-      params[:user].delete(:avatar) if params[:user][:avatar].blank?
-
-      respond_to do |format|
-        if @user.update_attributes(params[:user])
-          format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-          format.xml  { head :ok }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-        end
       end
     end
   end

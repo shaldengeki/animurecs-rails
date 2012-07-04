@@ -1,8 +1,12 @@
 Animurecs::Application.routes.draw do
+  resources :list_entries
+
+  resources :lists
+
   resources :sessions, :only => [:new, :create, :destroy]
   resources :tagtypes
   resources :tags do
-	get :autocomplete_tag_name, :on => :collection
+	  get :autocomplete_tag_name, :on => :collection
   end
   resources :shows do 
     member do
@@ -12,9 +16,10 @@ Animurecs::Application.routes.draw do
   resources :taggings, :users, :comments, :showvotes
 
   root :to => 'pages#home'
-  match '/home', :to => 'shows#index'
+  match '/home', :to => 'pages#home'
   match '/connect', :to => 'pages#connect'
-  match '/discover', :to => 'pages#discover'
+  #match '/discover', :to => 'pages#discover'
+  match '/discover', :to => 'shows#index'
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/signup',  :to => 'users#new'

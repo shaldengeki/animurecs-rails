@@ -1,0 +1,399 @@
+//@import "bootswatch/journal/variables";
+
+@import "bootstrap";
+
+body {
+  padding-top: 42px;
+}
+
+@import "bootstrap-responsive";
+
+//@import "bootswatch/journal/bootswatch";
+
+$topbarHeaderLinkColor: white;
+$topbarHeaderLinkBackgroundColor: #278c00;
+
+.navbar-inner {
+  background-color: #006E2E; /* fallback color, place your own */
+
+/* Gradients for modern browsers, replace as you see fit */
+  background: #278c00; /* Old browsers */
+  background: -moz-linear-gradient(top, #278c00 0%, #006e2e 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#278c00), color-stop(100%,#006e2e)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #278c00 0%,#006e2e 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #278c00 0%,#006e2e 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #278c00 0%,#006e2e 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #278c00 0%,#006e2e 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#278c00', endColorstr='#006e2e',GradientType=0 ); /* IE6-9 */
+
+  .container-fluid {
+    a.brand {
+      color: $topbarHeaderLinkColor;
+      &:visited {
+        color: $topbarHeaderLinkColor;
+      }
+    }
+    div.nav-collapse > ul.nav > li > a {
+      text-transform: uppercase;
+      color: $topbarHeaderLinkColor;
+      &:hover {
+        background: $topbarHeaderLinkColor !important;
+        color: $topbarHeaderLinkBackgroundColor !important;
+      }
+      &:visited {
+        color: $topbarHeaderLinkColor;
+      }
+    }
+    div.nav-collapse > ul.nav > li > #global_notification_bubble > a {
+      text-transform: uppercase;
+      color: $topbarHeaderLinkColor;
+      &:hover {
+        color: $topbarHeaderLinkBackgroundColor;
+      }
+      &:visited {
+        color: $topbarHeaderLinkColor;
+      }
+    }
+    div.nav-collapse > ul.nav > li > #mini-profile {
+      h1, h2, h3, h4, h5, h6 { color: black; }
+    }
+  }
+}
+.ui-autocomplete-input {
+  width: 100%;
+}
+
+body {
+  background: whiteSmoke;
+  font: 12pt / 16pt "Lucida Grande",Arial,Sans-serif;
+}
+
+#header_profile_pic {
+  margin: 0 8px 0 5px;
+  padding: 8px 8px 7px 8px;
+  display: block;
+  float: left;
+  width: 25px;
+  height: 25px;
+
+  img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+a#header_profile_pic:hover {
+  background-color: white;
+}
+
+section {
+  display: block;
+  margin: 0 auto;
+  padding: 0 120px 0 246px;
+  min-width: 280px;
+}
+
+#maincontent {
+  border-left: 1px solid grey;
+  background: #F9FAFA;
+}
+
+section h1 {
+  font-size: 2em;
+}
+
+
+/* Links */
+
+a {
+  color: #09c;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #069;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #069;
+}
+
+/* Sidebar styling. */
+div#sidebar {
+  width: 100%;
+  padding: 10px;
+  overflow: visible;
+
+  ul {
+    margin: 10px 0px 0px 0px;
+    padding: 0 10px;
+    li {
+      list-style-type: none;
+      margin: 0;
+    }
+  }
+  #searchform_q {
+    width: 80%;
+    max-width: 200px;
+  }
+}
+div#sidebar-tags {
+  font-size: 0.9em;
+}
+a.tag-type-general, li.tag-type-general, li.tag-type-general a {
+/*	font-size: 0.9em;*/
+  color: #006FFA;
+}
+a.tag-type-studio, li.tag-type-studio, li.tag-type-studio a {
+/*	font-size: 0.9em;*/
+  color: #AA0000;
+}
+a.tag-type-va, li.tag-type-va, li.tag-type-va a {
+/*	font-size: 0.9em;*/
+  color: #00AA00;
+}
+span.shows-count {
+  color: #AAA;
+  margin-left: 5px;
+}
+span.list_tags {
+  font-size: 0.9em;
+}
+a.delete-tagging {
+  vertical-align: super;
+  font-size: 0.5em;
+}
+
+/* Mainbody content styling. */
+
+div.pagination {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+div.pagination a, div.pagination em, div.pagination span{
+  border: 			1px solid #EAEAEA;
+  padding: 			2px 6px;
+  margin: 			0 3px;
+  text-decoration:	none;
+}
+div.pagination a:hover {
+  background:	rgb(60,60,220);
+  color:		white;
+}
+
+table#show_list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr.show_list_entry td {
+  margin:0;
+  border: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+td.show_list_animepic {
+  width: 120px;
+}
+
+span.like_button , span.dislike_button{
+  font-size: 7pt;
+}
+
+.list_show_title {
+  font-size: 12pt;
+  font-weight: bold;
+  margin-top: 0px;
+}
+
+.list_show_descrip {
+  font-size: 10pt;
+  font-style: italic;
+}
+
+#show_imagebox, #user_imagebox {
+  float: left;
+  overflow: hidden;
+}
+
+.avatar, .show_image {
+  max-height: 320px;
+  max-width: 225px;
+  min-width: 225px;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.65);
+}
+
+.avatar_thumb, .show_image_thumb {
+  max-height: 142px;
+  min-width: 100px;
+  max-width: 100px;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.65);
+}
+
+#show_box, #user_header  {
+  background: #EBEDEE;
+  min-height: 320px;
+  border-bottom: 1px solid grey;
+}
+
+#user_header {
+  min-height: 290px;
+  padding: 20px;
+}
+
+#user_header_leftcol {
+  float: left;
+  width: 50%;
+}
+
+.username, .userinfo, .user_description {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+#user_header_rightcol {
+  margin-left: 50%;
+}
+
+#user_feedlist {
+  padding: 0 0 0 10px;
+  margin: 0 auto;
+}
+
+#user_feedlist > #user_feed_selector {
+  height: 33px;
+  padding: 2px 0 0 0;
+}
+
+#user_feedlist > #user_feed_selector > ul {
+  height: 31px;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+#user_feedlist > #user_feed_selector > ul li {
+  list-style: none;
+  float: left;
+  padding: 5px 5px;
+}
+
+#user_feedlist > #user_feed_selector > ul li a {
+  color: #999999;
+  font-weight: bold;
+}
+
+#user_feedlist > #user_feed_selector > ul li a#active_feed_link, #user_feedlist > #user_feed_selector > ul li a:hover {
+  padding: 5px 0 2px 0;
+  border-bottom: 3px solid #3EA055;
+  color: black;
+}
+
+#user_feed {
+  margin: 0px 0px 0px -10px;
+}
+
+#user_feed > ul {
+  border-top: 1px solid grey;
+  clear: both;
+  display: block;
+  padding: 0 0 0 5px;
+}
+
+p.text {
+  font-size: 10pt;
+  margin: 1px 0px;
+}
+
+.author, .timestamp {
+  font-size: 8pt;
+  margin: 0px 0px 0px 5px;
+}
+
+/* Tag page styling. */
+
+table.highlightable {
+  border-collapse:collapse;
+  border-spacing:0;
+  width: 100%;
+}
+
+table.highlightable > tbody > tr:hover {
+  background:#FFD;
+}
+
+table.highlightable th {
+  color: #171BB3;
+}
+table.highlightable td {
+  border: 1px dotted #EEE;
+  margin: 0;
+}
+table.highlightable th {
+  margin: 0;
+}
+table td {
+  padding: 1px 4px;
+  vertical-align: top;
+}
+table td.large-text p {
+  font-size: 1em;
+}
+table th {
+  font-weight: bold;
+  text-align: left;
+  vertical-align: top;
+  padding: 0.2em 0.5em;
+  white-space: nowrap;
+}
+
+td.tagging {
+  text-align: center;
+}
+
+/* Form styling. */
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+.field_with_errors {
+  margin-top: 10px;
+  padding: 2px;
+  background-color: red;
+  display: table;
+  label {
+    color: #fff;
+  }
+}
+
+/* Footer styling. */
+
+footer {
+  clear: both;
+  text-align: center;
+  margin: 10px auto;
+  width: 100%;
+  font-size: 0.8em;
+  nav {
+    ul {
+      margin: 0 auto;
+      text-align: center;
+      width: 10%;
+      height: 40px;
+      padding: 0;
+      list-style: none;
+      li {
+        float: left;
+        padding-right: 10px;
+      }
+    }
+  }
+}

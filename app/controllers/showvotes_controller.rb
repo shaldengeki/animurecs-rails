@@ -1,7 +1,6 @@
 class ShowvotesController < ApplicationController
+  load_and_authorize_resource
   before_filter :authenticate, :only => [:new, :edit, :create, :update, :destroy]
-  before_filter :correct_user, :only => [:edit, :update, :destroy]
-  before_filter :moderator, :only => [:index, :show]
 
   # Displays list of showvotes.
   # Can be accessed by GETting /showvotes or  /showvotes.xml
@@ -123,18 +122,7 @@ class ShowvotesController < ApplicationController
   end
   
   private
-
-	def authenticate
-	  deny_access unless signed_in?
-	end
-    def correct_user
-      @user = User.find(Showvote.find(params[:id]).user_id)
-      redirect_to(root_path) unless ( current_user?(@user) || admin_user? )
-    end
-    def moderator
-      deny_access unless moderator_user?
-    end
-    def admin_user
-      deny_access unless admin_user?
+    def authenticate
+      deny_access unless signed_in?
     end
 end

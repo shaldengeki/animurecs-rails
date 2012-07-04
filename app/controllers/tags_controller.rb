@@ -1,8 +1,8 @@
 class TagsController < ApplicationController
+  load_and_authorize_resource
   autocomplete :tag, :name
   before_filter :authenticate, :only => [:new, :create]
-  before_filter :moderator, :only => [:edit, :update, :destroy]
-  
+
   # Displays list of tags.
   # Can be accessed by GETting /tags or  /tags.xml
   def index
@@ -121,14 +121,7 @@ class TagsController < ApplicationController
     end
   end
   private
-
     def authenticate
       deny_access unless signed_in?
-    end
-    def moderator
-      deny_access unless moderator_user?
-    end
-    def admin_user
-      deny_access unless admin_user?
     end
 end

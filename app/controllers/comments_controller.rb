@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource
   before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
-  before_filter :correct_user, :only => [:edit, :update, :destroy]
-  before_filter :moderator, :only => [:edit, :update]
-  
+
   # Displays list of comments.
   # Can be accessed by GETting /comments or  /comments.xml
   def index
@@ -109,15 +108,5 @@ class CommentsController < ApplicationController
   private
     def authenticate
       deny_access unless signed_in?
-    end
-    def moderator
-      deny_access unless moderator_user?
-    end
-    def admin_user
-      deny_access unless admin_user?
-    end
-    def correct_user
-      @user = User.find(Comment.find(params[:id]).user_id)
-      redirect_to(root_path) unless ( current_user?(@user) || admin_user? )
     end
 end

@@ -1,0 +1,30 @@
+<%= form_for(@list_entry, :html => {:class => "form form-horizontal"}) do |f| %>
+  <%= f.hidden_field :list_id, :value => @list_entry.list.id %>
+  <div class='control-group'>
+    <%= f.label :show, :class => "control-label" %>
+    <div class='controls'>
+      <%= f.collection_select :show_id, Show.order("`name` ASC").all, :id, :name %>
+    </div>
+  </div>
+  <div class='control-group'>
+    <%= f.label :score, :class => "control-label" %>
+    <div class='controls'>
+      <%= f.number_field :score, :in => 0..10, :step => 1 %>
+    </div>
+  </div>
+  <div class='control-group'>
+    <%= f.label :last_watched_at, :class => "control-label" %>
+    <div class='controls'>
+      <%= f.datetime_select :last_watched_at %>
+    </div>
+  </div>
+  <div class='control-group'>
+    <%= f.label :comment, :class => "control-label" %>
+    <div class='controls'>
+      <%= f.text_area :comment, :size => "100x3" %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Save Entry", :class => "btn btn-primary btn-large" %>
+  </div>
+<% end %>

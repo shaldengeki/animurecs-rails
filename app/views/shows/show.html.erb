@@ -1,38 +1,23 @@
-<p id="notice"><%= notice %></p>
 <div id = 'show_box'>
-	<div id = 'show_imagebox'>
-	<%= show_image %>
-	<% if moderator_user? %><br />
-	<%= link_to 'Edit Anime Information', edit_show_path(@show) %><br />
-	<%= link_to 'Delete Anime', @show, :confirm => 'Are you sure you want to delete show: ' + @show.name + '?', :method => :delete %>
-	<% end %>
-	</div>
-	<div id = 'show_infobox'>
-		<%= simple_format(@show.description) %>
+  <h1><%= @show.name %></h1>
+  <%= simple_format(@show.description) %>
 
-		<p>
-		  <b>Length:</b>
-		  <%= @show.length %>
-		</p>
+  <p>
+    <b>Length:</b>
+    <%= @show.length %>
+  </p>
 
-		<p>
-		  <b>Link:</b>
-		  <%= link_to @show.link, @show.link %>
-		</p>
+  <p>
+    <b>Voting:</b>
+    <%= display_show_like_button(@show) %>
+    <%= display_show_dislike_button(@show) %>
+  </p>
 
-		<p>
-		  <b>Voting:</b>
-			<%= display_show_like_button(@show) %>
-			<%= display_show_dislike_button(@show) %>
-		</p>
-
-		<p>
-		  <b>Tags:</b>
-		  <%= tag_cloud(@show) %>
-		</p>
-	</div>
-</div><br /><br />
-
+  <p>
+    <b>Tags:</b>
+    <%= tag_cloud(@show) %>
+  </p>
+</div>
 <h2>Comments:</h2>
 <% unless @comments.empty? %>
 <table class="comments" summary="Show comments">
@@ -42,9 +27,9 @@
 No comments on this series yet. Be the first!
 <% end %>
 <% if signed_in? 
-	if @comment.nil?
-		@comment = Comment.new
-	end
+  if @comment.nil?
+    @comment = Comment.new
+  end
 %>
-	<%= render :partial => 'comments/form' %>
+  <%= render :partial => 'comments/form' %>
 <% end %>

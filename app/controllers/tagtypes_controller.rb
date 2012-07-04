@@ -1,5 +1,5 @@
 class TagtypesController < ApplicationController
-  before_filter :moderator, :only => [:index, :new, :edit, :create, :update, :destroy]
+  load_and_authorize_resource
 
   # Displays list of tagtypes.
   # Can be accessed by GETting /tagtypes or  /tagtypes.xml
@@ -91,12 +91,6 @@ class TagtypesController < ApplicationController
   private
     def authenticate
       deny_access unless signed_in?
-    end
-    def moderator
-      deny_access unless moderator_user?
-    end
-    def admin_user
-      deny_access unless admin_user?
     end
 
 end

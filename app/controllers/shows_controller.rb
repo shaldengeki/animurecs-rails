@@ -1,6 +1,6 @@
 class ShowsController < ApplicationController
-  before_filter :moderator, :only => [:new, :create, :edit, :update, :destroy]
-  
+  load_and_authorize_resource
+
   require 'will_paginate/array'
   # Displays list of shows.
   # Can be accessed by GETting /shows or  /shows.xml
@@ -54,6 +54,10 @@ class ShowsController < ApplicationController
 			
 			# now get all of the taggings for this particular tag.
 			tag = Tag.find_by_name(tag_name)
+      show = Show.find_by_name(tag_name)
+      if !show.nil?
+        all_shows_array.push(show.id)
+      end
 			if !tag.nil?
 				taggings = Tagging.where(:tag_id => tag.id)
 				j = 0
@@ -83,7 +87,7 @@ class ShowsController < ApplicationController
 		i = 0
 		while i < all_shows_array.length
 			if final_shows_array.length == 0
-				final_shows_array = all_shows_array[i]
+				final_shows_array = [all_shows_array[i]]
 			else
 				final_shows_array = final_shows_array & all_shows_array[i]
 			end
@@ -210,11 +214,5 @@ class ShowsController < ApplicationController
   private
     def authenticate
       deny_access unless signed_in?
-    end
-    def moderator
-      deny_access unless moderator_user?
-    end
-    def admin_user
-      deny_access unless admin_user?
     end
 end

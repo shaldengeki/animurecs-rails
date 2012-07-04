@@ -1,0 +1,31 @@
+<h1>Listing list_entries</h1>
+
+<table>
+  <tr>
+    <th>List</th>
+    <th>Show</th>
+    <th>Score</th>
+    <th>Last watched at</th>
+    <th>Comments</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @list_entries.each do |list_entry| %>
+  <tr>
+    <td><%= list_entry.list %></td>
+    <td><%= list_entry.show %></td>
+    <td><%= list_entry.score %></td>
+    <td><%= list_entry.last_watched_at %></td>
+    <td><%= list_entry.comments %></td>
+    <td><%= link_to 'Show', list_entry %></td>
+    <td><%= link_to 'Edit', edit_list_entry_path(list_entry) %></td>
+    <td><%= link_to 'Destroy', list_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New List entry', new_list_entry_path %>

@@ -1,0 +1,1 @@
+$("#list_entry_form").html("<%= escape_javascript(render(:partial => "form")) %>");

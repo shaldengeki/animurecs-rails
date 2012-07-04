@@ -1,29 +1,50 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.0'
-gem 'mysql2', '0.3.11'
+gem 'rails'
+gem 'mysql2'
+
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby'
 
 # use jQuery instead of prototype, and bundle the autocomplete gem.
-gem "jquery-rails"
+gem 'cancan'
+gem 'jquery-rails'
 gem 'rails3-jquery-autocomplete'
+gem 'd3-rails'
+gem 'acts_as_list'
+gem 'paperclip'
+gem 'will_paginate'
+gem 'friendly_id'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :assets do
+  gem 'sass-rails'
+  gem 'bootstrap-sass'
+  gem 'coffee-rails'
+  gem 'jquery-ui-rails'
+  gem 'jquery-datatables-rails', :git => "https://github.com/rweng/jquery-datatables-rails.git"
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'execjs'
+  gem 'therubyracer', :platform => :ruby
+  gem 'uglifier'
+end
 
-group :development do
-  gem 'rspec-rails', '2.6.0'
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :test do
-  gem 'rspec', '2.6.0'
-  gem 'webrat', '0.7.1'
+  gem 'faker'
+  gem 'guard-rspec'
 end
-
-gem "paperclip", "~> 2.4"
-
-gem 'will_paginate', '~> 3.0.2'
-
-gem "friendly_id", "~> 4.0.1"
+group :cucumber do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'spork'
+  gem 'launchy'
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'

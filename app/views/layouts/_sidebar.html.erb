@@ -6,12 +6,22 @@
             <%= link_to 'Edit', edit_user_path(@user) %> |
             <% end %>
           </div>
-
-        <% elsif @popularTags %>
+        <% elsif @show %>
+        <div id="showprofile" class="sidebar">
+          <%= show_image %>
+          <% if moderator_user? %><br />
+          <%= link_to 'Edit Anime Information', edit_show_path(@show) %><br />
+          <%= link_to 'Delete Anime', @show, :confirm => 'Are you sure you want to delete show: ' + @show.name + '?', :method => :delete %>
+          <% end %><br />
+        <% end %>
+        <% if @popularTags %>
           <h5>Tags</h5>
           <%= render 'layouts/search' %>
           <div id="sidebar-tags">
             <%= show_tag_sidebar(@popularTags) %>
           </div>
+        <% end %>
+        <% if @show %>
+        </div>
         <% end %>
       </div>

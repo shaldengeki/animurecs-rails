@@ -1,0 +1,24 @@
+# example database.yml for animurecs.
+# tweak these parameters as fits your stack.
+common: &common
+  host: 127.0.0.1
+  adapter: mysql2
+  encoding: utf8
+  username: username
+  password: password
+  port:     3306
+
+development:
+  <<: *common
+  database: animurecs_development
+
+test: &test
+  <<: *common
+  database: animurecs_test
+
+production:
+  <<: *common
+  database: animurecs_production
+
+cucumber:
+  <<: *test

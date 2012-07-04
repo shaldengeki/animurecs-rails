@@ -1,5 +1,5 @@
-# LL Animurecs
+# Animurecs
 
-LL Animurecs is a Ruby on Rails / MySQL web application designed to make searching for anime recommendations easy and painless. The idea is to have a Danbooru-esque searchable tagging system with commenting and up/downvoting for anime series; this system can easily be extended to work for manga or any other media.
+Animurecs is a Ruby on Rails / MySQL web application designed to make anime recommendations easy, painless, and intelligent.
 
-To get started, you should be able to generate a new rails project and copy the source for LL Animurecs into the project directory, make your own config/databases.yml file as pertains to your setup, and then use db/schema.rb to create the relevant tables for the application.
+To get started, you should be able to simply `git clone` Animurecs, modify `database.yml.example` to work with your setup, rename it to database.yml, and then run `rake db:migrate`.

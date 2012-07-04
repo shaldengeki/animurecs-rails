@@ -1,0 +1,14 @@
+<% notifications = []
+if user.nil? or user.username.nil? %>
+<div class="badge" id="global_notification_bubble">
+  <div>0</div>
+</div>
+<% else %>
+<div class="badge<%= (" badge-warning" unless notifications.length == 0) %>" id="global_notification_bubble">
+  <% if notifications.length > 0 %>
+    <%=  link_to raw("<div>" + notifications.length.to_s + "</div>"), '#' %>
+  <% else %>
+    <div>0</div>
+  <% end %>
+</div>
+<% end %>

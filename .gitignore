@@ -8,3 +8,5 @@ public/system/avatars/*
 .buildpath
 .project
 nbproject
+.idea
+public/images/*
