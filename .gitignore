@@ -5,6 +5,7 @@ log/*.log
 tmp/
 public/system/images/*
 public/system/avatars/*
+public/system/shows/images/*/*/*/*/*.jpg
 .buildpath
 .project
 nbproject
