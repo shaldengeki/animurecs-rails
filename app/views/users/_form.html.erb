@@ -40,14 +40,14 @@
     <%= f.label :description %><br />
     <%= f.text_area :description, :size => "50x10" %>
   </div>
-<% if can? :update, @user %>
+<% if can? :update, Userrole %>
   <% for userrole in Userrole.all %>
   <div>
-    <%= check_box_tag "user[role_ids][]", userrole.id, @user.userroles.include?(userrole) %>
+    <%= check_box_tag "user[userrole_ids][]", userrole.id, @user.userroles.include?(userrole) %>
     <%=h userrole.name %>
   </div>
   <% end %>
-  <%= hidden_field_tag "user[role_ids][]", "" %>
+  <%= hidden_field_tag "user[userrole_ids][]", "" %>
 <% end %>
   <%= f.hidden_field :id, :value => @user.id %>
   <div class="actions">
