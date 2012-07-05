@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :lists, :allow_destroy => true
   # before_save :encrypt_password, :unless => Proc.new { |u| u.password.blank? }
 
-  attr_accessible :username, :age, :gender, :description, :color, :userlevel, :password, :password_confirmation, :avatar
+  attr_accessible :username, :age, :gender, :description, :color, :password, :password_confirmation, :avatar
 	extend FriendlyId
 	
 	friendly_id :username, :use => :slugged
@@ -33,11 +33,6 @@ class User < ActiveRecord::Base
             :length       => { :minimum => 6 },
             :on           => :create,
             :if => :validate_password?
-
-	validates :userlevel,	:presence => true,
-            :numericality => true
-
-  validates_inclusion_of :userlevel, :in => 0..5, :message => "can only be between 0 and 5."
 
 	validates_attachment_content_type :avatar, :content_type => %w(image/jpeg image/png image/gif image/pjpeg image/x-png),
                                     :message => "Oops! Make sure you are uploading an image file."

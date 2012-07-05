@@ -4,6 +4,7 @@ class Ability
     user ||= User.new
     if user.userroles.size == 0
       can :read, :all
+      can :create, User
     else
       user.userroles.each {|role| send(role.name.downcase, user)}
     end

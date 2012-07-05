@@ -53,13 +53,12 @@ class UsersController < ApplicationController
     @user.lists.each do |list|
       list[:user_id] = "some fake data here"
     end
-    normal_userrole = Userrole.find(:name => "Normal")
-    @user.build_userrole(:userrole_id => normal_userrole.id)
-
+    normal_userrole = Userrole.where(:name => "Normal").first
+    @user.userroles << normal_userrole
     respond_to do |format|
       if @user.save
         sign_in @user
-        format.html { redirect_to(@user, :notice => 'Welcome to LL Animu Recommendations!') }
+        format.html { redirect_to(@user, :notice => 'Welcome to Animurecs!') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         @title = "Sign up"
