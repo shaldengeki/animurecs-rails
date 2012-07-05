@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120704150117) do
+ActiveRecord::Schema.define(:version => 20120705183241) do
 
   create_table "comments", :force => true do |t|
     t.string   "text",       :limit => 1500
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(:version => 20120704150117) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "show_aliases", :force => true do |t|
+    t.string   "name"
+    t.integer  "show_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "show_aliases", ["show_id"], :name => "index_show_aliases_on_show_id"
 
   create_table "shows", :force => true do |t|
     t.string   "name"

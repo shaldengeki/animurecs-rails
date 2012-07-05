@@ -16,17 +16,8 @@ module SessionsHelper
   def current_user
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
-  def admin_user?
-    (!current_user.nil? && current_user.userlevel > 1)
-  end
-  def moderator_user?
-    (!current_user.nil? && current_user.userlevel > 0)
-  end
   def current_user?(user)
     user == current_user
-  end
-  def deny_access
-    redirect_to signin_path, :notice => "Please sign in to access this page."
   end
   def return_to_addr
     session[:return_to]
@@ -34,18 +25,6 @@ module SessionsHelper
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to
-  end
-  def user_type(user)
-		case user.userlevel
-		when 0
-			"Normal"
-		when 1
-			"Moderator"
-		when 2
-			"Administrator"
-		else
-			"Unknown"
-		end
   end
 
   private

@@ -2,15 +2,17 @@
         <% if @user %>
           <div id = 'userprofile' class="sidebar">
             <%= avatar_image %>
-            <% if current_user?(@user) || admin_user? %><br />
+            <% if can? :edit, @user %><br />
             <%= link_to 'Edit', edit_user_path(@user) %> |
             <% end %>
           </div>
         <% elsif @show %>
         <div id="showprofile" class="sidebar">
           <%= show_image %>
-          <% if moderator_user? %><br />
+          <% if can? :edit, @show %><br />
           <%= link_to 'Edit Anime Information', edit_show_path(@show) %><br />
+          <% end
+          if can? :destroy, @show %>
           <%= link_to 'Delete Anime', @show, :confirm => 'Are you sure you want to delete show: ' + @show.name + '?', :method => :delete %>
           <% end %><br />
         <% end %>

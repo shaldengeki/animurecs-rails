@@ -1,12 +1,11 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
 
   # Displays list of comments.
   # Can be accessed by GETting /comments or  /comments.xml
   def index
 	begin
-		@comments = Comment.find(:all, :order => 'time DESC').paginate(:page => params[:page])
+		@comments = Comment.order('time DESC').paginate(:page => params[:page])
 	rescue
 		@comments = Hash.new
 	end
@@ -105,8 +104,4 @@ class CommentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  private
-    def authenticate
-      deny_access unless signed_in?
-    end
 end

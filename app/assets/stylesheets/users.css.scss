@@ -1,0 +1,49 @@
+#user_header {
+  min-height: 290px;
+  padding: 20px;
+}
+
+#user_feed_selector {
+  height: 39px;
+  padding: 0;
+  border-bottom: 1px solid grey;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  ul {
+    padding: 0;
+    margin: 0;
+    display: block;
+    li {
+      list-style: none;
+      float: left;
+      padding: 10px 5px;
+      a.active_feed_link, a:hover {
+        border-bottom: 3px solid #3EA055;
+        color: black;
+      }
+      a {
+        color: #999999;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+#user_feed {
+  margin: 0;
+  ul {
+    clear: both;
+    display: block;
+    padding: 0 0 0 5px;
+  }
+}
+
+p.text {
+  font-size: 10pt;
+  margin: 1px 0px;
+}
+
+.author, .timestamp {
+  font-size: 8pt;
+  margin: 0px 0px 0px 5px;
+}

@@ -1,7 +1,15 @@
 class Show < ActiveRecord::Base
 	belongs_to	:tag
+  has_many	:comments,	:dependent => :destroy
+  has_many	:taggings,	:foreign_key => "show_id",
+            :dependent => :destroy
+  has_many	:taggeds, 	:through => :taggings,
+            :source => "tag",
+            :dependent => :destroy
+  has_many	:showvotes,	:dependent => :destroy
+  has_many :show_aliases, :dependent => :destroy
+
 	extend FriendlyId
-	
 	friendly_id :name, :use => :slugged
 
 	has_attached_file :image, :styles => { :medium => "225x320>", :thumb => "100x142>" }
@@ -10,18 +18,7 @@ class Show < ActiveRecord::Base
 												:message => "Oops! Make sure you are uploading an image file."
 									
 	validates_attachment_size :image,  :less_than => 10.megabyte,
-										:message => "Maximum show image size is 10M."  
-
-	has_many	:comments,	:dependent => :destroy
-	
-	has_many	:taggings,	:foreign_key => "show_id",
-							:dependent => :destroy
-							
-	has_many	:taggeds, 	:through => :taggings, 
-							:source => "tag", 
-							:dependent => :destroy
-	
-	has_many	:showvotes,	:dependent => :destroy
+										:message => "Maximum show image size is 10M."
 	
 	validates :name, 	:presence => true,
 						:uniqueness => { :case_sensitive => false }, 

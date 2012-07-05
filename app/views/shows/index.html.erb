@@ -36,6 +36,6 @@ Nobody here but us chickens!
 <% end %>
 <br />
 
-<% if moderator_user? %>
+<% if can? :create, Show %>
 <%= link_to 'New Show', new_show_path %>
 <% end %>

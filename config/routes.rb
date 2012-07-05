@@ -1,4 +1,6 @@
 Animurecs::Application.routes.draw do
+  resources :show_aliases
+
   resources :list_entries
 
   resources :lists

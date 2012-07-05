@@ -1,6 +1,5 @@
 class ShowvotesController < ApplicationController
   load_and_authorize_resource
-  before_filter :authenticate, :only => [:new, :edit, :create, :update, :destroy]
 
   # Displays list of showvotes.
   # Can be accessed by GETting /showvotes or  /showvotes.xml
@@ -119,10 +118,5 @@ class ShowvotesController < ApplicationController
       format.html { redirect_to(showvotes_url) }
       format.xml  { head :ok }
     end
-  end
-  
-  private
-    def authenticate
-      deny_access unless signed_in?
     end
 end

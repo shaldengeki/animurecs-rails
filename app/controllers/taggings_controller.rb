@@ -1,7 +1,5 @@
 class TaggingsController < ApplicationController
   load_and_authorize_resource
-  before_filter :authenticate, :only => [:new, :create]
-
   # Displays list of taggings.
   # Can be accessed by GETting /taggings or  /taggings.xml
   def index
@@ -128,10 +126,4 @@ class TaggingsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  private
-    def authenticate
-      deny_access unless signed_in?
-    end
-
-	
 end

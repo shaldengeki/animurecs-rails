@@ -1,11 +1,10 @@
 <% if current_user?(@list.user) %>
 <div class='row-fluid'>
-  <div class='span12'>
-    <%= link_to "Add a new entry", new_list_entry_path(:format => :js, :list_id => @list.id), :remote=>true %>
-  </div>
+  <div class='span7' id='list-entry-form'></div>
 </div>
 <div class='row-fluid'>
-  <div class='span12' id='list_entry_form'>
+  <div class='span12' id='list-add-entry-button'>
+    <%= link_to raw("<i class='icon-plus-sign'></i>Add a new entry"), new_list_entry_path(:format => :js, :list_id => @list.id), :remote=>true %>
   </div>
 </div>
 <% end %>

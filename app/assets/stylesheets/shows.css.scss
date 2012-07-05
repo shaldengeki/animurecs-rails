@@ -1,0 +1,32 @@
+table#show_list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr.show_list_entry td {
+  margin:0;
+  border: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+td.show_list_animepic {
+  width: 120px;
+}
+
+span.like_button , span.dislike_button{
+  font-size: 7pt;
+}
+
+.list_show_title {
+  font-size: 12pt;
+  font-weight: bold;
+  margin-top: 0px;
+}
+
+.list_show_descrip {
+  font-size: 10pt;
+  font-style: italic;
+}
+

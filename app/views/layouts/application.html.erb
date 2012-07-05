@@ -8,16 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-<%= render 'layouts/topbar' %>
     <div class='container-fluid'>
+      <%= render 'layouts/topbar' %>
       <div class='row-fluid'>
         <% if @show or @popularTags or @user %>
         <div class='span3'>
           <%= render 'layouts/sidebar' %>
         </div>
-        <div class='span7'>
+        <div class='span8'>
         <% else %>
-        <div class='span10'>
+        <div class='span11'>
         <% end %>
         <% flash.each do |key, value| %>
           <div class="alert alert-<%= key %>">
@@ -27,7 +27,7 @@
         <% end %>
           <%= yield %>
         </div>
-        <div class='span2' id="ads">
+        <div class='span1' id="ads">
           Nothing to see here.
         </div>
       </div>

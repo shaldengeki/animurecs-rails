@@ -1,4 +1,6 @@
                   <%= form_tag '/shows', :id => "home_search", :class=> 'form-search', :method => 'get' do %>
-		      <%= text_field_tag :tags, params[:tags], :size => 8, :class => 'input-medium search-query round-left', :id => 'searchform_q', :autocomplete => autocomplete_tag_name_tags_path, :"data-delimiter" => ' ' %>
-		      <%= submit_tag "Search", :class => 'btn round-right', :id => 'searchform_submit' %>
+          <div class='input-append'>
+            <%= text_field_tag :tags, params[:tags], :size => 8, :class => 'input-medium search-query', :id => 'searchform_q', :autocomplete => autocomplete_tag_name_tags_path, :"data-delimiter" => ' ' %>
+            <%= button_tag "Search", :class => 'btn', :type => 'button', :id => 'searchform_submit' %>
+          </div>
 		  <% end %>

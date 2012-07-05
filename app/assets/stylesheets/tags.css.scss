@@ -1,0 +1,26 @@
+div#sidebar-tags {
+  font-size: 0.9em;
+}
+a.tag-type-general, li.tag-type-general, li.tag-type-general a {
+/*	font-size: 0.9em;*/
+  color: #006FFA;
+}
+a.tag-type-studio, li.tag-type-studio, li.tag-type-studio a {
+/*	font-size: 0.9em;*/
+  color: #AA0000;
+}
+a.tag-type-va, li.tag-type-va, li.tag-type-va a {
+/*	font-size: 0.9em;*/
+  color: #00AA00;
+}
+span.shows-count {
+  color: #AAA;
+  margin-left: 5px;
+}
+span.list_tags {
+  font-size: 0.9em;
+}
+a.delete-tagging {
+  vertical-align: super;
+  font-size: 0.5em;
+}

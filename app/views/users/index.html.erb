@@ -5,8 +5,10 @@
     <th>Username</th>
     <th>Color</th>
     <th>User Type</th>
-<% if admin_user? %>
+<% if can? :edit, User %>
     <th></th>
+<% end %>
+<% if can? :destroy, User %>
     <th></th>
 <% end %>
   </tr>
@@ -16,14 +18,12 @@
     <td><%= link_to user.username, user %></td>
     <td><%= user.color %></td>
     <td><%= user_type(user) %></td>
-<% if admin_user? %>
+<% if can? :edit, user %>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+<% end %>
+<% if can? :destroy, user %>
+  <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
 <% end %>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New User', new_user_path %>

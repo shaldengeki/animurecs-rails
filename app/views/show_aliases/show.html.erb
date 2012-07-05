@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @show_alias.name %>
+</p>
+
+<p>
+  <b>Show:</b>
+  <%= @show_alias.show %>
+</p>
+
+
+<%= link_to 'Edit', edit_show_alias_path(@show_alias) %> |
+<%= link_to 'Back', show_aliases_path %>

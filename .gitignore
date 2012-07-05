@@ -6,6 +6,7 @@ tmp/
 public/system/images/*
 public/system/avatars/*
 public/system/shows/images/*
+public/system/users/avatars/*
 .buildpath
 .project
 nbproject

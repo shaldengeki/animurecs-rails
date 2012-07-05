@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-  before_filter :authenticate, :only => [:edit, :update, :destroy]
 
   # Displays list of users.
   # Can be accessed by GETting /users or  /users.xml
@@ -48,19 +47,22 @@ class UsersController < ApplicationController
   # Can be accessed by POSTING /users or  /users.xml
   def create
     @user = User.new(params[:user])
+
+    # initialize users with a list and a normal userrole.
     @user.lists.build
     @user.lists.each do |list|
       list[:user_id] = "some fake data here"
     end
-    # new users are ALWAYS normal users.
-    @user.userlevel = 0
+    normal_userrole = Userrole.find(:name => "Normal")
+    @user.build_userrole(:userrole_id => normal_userrole.id)
+
     respond_to do |format|
       if @user.save
-    sign_in @user
+        sign_in @user
         format.html { redirect_to(@user, :notice => 'Welcome to LL Animu Recommendations!') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
-    @title = "Sign up"
+        @title = "Sign up"
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -79,7 +81,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'Your information has been updated.') }
+        format.html { redirect_to(@user, :notice => 'Your information has been updated. You will need to log in again.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -99,11 +101,4 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  private
-
-    def authenticate
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless ( current_user?(@user) || admin_user? )
-#      deny_access unless signed_in?
-    end
 end

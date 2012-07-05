@@ -1,0 +1,25 @@
+<%= form_for(@show_alias) do |f| %>
+  <% if @show_alias.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@show_alias.errors.count, "error") %> prohibited this show_alias from being saved:</h2>
+
+      <ul>
+      <% @show_alias.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :show %><br />
+    <%= f.text_field :show %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

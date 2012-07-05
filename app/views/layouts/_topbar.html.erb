@@ -7,14 +7,17 @@
                           <span class="icon-bar"></span>
                         </a>
                         <% if signed_in? %>
-                          <%= link_to "Animurecs", users_path, :class => "brand" %>
-                        <% else %>
+                          <%= link_to "Animurecs", user_path(current_user), :class => "brand" %>
+                          <div class="nav-collapse">
+                            <ul class="nav">
+                              <li><%= link_to "Home", user_path(current_user), :class=>"home" %></li>
+                      <% else %>
                           <%= link_to "Animurecs", root_path, :class => "brand" %>
-                        <% end %>
-                        <div class="nav-collapse">
-                          <ul class="nav">
-                            <li><%= link_to "Home", home_path, :class=>"home" %></li>
-                            <li><%= link_to "Connect", connect_path, :class=>"connect" %></li>
+                          <div class="nav-collapse">
+                            <ul class="nav">
+                              <li><%= link_to "Home", home_path, :class=>"home" %></li>
+                      <% end %>
+                            <li><%= link_to "Connect", users_path, :class=>"connect" %></li>
                             <li><%= link_to "Discover", discover_path, :class=>"discover" %></li>
                           </ul>
                           <ul class="nav pull-right">

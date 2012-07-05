@@ -1,0 +1,24 @@
+each user only has one list
+  several kinds of items on the list
+    manga
+    anime
+    these things should be separated
+    
+List model
+  //ListType => anime, manga
+  List => list_type_id, user_id
+    belongs_to :user
+  ListEntry => list_id, show_id
+    attr_accessible :list_id, :show_id, :score, :last_watched_at, :comments
+    belongs_to :list, :show
+    belongs_to :user, :through => :list
+    
+Watchings
+
+ActiveRecord:Dirty to automatically insert list changes
+  upon List:update, check nested ListEntry models to see if changed
+  if changed, insert change into ListChange record
+  
+TODO: 
+  add show aliases
+  autocomplete show on aliases for listentry/new
