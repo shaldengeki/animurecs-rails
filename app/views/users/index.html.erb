@@ -4,7 +4,7 @@
   <tr>
     <th>Username</th>
     <th>Color</th>
-    <th>User Type</th>
+    <th>User Type(s)</th>
 <% if can? :edit, User %>
     <th></th>
 <% end %>
@@ -17,7 +17,7 @@
   <tr>
     <td><%= link_to user.username, user %></td>
     <td><%= user.color %></td>
-    <td><%= user_type(user) %></td>
+    <td><%= user.userroles.map{|userrole| userrole.name}.join(",") %></td>
 <% if can? :edit, user %>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
 <% end %>
