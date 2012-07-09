@@ -6,6 +6,7 @@ class ListEntry < ActiveRecord::Base
   validates :user, :presence => true
   validates :list, :presence => true
   validates :show, :presence => true
+  validates_uniqueness_of :show_id, :scope => :list_id
 
   validates :comment,	:presence => true,
             :allow_blank => true,

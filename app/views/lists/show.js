@@ -1,3 +1,4 @@
+$("#list-entry-form").fadeOut("slow");
 $("#user_feed").html("<%= escape_javascript(render(@list)) %>");
 (function() {
     jQuery(function() {

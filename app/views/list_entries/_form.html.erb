@@ -1,6 +1,6 @@
 <div id='list-entry-form' class='fade in'>
   <button class="close" data-dismiss="alert">×</button>
-  <%= form_for(@list_entry, :html => {:class => "form well form-horizontal"}) do |f| %>
+  <%= form_for(@list_entry, :html => {:class => "form well form-horizontal"}, :remote => true, :format => :js) do |f| %>
     <%= f.hidden_field :list_id, :value => @list_entry.list.id %>
     <div class='control-group'>
       <%= f.label :show, :class => "control-label" %>

@@ -43,10 +43,11 @@ class ListEntriesController < ApplicationController
   # POST /list_entries
   # POST /list_entries.json
   def create
-    @list_entry = ListEntry.new(params[:list_entry])
-
+    @list_entry = ListEntry.find_or_initialize_by_list_id_and_show_id(params[:list_entry][:list_id], params[:list_entry][:show_id])
     respond_to do |format|
-      if @list_entry.save
+      if @list_entry.update_attributes(params[:list_entry])
+        @list = @list_entry.list
+        format.js { render :template => 'lists/show' }
         format.html { redirect_to @list_entry, notice: 'List entry was successfully created.' }
         format.json { render json: @list_entry, status: :created, location: @list_entry }
       else
