@@ -58,7 +58,7 @@ class ShowsController < ApplicationController
       if !show.nil?
         all_shows_array.push(show.id)
       end
-			if !tag.nil?
+			unless tag.nil?
 				taggings = Tagging.where(:tag_id => tag.id)
 				j = 0
 				shows_array = Array.new

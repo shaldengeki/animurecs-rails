@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @users.to_xml(:except => [:encrypted_password, :salt])}
+      format.xml  { render :xml => @users.to_xml(:except => [:password_digest, :remember_token])}
     end
   end
 
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @user.to_xml(:except => [:encrypted_password, :salt])}
+      format.xml  { render :xml => @user.to_xml(:except => [:password_digest, :remember_token])}
     end
   end
 
